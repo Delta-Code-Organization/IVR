@@ -1,0 +1,9 @@
+C:\Users\Top system\Desktop\IVR\IVR\IVR\bin\Debug\IVR.exe.config
+C:\Users\Top system\Desktop\IVR\IVR\IVR\bin\Debug\IVR.exe
+C:\Users\Top system\Desktop\IVR\IVR\IVR\bin\Debug\IVR.pdb
+C:\Users\Top system\Desktop\IVR\IVR\IVR\obj\Debug\IVR.csprojResolveAssemblyReference.cache
+C:\Users\Top system\Desktop\IVR\IVR\IVR\obj\Debug\IVR.Form1.resources
+C:\Users\Top system\Desktop\IVR\IVR\IVR\obj\Debug\IVR.Properties.Resources.resources
+C:\Users\Top system\Desktop\IVR\IVR\IVR\obj\Debug\IVR.csproj.GenerateResource.Cache
+C:\Users\Top system\Desktop\IVR\IVR\IVR\obj\Debug\IVR.exe
+C:\Users\Top system\Desktop\IVR\IVR\IVR\obj\Debug\IVR.pdb
