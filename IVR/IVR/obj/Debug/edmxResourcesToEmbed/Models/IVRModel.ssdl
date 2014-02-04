@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="IVRDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="IVRDBModelStoreContainer">
+    <EntitySet Name="Course" EntityType="IVRDBModel.Store.Course" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Prerequisites" EntityType="IVRDBModel.Store.Prerequisites" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Student" EntityType="IVRDBModel.Store.Student" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StudentCourse" EntityType="IVRDBModel.Store.StudentCourse" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="IVRDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TimeTable" EntityType="IVRDBModel.Store.TimeTable" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Prerequisites_Course" Association="IVRDBModel.Store.FK_Prerequisites_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Prerequisites" EntitySet="Prerequisites" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourse_Course" Association="IVRDBModel.Store.FK_StudentCourse_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="StudentCourse" EntitySet="StudentCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StudentCourse_Student" Association="IVRDBModel.Store.FK_StudentCourse_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="StudentCourse" EntitySet="StudentCourse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeTable_Course" Association="IVRDBModel.Store.FK_TimeTable_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="TimeTable" EntitySet="TimeTable" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CourseID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CourseCode" Type="int" Nullable="false" />
+    <Property Name="CourseName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Term_associated" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreditHours" Type="int" />
+  </EntityType>
+  <EntityType Name="Prerequisites">
+    <Key>
+      <PropertyRef Name="PRID" />
+    </Key>
+    <Property Name="PRID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PRCode" Type="int" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="S_email" Type="nvarchar" MaxLength="50" />
+    <Property Name="S_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="S_pw" Type="nvarchar" MaxLength="50" />
+    <Property Name="S_phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Credits_aquired" Type="int" />
+  </EntityType>
+  <EntityType Name="StudentCourse">
+    <Key>
+      <PropertyRef Name="StudentID" />
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="CourseID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TimeTable">
+    <Key>
+      <PropertyRef Name="TimeTableID" />
+    </Key>
+    <Property Name="TimeTableID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Section_ID" Type="int" />
+    <Property Name="Capacity" Type="int" />
+    <Property Name="StartTime" Type="datetime" />
+    <Property Name="EndTime" Type="datetime" />
+    <Property Name="Day" Type="int" />
+    <Property Name="Registered" Type="int" />
+  </EntityType>
+  <Association Name="FK_Prerequisites_Course">
+    <End Role="Course" Type="IVRDBModel.Store.Course" Multiplicity="0..1" />
+    <End Role="Prerequisites" Type="IVRDBModel.Store.Prerequisites" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Prerequisites">
+        <PropertyRef Name="PRCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourse_Course">
+    <End Role="Course" Type="IVRDBModel.Store.Course" Multiplicity="1" />
+    <End Role="StudentCourse" Type="IVRDBModel.Store.StudentCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="StudentCourse">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StudentCourse_Student">
+    <End Role="Student" Type="IVRDBModel.Store.Student" Multiplicity="1" />
+    <End Role="StudentCourse" Type="IVRDBModel.Store.StudentCourse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="StudentCourse">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeTable_Course">
+    <End Role="Course" Type="IVRDBModel.Store.Course" Multiplicity="0..1" />
+    <End Role="TimeTable" Type="IVRDBModel.Store.TimeTable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="TimeTable">
+        <PropertyRef Name="Section_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

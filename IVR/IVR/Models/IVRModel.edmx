@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="IVRDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="IVRDBModelStoreContainer">
+          <EntitySet Name="Course" EntityType="IVRDBModel.Store.Course" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Prerequisites" EntityType="IVRDBModel.Store.Prerequisites" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Student" EntityType="IVRDBModel.Store.Student" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StudentCourse" EntityType="IVRDBModel.Store.StudentCourse" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="IVRDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TimeTable" EntityType="IVRDBModel.Store.TimeTable" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Prerequisites_Course" Association="IVRDBModel.Store.FK_Prerequisites_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Prerequisites" EntitySet="Prerequisites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Course" Association="IVRDBModel.Store.FK_StudentCourse_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Student" Association="IVRDBModel.Store.FK_StudentCourse_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeTable_Course" Association="IVRDBModel.Store.FK_TimeTable_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="TimeTable" EntitySet="TimeTable" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CourseCode" Type="int" Nullable="false" />
+          <Property Name="CourseName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Term_associated" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreditHours" Type="int" />
+        </EntityType>
+        <EntityType Name="Prerequisites">
+          <Key>
+            <PropertyRef Name="PRID" />
+          </Key>
+          <Property Name="PRID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PRCode" Type="int" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="S_email" Type="nvarchar" MaxLength="50" />
+          <Property Name="S_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="S_pw" Type="nvarchar" MaxLength="50" />
+          <Property Name="S_phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Credits_aquired" Type="int" />
+        </EntityType>
+        <EntityType Name="StudentCourse">
+          <Key>
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TimeTable">
+          <Key>
+            <PropertyRef Name="TimeTableID" />
+          </Key>
+          <Property Name="TimeTableID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Section_ID" Type="int" />
+          <Property Name="Capacity" Type="int" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="Day" Type="int" />
+          <Property Name="Registered" Type="int" />
+        </EntityType>
+        <Association Name="FK_Prerequisites_Course">
+          <End Role="Course" Type="IVRDBModel.Store.Course" Multiplicity="0..1" />
+          <End Role="Prerequisites" Type="IVRDBModel.Store.Prerequisites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Prerequisites">
+              <PropertyRef Name="PRCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Course">
+          <End Role="Course" Type="IVRDBModel.Store.Course" Multiplicity="1" />
+          <End Role="StudentCourse" Type="IVRDBModel.Store.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Student">
+          <End Role="Student" Type="IVRDBModel.Store.Student" Multiplicity="1" />
+          <End Role="StudentCourse" Type="IVRDBModel.Store.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeTable_Course">
+          <End Role="Course" Type="IVRDBModel.Store.Course" Multiplicity="0..1" />
+          <End Role="TimeTable" Type="IVRDBModel.Store.TimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="TimeTable">
+              <PropertyRef Name="Section_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IVRDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="IVRDBEntities2" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Course" EntityType="IVRDBModel.Course" />
+          <EntitySet Name="Prerequisites" EntityType="IVRDBModel.Prerequisites" />
+          <EntitySet Name="Student" EntityType="IVRDBModel.Student" />
+          <EntitySet Name="sysdiagrams" EntityType="IVRDBModel.sysdiagrams" />
+          <EntitySet Name="TimeTable" EntityType="IVRDBModel.TimeTable" />
+          <AssociationSet Name="FK_Prerequisites_Course" Association="IVRDBModel.FK_Prerequisites_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Prerequisites" EntitySet="Prerequisites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeTable_Course" Association="IVRDBModel.FK_TimeTable_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="TimeTable" EntitySet="TimeTable" />
+          </AssociationSet>
+          <AssociationSet Name="StudentCourse" Association="IVRDBModel.StudentCourse">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseCode" Type="Int32" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Term_associated" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreditHours" Type="Int32" />
+          <NavigationProperty Name="Prerequisites" Relationship="IVRDBModel.FK_Prerequisites_Course" FromRole="Course" ToRole="Prerequisites" />
+          <NavigationProperty Name="TimeTable" Relationship="IVRDBModel.FK_TimeTable_Course" FromRole="Course" ToRole="TimeTable" />
+          <NavigationProperty Name="Student" Relationship="IVRDBModel.StudentCourse" FromRole="Course" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Prerequisites">
+          <Key>
+            <PropertyRef Name="PRID" />
+          </Key>
+          <Property Name="PRID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="PRCode" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="IVRDBModel.FK_Prerequisites_Course" FromRole="Prerequisites" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="S_email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="S_name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="S_pw" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="S_phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Credits_aquired" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="IVRDBModel.StudentCourse" FromRole="Student" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TimeTable">
+          <Key>
+            <PropertyRef Name="TimeTableID" />
+          </Key>
+          <Property Name="TimeTableID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Section_ID" Type="Int32" />
+          <Property Name="Capacity" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="Day" Type="Int32" />
+          <Property Name="Registered" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="IVRDBModel.FK_TimeTable_Course" FromRole="TimeTable" ToRole="Course" />
+        </EntityType>
+        <Association Name="FK_Prerequisites_Course">
+          <End Role="Course" Type="IVRDBModel.Course" Multiplicity="0..1" />
+          <End Role="Prerequisites" Type="IVRDBModel.Prerequisites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Prerequisites">
+              <PropertyRef Name="PRCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeTable_Course">
+          <End Role="Course" Type="IVRDBModel.Course" Multiplicity="0..1" />
+          <End Role="TimeTable" Type="IVRDBModel.TimeTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="TimeTable">
+              <PropertyRef Name="Section_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="StudentCourse">
+          <End Role="Course" Type="IVRDBModel.Course" Multiplicity="*" />
+          <End Role="Student" Type="IVRDBModel.Student" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IVRDBModelStoreContainer" CdmEntityContainer="IVRDBEntities2">
+          <EntitySetMapping Name="Course">
+            <EntityTypeMapping TypeName="IVRDBModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="Term_associated" ColumnName="Term_associated" />
+                <ScalarProperty Name="CreditHours" ColumnName="CreditHours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prerequisites">
+            <EntityTypeMapping TypeName="IVRDBModel.Prerequisites">
+              <MappingFragment StoreEntitySet="Prerequisites">
+                <ScalarProperty Name="PRID" ColumnName="PRID" />
+                <ScalarProperty Name="PRCode" ColumnName="PRCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="IVRDBModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="S_email" ColumnName="S_email" />
+                <ScalarProperty Name="S_name" ColumnName="S_name" />
+                <ScalarProperty Name="S_pw" ColumnName="S_pw" />
+                <ScalarProperty Name="S_phone" ColumnName="S_phone" />
+                <ScalarProperty Name="Credits_aquired" ColumnName="Credits_aquired" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="IVRDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeTable">
+            <EntityTypeMapping TypeName="IVRDBModel.TimeTable">
+              <MappingFragment StoreEntitySet="TimeTable">
+                <ScalarProperty Name="TimeTableID" ColumnName="TimeTableID" />
+                <ScalarProperty Name="Section_ID" ColumnName="Section_ID" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
+                <ScalarProperty Name="Registered" ColumnName="Registered" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="StudentCourse" TypeName="IVRDBModel.StudentCourse" StoreEntitySet="StudentCourse">
+            <EndProperty Name="Course">
+              <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+            </EndProperty>
+            <EndProperty Name="Student">
+              <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

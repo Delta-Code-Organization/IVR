@@ -7,3 +7,35 @@ C:\Users\Top system\Desktop\IVR\IVR\IVR\obj\Debug\IVR.Properties.Resources.resou
 C:\Users\Top system\Desktop\IVR\IVR\IVR\obj\Debug\IVR.csproj.GenerateResource.Cache
 C:\Users\Top system\Desktop\IVR\IVR\IVR\obj\Debug\IVR.exe
 C:\Users\Top system\Desktop\IVR\IVR\IVR\obj\Debug\IVR.pdb
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\bin\Debug\IVR.exe.config
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.exe
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.pdb
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\bin\Debug\IVR.exe
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\bin\Debug\IVR.pdb
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.csprojResolveAssemblyReference.cache
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.Properties.Resources.resources
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.csproj.GenerateResource.Cache
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.ManageMaterials.resources
+H:\ivr\trunk\IVR\IVR\bin\Debug\IVR.exe.config
+H:\ivr\trunk\IVR\IVR\obj\Debug\IVR.exe
+H:\ivr\trunk\IVR\IVR\obj\Debug\IVR.pdb
+H:\ivr\trunk\IVR\IVR\bin\Debug\IVR.exe
+H:\ivr\trunk\IVR\IVR\bin\Debug\IVR.pdb
+H:\ivr\trunk\IVR\IVR\obj\Debug\IVR.csprojResolveAssemblyReference.cache
+H:\ivr\trunk\IVR\IVR\obj\Debug\IVR.AddMaterial.resources
+H:\ivr\trunk\IVR\IVR\obj\Debug\IVR.AddUser.resources
+H:\ivr\trunk\IVR\IVR\obj\Debug\IVR.ManageMaterials.resources
+H:\ivr\trunk\IVR\IVR\obj\Debug\IVR.Properties.Resources.resources
+H:\ivr\trunk\IVR\IVR\obj\Debug\IVR.csproj.GenerateResource.Cache
+H:\ivr\trunk\IVR\IVR\obj\Debug\IVR.MainScreen.resources
+E:\ivr\trunk\IVR\IVR\bin\Debug\IVR.exe.config
+E:\ivr\trunk\IVR\IVR\obj\Debug\IVR.exe
+E:\ivr\trunk\IVR\IVR\obj\Debug\IVR.pdb
+C:\Users\Delta code\Desktop\ivr2\trunk\IVR\IVR\bin\Debug\IVR.exe.config
+C:\Users\Delta code\Desktop\ivr2\trunk\IVR\IVR\obj\Debug\IVR.exe
+C:\Users\Delta code\Desktop\ivr2\trunk\IVR\IVR\obj\Debug\IVR.pdb
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.AddMaterial.resources
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.AddUser.resources
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.MainScreen.resources
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\bin\Debug\EntityFramework.dll
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\bin\Debug\EntityFramework.xml
