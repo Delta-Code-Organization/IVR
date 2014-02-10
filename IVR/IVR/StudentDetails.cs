@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IVR.Models;
 
 namespace IVR
 {
@@ -27,24 +28,18 @@ namespace IVR
         bool ValidateControls()
         {
             var check = true;
-            if (textBoxName.Text == "")
+            if (textBoxName.Text == "" && textBoxNumber.Text == "")
             {
                 errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(textBoxName, "This field is required");
-                check = false;
-            }
-            if (textBoxNumber.Text == "")
-            {
-                errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(textBoxNumber, "This field is required");
+                errorProvider1.SetError(textBoxNumber, "من فضلك أدخل قيمه للبحث بدلالتها");
                 check = false;
             }
             int num;
             bool isNum = int.TryParse(textBoxNumber.Text.Trim(), out num);
-            if (!isNum)
+            if (!isNum && textBoxNumber.Text != "")
             {
                 errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(textBoxNumber, "this field must be numeric");
+                errorProvider1.SetError(textBoxNumber, "من فضلك أدخل قيمه رقميه");
                 check = false;
             }
             return check;
@@ -71,52 +66,60 @@ namespace IVR
         }
 
         #endregion
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-
+         bool validation=ValidateControls();
+         if (validation == true)
+         {
+             List<Student> LOS = new List<Student>();
+             Student s = new Student();
+             if (textBoxName.Text != "")
+             {
+                 s.S_name = textBoxName.Text;
+                 var res = s.SearchStudentsByName();
+                 LOS.Add(res);
+             }
+             if (textBoxNumber.Text != "")
+             {
+                 s.S_phone = textBoxNumber.Text;
+                 var res = s.SearchStudentsByPhone();
+                 LOS.Add(res);
+             }
+             DataTable DT = new DataTable();
+             DT.Columns.Add("اسم الطالب", typeof(string));
+            // DT.Columns.Add("البريد الألكتروني", typeof(string));
+             DT.Columns.Add("رقم التليفون", typeof(string));
+           //  DT.Columns.Add("الرقم السري", typeof(string));
+            // DT.Columns.Add("الساعات المعتمدة", typeof(string));
+             foreach (var v in LOS)
+             {
+                 DataRow DR = DT.NewRow();
+                 DR[0] = v.S_name;
+                // DR[1] = v.S_email;
+                 DR[1] = v.S_phone;
+                // DR[3] = v.S_pw;
+                 //DR[4] = v.Credits_aquired;
+                 DT.Rows.Add(DR);
+             }
+             dataGridView1.DataSource = DT;
+             dataGridView1.Visible = true;
+         }
         }
-
-        private void label3_Click(object sender, EventArgs e)
+        private void textBoxName_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            {
+                pictureBox2_Click(sender, e);
+            }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void textBoxNumber_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            {
+                pictureBox2_Click(sender, e);
+            }
         }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            ValidateControls();
-        }
-
         private void textBoxName_TextChanged(object sender, EventArgs e)
         {
             if (textBoxName.Text != "")

@@ -6,6 +6,7 @@
     <EntitySet Name="Student" EntityType="IVRDBModel.Store.Student" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="StudentCourse" EntityType="IVRDBModel.Store.StudentCourse" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="sysdiagrams" EntityType="IVRDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SystemUser" EntityType="IVRDBModel.Store.SystemUser" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TimeTable" EntityType="IVRDBModel.Store.TimeTable" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="FK_Prerequisites_Course" Association="IVRDBModel.Store.FK_Prerequisites_Course">
       <End Role="Course" EntitySet="Course" />
@@ -69,6 +70,15 @@
     <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="SystemUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Status" Type="int" />
   </EntityType>
   <EntityType Name="TimeTable">
     <Key>

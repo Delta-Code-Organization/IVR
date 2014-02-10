@@ -39,3 +39,8 @@ C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.AddUser.resources
 C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.MainScreen.resources
 C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\bin\Debug\EntityFramework.dll
 C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\bin\Debug\EntityFramework.xml
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.Login.resources
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.MyAccount.resources
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.StudentDetails.resources
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.StudentMaterials.resources
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.AddStudent.resources

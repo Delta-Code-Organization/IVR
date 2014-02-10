@@ -4,13 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="IVRDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IVRDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="IVRDBModelStoreContainer">
           <EntitySet Name="Course" EntityType="IVRDBModel.Store.Course" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Prerequisites" EntityType="IVRDBModel.Store.Prerequisites" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Student" EntityType="IVRDBModel.Store.Student" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StudentCourse" EntityType="IVRDBModel.Store.StudentCourse" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="IVRDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SystemUser" EntityType="IVRDBModel.Store.SystemUser" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TimeTable" EntityType="IVRDBModel.Store.TimeTable" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Prerequisites_Course" Association="IVRDBModel.Store.FK_Prerequisites_Course">
             <End Role="Course" EntitySet="Course" />
@@ -75,6 +76,15 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="SystemUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
         <EntityType Name="TimeTable">
           <Key>
             <PropertyRef Name="TimeTableID" />
@@ -135,8 +145,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IVRDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -158,6 +167,7 @@
             <End Role="Course" EntitySet="Course" />
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
+          <EntitySet Name="SystemUser" EntityType="IVRDBModel.SystemUser" />
         </EntityContainer>
         <EntityType Name="Course">
           <Key>
@@ -243,6 +253,15 @@
           <End Role="Course" Type="IVRDBModel.Course" Multiplicity="*" />
           <End Role="Student" Type="IVRDBModel.Student" Multiplicity="*" />
         </Association>
+        <EntityType Name="SystemUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Status" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -312,6 +331,16 @@
               <ScalarProperty Name="StudentID" ColumnName="StudentID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="SystemUser">
+            <EntityTypeMapping TypeName="IVRDBModel.SystemUser">
+              <MappingFragment StoreEntitySet="SystemUser">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -326,7 +355,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

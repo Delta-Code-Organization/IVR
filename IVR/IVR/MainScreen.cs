@@ -16,5 +16,47 @@ namespace IVR
         {
             InitializeComponent();
         }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            StudentDetails sd = new StudentDetails();
+            this.Hide();
+            sd.ShowDialog();
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            ManageMaterials mm = new ManageMaterials();
+            this.Hide();
+            mm.ShowDialog();
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            AddMaterial am = new AddMaterial();
+            this.Hide();
+            am.ShowDialog();
+        }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            AddStudent ads = new AddStudent();
+            this.Hide();
+            ads.ShowDialog();
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+            StudentMaterials sm = new StudentMaterials();
+            this.Hide();
+            sm.ShowDialog();
+        }
+
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+            MyAccount ma = new MyAccount();
+            this.Hide();
+            ma.ShowDialog();
+        }
     }
 }

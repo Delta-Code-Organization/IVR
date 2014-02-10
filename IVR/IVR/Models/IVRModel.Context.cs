@@ -30,5 +30,6 @@ namespace IVR.Models
         public DbSet<Student> Student { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<TimeTable> TimeTable { get; set; }
+        public DbSet<SystemUser> SystemUser { get; set; }
     }
 }

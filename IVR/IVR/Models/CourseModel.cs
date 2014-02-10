@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IVR.Models
 {
-  partial class Course
+public partial class Course
     {
       IVRDBEntities2 db = new IVRDBEntities2();
        public Returner CreateCourse()
@@ -19,10 +19,6 @@ namespace IVR.Models
                     message = Msgs.Course_Name_Dublicated
                 };
             }
-            Course corse=new Course ();
-            corse.CourseName=this.CourseName;
-            corse.CreditHours=this.CreditHours;
-            corse.Term_associated=this.Term_associated;
                 db.Course.Add(this);
                 db.SaveChanges();
             var lastCourseName=db.Course.OrderByDescending(p=>p.CourseID).FirstOrDefault();
@@ -31,9 +27,25 @@ namespace IVR.Models
                     Data=lastCourseName,
                     message = Msgs.Course_Name_Created_Successfully
                 };
-
-
-            }
+           }
+       public Course AddStudentCourse(int _ID)
+       {
+           var course = db.Course.Where(p => p.CourseID == this.CourseID).SingleOrDefault();
+           var student = db.Student.Where(p => p.StudentID == _ID).SingleOrDefault();
+           course.Student.Add(student);
+           db.SaveChanges();
+           return course;
+       }
+       public List<Course> SearchCoursesByName()
+       {
+           var searchcourse = db.Course.Where(p => p.CourseName == this.CourseName).ToList();
+           return searchcourse;
+       }
+       public List<Course> GetAllcourses()
+       {
+           var all = db.Course.OrderBy(p => p.CourseID).ToList();
+           return all;
+       }
         }
     }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IVR.Models
 {
-   partial class Student
+  public partial class Student
     {
        IVRDBEntities2 db = new IVRDBEntities2();
        public Returner CreateStudent()
@@ -19,19 +19,29 @@ namespace IVR.Models
                    message = Msgs.Student_Name_Dublicated
                };
            }
-           Student s = new Student();
-           s.S_name = this.S_name;
-           s.S_email = this.S_email;
-           s.S_phone = this.S_phone;
-           s.S_pw = this.S_pw;
            db.Student.Add(this);
            db.SaveChanges();
            var lastStudent = db.Student.OrderByDescending(p => p.StudentID).FirstOrDefault();
            return new Returner
            {
-               message = Msgs.Student_Name_created_Successfuly,
+               message = Msgs.Student_created_Successfuly,
                Data = lastStudent
            };
+       }
+       public Student SearchStudentsByName()
+       {
+           var searchStudent = db.Student.Where(p => p.S_name == this.S_name).SingleOrDefault();
+           return searchStudent;
+       }
+       public Student SearchStudentsByPhone()
+       {
+           var searchStudent = db.Student.Where(p => p.S_phone == this.S_phone).SingleOrDefault();
+           return searchStudent;
+       }
+       public List<Student> GetAllStudents()
+       {
+           List<Student> all = db.Student.OrderBy(p => p.StudentID).ToList();
+           return all;
        }
     }
 }

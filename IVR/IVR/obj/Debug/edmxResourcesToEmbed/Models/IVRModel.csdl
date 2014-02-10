@@ -18,6 +18,7 @@
       <End Role="Course" EntitySet="Course" />
       <End Role="Student" EntitySet="Student" />
     </AssociationSet>
+    <EntitySet Name="SystemUser" EntityType="IVRDBModel.SystemUser" />
   </EntityContainer>
   <EntityType Name="Course">
     <Key>
@@ -103,4 +104,13 @@
     <End Role="Course" Type="IVRDBModel.Course" Multiplicity="*" />
     <End Role="Student" Type="IVRDBModel.Student" Multiplicity="*" />
   </Association>
+  <EntityType Name="SystemUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="UserName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Status" />
+  </EntityType>
 </Schema>

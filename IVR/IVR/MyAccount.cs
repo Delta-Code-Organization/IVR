@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IVR.Models;
 
 namespace IVR
 {
@@ -30,19 +31,20 @@ namespace IVR
             if (textBoxPass.Text == "")
             {
                 errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(textBoxPass, "This field is required");
+                errorProvider1.SetError(textBoxPass, "من فضلك ادخل الرقم السري الجديد");
                 check = false;
             }
             if (textBoxConfirmPass.Text == "")
             {
                 errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(textBoxConfirmPass, "This field is required");
+                errorProvider1.SetError(textBoxConfirmPass, "ادخل الرقم مرة اخري هنا");
                 check = false;
             }
-            if (textBoxPass.Text != textBoxConfirmPass.Text)
+            if (textBoxConfirmPass.Text!= "" && textBoxPass.Text != textBoxConfirmPass.Text)
             {
                 errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(textBoxConfirmPass, "Not Matched password");
+                errorProvider1.SetError(textBoxConfirmPass, "تأكد من ان الرقمين متطابقين");
+                check = false;
             }
             return check;
 
@@ -70,21 +72,6 @@ namespace IVR
 
         #endregion
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ValidateControls();
-        }
-
         private void textBoxPass_TextChanged(object sender, EventArgs e)
         {
             if (textBoxPass.Text != "")
@@ -100,5 +87,39 @@ namespace IVR
                 errorProvider1.Clear();
             }
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+          bool validation=ValidateControls();
+          if (validation == true)
+          {
+              SystemUser user = new SystemUser();
+              user.ID = 1;
+              user.Password = textBoxPass.Text;
+              var res = user.UpdatePassword().message.ShowMessage();
+              label7.Text = res;
+              label7.Visible = true;
+              MainScreen ms = new MainScreen();
+              this.Hide();
+              ms.ShowDialog();
+          }
+        }
+
+        private void textBoxPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            {
+                pictureBox2_Click(sender, e);
+            }
+        }
+
+        private void textBoxConfirmPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            {
+                pictureBox2_Click(sender, e);
+            }
+        }
+
     }
 }

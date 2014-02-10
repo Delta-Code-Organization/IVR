@@ -163,4 +163,64 @@
   <data name="myaccountscreenicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\myaccountscreenicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="addsubjecticon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addsubjecticon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addusericon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addusericon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="arrowicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrowicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leftarrow2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\leftarrow2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="leftarrowicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\leftarrowicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loginicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loginicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="loginscreenicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\loginscreenicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mangesubjectscreenicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mangesubjectscreenicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mapphoto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mapphoto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="modifyicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\modifyicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="myaccounticon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\myaccounticon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="newtrackicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\newtrackicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rightarrow2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rightarrow2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rightarrowicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rightarrowicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="saveicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\saveicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smallmapphoto" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\smallmapphoto.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="studentsdataicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\studentsdataicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="studentsubjectsicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\studentsubjectsicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="trackhistoryicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\trackhistoryicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="weightsicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\weightsicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

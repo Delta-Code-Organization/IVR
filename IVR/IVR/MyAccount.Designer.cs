@@ -41,7 +41,7 @@
             this.textBoxConfirmPass = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -102,7 +102,6 @@
             this.label3.Size = new System.Drawing.Size(101, 24);
             this.label3.TabIndex = 2;
             this.label3.Text = "دينا محمد";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -136,7 +135,6 @@
             this.label6.Size = new System.Drawing.Size(55, 24);
             this.label6.TabIndex = 5;
             this.label6.Text = "تأكيد";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // textBoxPass
             // 
@@ -152,6 +150,7 @@
             this.textBoxPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxPass.UseSystemPasswordChar = true;
             this.textBoxPass.TextChanged += new System.EventHandler(this.textBoxPass_TextChanged);
+            this.textBoxPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxPass_KeyDown);
             // 
             // textBoxConfirmPass
             // 
@@ -167,6 +166,7 @@
             this.textBoxConfirmPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBoxConfirmPass.UseSystemPasswordChar = true;
             this.textBoxConfirmPass.TextChanged += new System.EventHandler(this.textBoxConfirmPass_TextChanged);
+            this.textBoxConfirmPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxConfirmPass_KeyDown);
             // 
             // pictureBox2
             // 
@@ -177,20 +177,25 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // button1
+            // label7
             // 
-            this.button1.Location = new System.Drawing.Point(149, 283);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(413, 428);
+            this.label7.Name = "label7";
+            this.label7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label7.Size = new System.Drawing.Size(52, 17);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "label7";
+            this.label7.Visible = false;
             // 
             // MyAccount
             // 
@@ -198,7 +203,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(948, 522);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.textBoxConfirmPass);
             this.Controls.Add(this.textBoxPass);
@@ -235,6 +240,6 @@
         private System.Windows.Forms.TextBox textBoxConfirmPass;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label7;
     }
 }
