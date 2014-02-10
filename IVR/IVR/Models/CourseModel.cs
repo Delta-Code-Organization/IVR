@@ -28,13 +28,26 @@ public partial class Course
                     message = Msgs.Course_Name_Created_Successfully
                 };
            }
-       public Course AddStudentCourse(int _ID)
+       public Returner AddStudentCourse(int _ID)
        {
-           var course = db.Course.Where(p => p.CourseID == this.CourseID).SingleOrDefault();
-           var student = db.Student.Where(p => p.StudentID == _ID).SingleOrDefault();
-           course.Student.Add(student);
-           db.SaveChanges();
-           return course;
+           var fullOrEmpty = db.TimeTable.Any(p => p.Section_ID == this.CourseID && p.Registered < p.Capacity);
+           if (fullOrEmpty == true)
+           {
+               var course = db.Course.Where(p => p.CourseID == this.CourseID).SingleOrDefault();
+               var student = db.Student.Where(p => p.StudentID == _ID).SingleOrDefault();
+            var time=course.TimeTable.Where(p => p.Section_ID == this.CourseID).SingleOrDefault();
+            time.Registered++;
+               course.Student.Add(student);
+               db.SaveChanges();
+               return new Returner
+               {
+                   Data = course
+               };
+           }
+           return new Returner
+           {
+               message= Msgs.This_Course_Is_Full
+           };
        }
        public List<Course> SearchCoursesByName()
        {

@@ -13,7 +13,7 @@ namespace IVR
 {
     public partial class StudentMaterials : Form
     {
-       // ModifyRegistry Reg;//define in the public
+        // ModifyRegistry Reg;//define in the public
 
         public StudentMaterials()
         {
@@ -21,11 +21,11 @@ namespace IVR
         }
 
         #region BusinessMethods
-        
-        void FillControls() 
+
+        void FillControls()
         {
             //bool rr = Reg.Write("ID", 1);//(اسم ال key,القيمة)
-           // string X = Reg.Read("ID");//اي شيء يرجع علي هيئةstring
+            // string X = Reg.Read("ID");//اي شيء يرجع علي هيئةstring
             Student s = new Student();
             var res = s.GetAllStudents();
             DataTable DT = new DataTable();
@@ -49,25 +49,26 @@ namespace IVR
             foreach (var x in res2)
             {
                 DataRow DR = DT2.NewRow();
-                DR[0]=x.CourseName;
+                DR[0] = x.CourseName;
                 DR[1] = x.CourseID;
                 DT2.Rows.Add(DR);
             }
             comboBoxMaterial.DataSource = DT2;
             comboBoxMaterial.DisplayMember = "اسم المادة";
             comboBoxMaterial.ValueMember = "رقم المسلسل";
+            this.comboBoxMaterial.SelectedIndexChanged += new System.EventHandler(this.comboBoxMaterial_SelectedIndexChanged);
         }
 
         bool ValidateControls()
         {
             bool Check = true;
-            if (comboBoxMaterial.SelectedItem ==null)
+            if (comboBoxMaterial.SelectedItem == null)
             {
                 errorProvider1.RightToLeft = true;
                 errorProvider1.SetError(comboBoxMaterial, "من فضلك أدخل اسسم الطالب");
                 Check = false;
             }
-            if (comboBoxStudentName.SelectedItem==null)
+            if (comboBoxStudentName.SelectedItem == null)
             {
                 errorProvider1.RightToLeft = true;
                 errorProvider1.SetError(comboBoxStudentName, "من فضلك ادخل اسم المادة");
@@ -83,23 +84,23 @@ namespace IVR
         }
 
         void Collect()
-        { 
-            
+        {
+
         }
 
         void PushData()
         {
-            
+
         }
 
         void Save()
-        { 
-            
+        {
+
         }
 
         void Delete()
-        { 
-            
+        {
+
         }
 
         #endregion
@@ -121,7 +122,7 @@ namespace IVR
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -131,23 +132,35 @@ namespace IVR
             if (validation == true)
             {
                 Course c = new Course();
-                int studentID =(int)comboBoxStudentName.SelectedValue;
-                c.CourseID =(int)comboBoxMaterial.SelectedValue;
-               var result=c.AddStudentCourse(studentID);
-               DataTable DT = new DataTable();
-               DT.Columns.Add("اسم الطالب",typeof(string));
-               DT.Columns.Add("اسم المادة", typeof(string));
-               DT.Columns.Add("ميعاد المحاضرة", typeof(DateTime));
-               DataRow DR = DT.NewRow();
-              DR[1]= result.CourseName;
-             var name=result.Student.Where(p => p.StudentID == studentID).SingleOrDefault();
-             DR[0] = name.S_name;
-             var time = result.TimeTable.Where(p => p.Section_ID == c.CourseID).SingleOrDefault();
-             DR[2] = time.StartTime;
-              DT.Rows.Add(DR);
-              dataGridView1.DataSource = DT;
-              dataGridView1.Visible = true;
+                int studentID = (int)comboBoxStudentName.SelectedValue;
+                c.CourseID = (int)comboBoxMaterial.SelectedValue;
+                var res = c.AddStudentCourse(studentID);
+                var msg = res.message.ShowMessage();
+                var result = res.Data as Course;
+                if (msg != "ThisCourseIsFull")
+                {
+                    DataTable DT = new DataTable();
+                    DT.Columns.Add("اسم الطالب", typeof(string));
+                    DT.Columns.Add("اسم المادة", typeof(string));
+                    DT.Columns.Add("ميعاد المحاضرة", typeof(DateTime));
+                    DataRow DR = DT.NewRow();
+                    var name = result.Student.Where(p => p.StudentID == studentID).SingleOrDefault();
+                    DR[0] = name.S_name;
+                    DR[1] = result.CourseName;
+                    var time = result.TimeTable.Where(p => p.Section_ID == c.CourseID).SingleOrDefault();
+                    DR[2] = time.StartTime;
+                    DT.Rows.Add(DR);
+                    textBox1.Text = Convert.ToString(time.StartTime);
+                    dataGridView1.DataSource = DT;
+                    dataGridView1.Visible = true;
+                }
+                else
+                {
+                    label8.Text = msg;
+                    label8.Visible = true;
+                }
             }
+
         }
 
         private void comboBoxMaterial_SelectedIndexChanged(object sender, EventArgs e)
@@ -156,6 +169,13 @@ namespace IVR
             {
                 errorProvider1.Clear();
             }
+            Course c = new Course();
+            c.CourseID = (int)comboBoxMaterial.SelectedValue;
+            var course = c.GetAllcourses();
+            var selectedCourse = course.Where(p => p.CourseID == c.CourseID).SingleOrDefault();
+            var time = selectedCourse.TimeTable.Where(p => p.Section_ID == c.CourseID).SingleOrDefault();
+            var startTime = time.StartTime;
+            textBox1.Text = Convert.ToString(time.StartTime);
         }
 
         private void comboBoxStudentName_SelectedIndexChanged(object sender, EventArgs e)
@@ -166,18 +186,10 @@ namespace IVR
             }
         }
 
-        private void comboBoxLectureTime_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (comboBoxLectureTime.SelectedItem != null)
-            {
-                errorProvider1.Clear();
-            }
-        }
-
         private void comboBoxMaterial_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == System.Windows.Forms.Keys.Enter)
-                button1_Click_1(sender,e);
+                button1_Click_1(sender, e);
         }
 
         private void comboBoxStudentName_KeyDown(object sender, KeyEventArgs e)

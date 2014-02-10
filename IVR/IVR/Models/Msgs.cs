@@ -17,6 +17,7 @@ namespace IVR.Models
         User_Created_Successfull=6,
         Password_Updated_Successfully = 7,
         Successful_Login = 8,
-        Wrong_Name_Or_Password = 9
+        Wrong_Name_Or_Password = 9,
+        This_Course_Is_Full=10
     }
 }
