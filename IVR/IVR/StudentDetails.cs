@@ -71,38 +71,47 @@ namespace IVR
          bool validation=ValidateControls();
          if (validation == true)
          {
+              label6.Visible = false;
              List<Student> LOS = new List<Student>();
+             List<int> LOID = new List<int>();
              Student s = new Student();
              if (textBoxName.Text != "")
              {
                  s.S_name = textBoxName.Text;
                  var res = s.SearchStudentsByName();
-                 LOS.Add(res);
+                     LOS.Add(res.Data as Student);
+                     LOID.Add((res.Data as Student).StudentID);
              }
              if (textBoxNumber.Text != "")
              {
                  s.S_phone = textBoxNumber.Text;
                  var res = s.SearchStudentsByPhone();
-                 LOS.Add(res);
+                 if (!LOID.Contains((res.Data as Student).StudentID))
+                     LOS.Add(res.Data as Student);
              }
-             DataTable DT = new DataTable();
-             DT.Columns.Add("اسم الطالب", typeof(string));
-            // DT.Columns.Add("البريد الألكتروني", typeof(string));
-             DT.Columns.Add("رقم التليفون", typeof(string));
-           //  DT.Columns.Add("الرقم السري", typeof(string));
-            // DT.Columns.Add("الساعات المعتمدة", typeof(string));
-             foreach (var v in LOS)
+             if (LOS.Count != 0)
              {
-                 DataRow DR = DT.NewRow();
-                 DR[0] = v.S_name;
-                // DR[1] = v.S_email;
-                 DR[1] = v.S_phone;
-                // DR[3] = v.S_pw;
-                 //DR[4] = v.Credits_aquired;
-                 DT.Rows.Add(DR);
+                 DataTable DT = new DataTable();
+                 DT.Columns.Add("اسم الطالب", typeof(string));
+                 DT.Columns.Add("رقم التليفون", typeof(string));
+                 foreach (var v in LOS)
+                 {
+                     DataRow DR = DT.NewRow();
+                     DR[0] = v.S_name;
+                     DR[1] = v.S_phone;
+                     DT.Rows.Add(DR);
+                 }
+
+                 dataGridView1.DataSource = DT;
+                 dataGridView1.Visible = true;
+                 //textBoxName.Text = "";
+                 //textBoxNumber.Text = "";
              }
-             dataGridView1.DataSource = DT;
-             dataGridView1.Visible = true;
+             else
+             {
+                 label6.Text = "لا يوجد نتائج بحث مطابقه";
+                 label6.Visible = true;
+             }
          }
         }
         private void textBoxName_KeyDown(object sender, KeyEventArgs e)

@@ -48,7 +48,7 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxcode = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -250,17 +250,18 @@
             this.label8.TabIndex = 15;
             this.label8.Text = " : كود المادة";
             // 
-            // textBox1
+            // textBoxcode
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.White;
-            this.textBox1.Location = new System.Drawing.Point(202, 228);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(192, 40);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxcode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.textBoxcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxcode.ForeColor = System.Drawing.Color.White;
+            this.textBoxcode.Location = new System.Drawing.Point(202, 228);
+            this.textBoxcode.Multiline = true;
+            this.textBoxcode.Name = "textBoxcode";
+            this.textBoxcode.Size = new System.Drawing.Size(192, 40);
+            this.textBoxcode.TabIndex = 16;
+            this.textBoxcode.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxcode.TextChanged += new System.EventHandler(this.textBoxcode_TextChanged);
             // 
             // AddMaterial
             // 
@@ -268,7 +269,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(948, 522);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxcode);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
@@ -285,7 +286,6 @@
             this.MaximizeBox = false;
             this.Name = "AddMaterial";
             this.Text = "AddMaterial";
-            this.Load += new System.EventHandler(this.AddMaterial_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -313,7 +313,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxcode;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label3;
     }

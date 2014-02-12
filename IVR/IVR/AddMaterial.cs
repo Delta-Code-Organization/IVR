@@ -33,23 +33,28 @@ namespace IVR
             }
             if (txtyear.Text=="")
             {
-                errorProvider1.SetError(txtyear, "من فضلك ادخل قيمة");
+                errorProvider1.SetError(txtyear, "من فضلك ادخل الفصل الدراسي");
                 check = false;
             }
-            if (txthoursno.TextLength <1)
+            if (txthoursno.TextLength<1)
             {
                 errorProvider1.SetError(txthoursno, "من فضلك أدخل عدد الساعات");
                 check = false;
             }
             int hours;
-            if (!int.TryParse(txthoursno.Text,out hours))
+            if (txthoursno.TextLength>1&&!int.TryParse(txthoursno.Text,out hours))
             {
                 errorProvider1.SetError(txthoursno, "لابد ان تكون قيمة رقمية");
                 check = false;
             }
-            if (textBox1.TextLength<1)
+            if (textBoxcode.TextLength<1)
             {
-                errorProvider1.SetError(textBox1, "من فضلك أدخل كود المادة");
+                errorProvider1.SetError(textBoxcode, "من فضلك أدخل كود المادة");
+                check = false;
+            }
+            if (textBoxcode.TextLength > 1 && !int.TryParse(textBoxcode.Text, out hours))
+            {
+                errorProvider1.SetError(textBoxcode, "لابد ان تكون قيمة رقمية");
                 check = false;
             }
             return check;
@@ -95,11 +100,11 @@ namespace IVR
                 errorProvider1.Clear();
         }
 
-        private void AddMaterial_Load(object sender, EventArgs e)
+        private void textBoxcode_TextChanged(object sender, EventArgs e)
         {
-           
+            if (textBoxcode.Text != "")
+                errorProvider1.Clear();
         }
-
         private void pictureBox2_Click(object sender, EventArgs e)
         {
          bool validation=ValidateControls();
@@ -109,12 +114,12 @@ namespace IVR
              c.CourseName = txtMaterialname.Text;
              c.CreditHours = Convert.ToInt32(txthoursno.Text);
              c.Term_associated = txtyear.Text;
-             c.CourseCode = Convert.ToInt32(textBox1.Text);
+             c.CourseCode = Convert.ToInt32(textBoxcode.Text);
              Course res = c.CreateCourse().Data as Course;
              DataTable DT = new DataTable();
              DT.Columns.Add("كود المادة", typeof(int));
              DT.Columns.Add("اسم المادة", typeof(string));
-             DT.Columns.Add("السنه", typeof(string));
+             DT.Columns.Add("الفصل الدراسي", typeof(string));
              DT.Columns.Add("عدد الساعات", typeof(int));
              DataRow DR = DT.NewRow();
              DR[0] = res.CourseCode;
@@ -123,11 +128,6 @@ namespace IVR
              DR[3] = res.CreditHours;
              DT.Rows.Add(DR);
              dataGridView1.DataSource = DT;
-             //dataGridView1.Columns[0].Visible = false;
-             //dataGridView1.Columns[1].Visible = false;
-             //dataGridView1.Columns[2].HeaderText = "اسم الماده";
-             //dataGridView1.Columns[3].HeaderText = "السنه";
-             //dataGridView1.Columns[4].HeaderText = "عددالساعات";
              dataGridView1.Visible = true;
          }
         }

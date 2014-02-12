@@ -28,20 +28,55 @@ namespace IVR.Models
                Data = lastStudent
            };
        }
-       public Student SearchStudentsByName()
+       public Returner SearchStudentsByName()
        {
-           var searchStudent = db.Student.Where(p => p.S_name == this.S_name).SingleOrDefault();
-           return searchStudent;
-       }
-       public Student SearchStudentsByPhone()
+               var searchStudent = db.Student.Where(p => p.S_name == this.S_name).SingleOrDefault();
+               return new Returner
+               {
+                   Data = searchStudent,
+                   message= Msgs.Is_Found
+               };
+           }
+       
+       public Returner SearchStudentsByPhone()
        {
-           var searchStudent = db.Student.Where(p => p.S_phone == this.S_phone).SingleOrDefault();
-           return searchStudent;
+               var searchStudent = db.Student.Where(p => p.S_phone == this.S_phone).SingleOrDefault();
+               return new Returner
+               {
+                   Data = searchStudent,
+                   message = Msgs.Is_Found
+               };
        }
        public List<Student> GetAllStudents()
        {
            List<Student> all = db.Student.OrderBy(p => p.StudentID).ToList();
            return all;
+       }
+       public Returner DeleteStudent()
+       {
+           var student = db.Student.Where(p => p.StudentID == this.StudentID).SingleOrDefault();
+           db.Student.Remove(student);
+           db.SaveChanges();
+           return new Returner
+           {
+               Data = student,
+               message = Msgs.Student_Deleted_Successfully
+           };
+       }
+       public Returner UpdateStudent()
+       {
+           var student = db.Student.Where(p => p.StudentID == this.StudentID).SingleOrDefault();
+           student.S_name= this.S_name;
+           student.S_email = this.S_email;
+           student.S_phone = this.S_phone;
+           student.S_pw = this.S_pw;
+           db.SaveChanges();
+           return new Returner
+           {
+               Data = student,
+               message = Msgs.Student_Updated_Successfully
+           };
+
        }
     }
 }

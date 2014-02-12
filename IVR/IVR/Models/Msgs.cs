@@ -18,6 +18,13 @@ namespace IVR.Models
         Password_Updated_Successfully = 7,
         Successful_Login = 8,
         Wrong_Name_Or_Password = 9,
-        This_Course_Is_Full=10
+        This_Course_Is_Full=10,
+       Not_Found=11,
+        Is_Found=12,
+        Course_Deleted_Successfully=13,
+        Student_Deleted_Successfully=14,
+        Student_Updated_Successfully=15,
+        Student_Deleted_From_Course_Successfully=16,
+        System_User_Deleted_Successfully=17
     }
 }

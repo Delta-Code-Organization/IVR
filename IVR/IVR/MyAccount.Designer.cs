@@ -99,9 +99,8 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label3.Location = new System.Drawing.Point(497, 169);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 24);
+            this.label3.Size = new System.Drawing.Size(0, 24);
             this.label3.TabIndex = 2;
-            this.label3.Text = "دينا محمد";
             // 
             // label4
             // 
@@ -216,6 +215,7 @@
             this.MaximizeBox = false;
             this.Name = "MyAccount";
             this.Text = "MyAccount";
+            this.Load += new System.EventHandler(this.MyAccount_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

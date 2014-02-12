@@ -13,8 +13,6 @@ namespace IVR
 {
     public partial class StudentMaterials : Form
     {
-        // ModifyRegistry Reg;//define in the public
-
         public StudentMaterials()
         {
             InitializeComponent();
@@ -24,8 +22,6 @@ namespace IVR
 
         void FillControls()
         {
-            //bool rr = Reg.Write("ID", 1);//(اسم ال key,القيمة)
-            // string X = Reg.Read("ID");//اي شيء يرجع علي هيئةstring
             Student s = new Student();
             var res = s.GetAllStudents();
             DataTable DT = new DataTable();
@@ -65,21 +61,15 @@ namespace IVR
             if (comboBoxMaterial.SelectedItem == null)
             {
                 errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(comboBoxMaterial, "من فضلك أدخل اسسم الطالب");
+                errorProvider1.SetError(comboBoxMaterial, " من فضلك اختر اسم المادة ");
                 Check = false;
             }
             if (comboBoxStudentName.SelectedItem == null)
             {
                 errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(comboBoxStudentName, "من فضلك ادخل اسم المادة");
+                errorProvider1.SetError(comboBoxStudentName, "من فضلك ادخل اسم الطالب");
                 Check = false;
             }
-            //if (comboBoxLectureTime.SelectedItem==null)
-            //{
-            //    errorProvider1.RightToLeft = true;
-            //    errorProvider1.SetError(comboBoxLectureTime, "من فضلك أدخل ميعاد المحاضرة");
-            //    Check = false;
-            //}
             return Check;
         }
 
@@ -109,28 +99,17 @@ namespace IVR
         {
 
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void StudentMaterials_Load(object sender, EventArgs e)
         {
             FillControls();
         }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             ValidateControls();
             bool validation = ValidateControls();
             if (validation == true)
             {
+                label8.Visible = false;
                 Course c = new Course();
                 int studentID = (int)comboBoxStudentName.SelectedValue;
                 c.CourseID = (int)comboBoxMaterial.SelectedValue;

@@ -49,15 +49,44 @@ public partial class Course
                message= Msgs.This_Course_Is_Full
            };
        }
-       public List<Course> SearchCoursesByName()
+       public Returner SearchCoursesByName()
        {
            var searchcourse = db.Course.Where(p => p.CourseName == this.CourseName).ToList();
-           return searchcourse;
+           return new Returner
+           {
+               Data = searchcourse
+           };
        }
        public List<Course> GetAllcourses()
        {
            var all = db.Course.OrderBy(p => p.CourseID).ToList();
            return all;
+       }
+
+       public Returner DeleteCourse()
+       {
+           var course = db.Course.Where(p => p.CourseID == this.CourseID).SingleOrDefault();
+           db.Course.Remove(course);
+           db.SaveChanges();
+           return new Returner
+           {
+               Data = course,
+               message = Msgs.Course_Deleted_Successfully
+           };
+       }
+       public Returner DeleteStudentCourse(int _ID)
+       {
+               var course = db.Course.Where(p => p.CourseID == this.CourseID).SingleOrDefault();
+               var student = db.Student.Where(p => p.StudentID == _ID).SingleOrDefault();
+               course.Student.Remove(student);
+               var time = course.TimeTable.Where(p => p.Section_ID == this.CourseID).SingleOrDefault();
+               time.Registered--;
+               db.SaveChanges();
+               return new Returner
+               {
+                   Data=course,
+                  message= Msgs.Student_Deleted_From_Course_Successfully
+               };
        }
         }
     }

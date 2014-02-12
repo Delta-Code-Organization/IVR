@@ -95,11 +95,11 @@
             this.Username.AutoSize = true;
             this.Username.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Username.ForeColor = System.Drawing.Color.Maroon;
-            this.Username.Location = new System.Drawing.Point(709, 141);
+            this.Username.Location = new System.Drawing.Point(682, 142);
             this.Username.Name = "Username";
-            this.Username.Size = new System.Drawing.Size(127, 19);
+            this.Username.Size = new System.Drawing.Size(55, 19);
             this.Username.TabIndex = 3;
-            this.Username.Text = "مرحبا دينا محمد";
+            this.Username.Text = "مرحبا ";
             // 
             // pictureBox8
             // 
@@ -267,6 +267,7 @@
             this.MaximizeBox = false;
             this.Name = "MainScreen";
             this.Text = "MainScreen";
+            this.Load += new System.EventHandler(this.MainScreen_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

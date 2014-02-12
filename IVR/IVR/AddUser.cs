@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IVR.Models;
 
 namespace IVR
 {
@@ -31,22 +32,18 @@ namespace IVR
         {
             errorProvider1.RightToLeft = true;
             bool check = true;
-            if (txtusername.Text=="")
+            if (txtusername.Text == "")
             {
-                errorProvider1.SetError(txtusername, "please enter user name");
+                errorProvider1.SetError(txtusername, "من فضلك أدخل اسم المستخدم");
                 check = false;
             }
-            int hours;
-            if (!int.TryParse(txtuserhours.Text,out hours))
+
+            if (txtuserpassword.Text == "")
             {
-                errorProvider1.SetError(txtuserhours, "Must be number");
+                errorProvider1.SetError(txtuserpassword, "من فضلك أدخل الرقم السري");
                 check = false;
             }
-            if (comboBox1.SelectedItem ==null)
-            {
-                errorProvider1.SetError(comboBox1, "please select ayear");
-                check = false;
-            }
+
             return check;
         }
 
@@ -65,9 +62,33 @@ namespace IVR
 
         }
         #endregion
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
-            ValidateControls();
+             bool validation = ValidateControls();
+            if (validation == true)
+            {
+                SystemUser su = new SystemUser();
+                su.Password = txtuserpassword.Text;
+                su.UserName = txtusername.Text;
+                su.Status = 1;
+                var res = su.CreateUser();
+                var msg=res.message.ShowMessage();
+                if (msg != "UserNameAlreadyExist")
+                {
+                    DataTable DT = new DataTable();
+                    DT.Columns.Add("اسم المستخدم", typeof(string));
+                    DT.Columns.Add("الرقم السري", typeof(string));
+                    DataRow DR = DT.NewRow();
+                    DR[0] = (res.Data as SystemUser).UserName;
+                    DR[1] = (res.Data as SystemUser).Password;
+                    DT.Rows.Add(DR);
+                    dataGridView1.DataSource = DT;
+                    dataGridView1.Visible = true;
+                    label3.Text = msg;
+                    label3.Visible = true;
+                }
+                label3.Visible = true;
+            }
         }
 
         private void txtusername_TextChanged(object sender, EventArgs e)
@@ -75,18 +96,22 @@ namespace IVR
             if (txtusername.Text != "")
                 errorProvider1.Clear();
         }
-
-        private void txtuserhours_TextChanged(object sender, EventArgs e)
+        private void txtuserpassword_TextChanged_1(object sender, EventArgs e)
         {
-            if (txtuserhours.Text != "")
+            if (txtuserpassword.Text != "")
                 errorProvider1.Clear();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void txtusername_KeyDown(object sender, KeyEventArgs e)
         {
-            if (comboBox1.SelectedItem != null)
-                errorProvider1.Clear();
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                button1_Click_1(sender,e);
         }
 
+        private void txtuserpassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                button1_Click_1(sender, e);
+        }
     }
 }

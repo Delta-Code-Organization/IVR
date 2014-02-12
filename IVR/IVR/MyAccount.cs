@@ -13,6 +13,7 @@ namespace IVR
 {
     public partial class MyAccount : Form
     {
+        ModifyRegistry Reg=new ModifyRegistry();
         public MyAccount()
         {
             InitializeComponent();
@@ -22,7 +23,6 @@ namespace IVR
 
         void FillControls()
         {
-
         }
 
         bool ValidateControls()
@@ -94,7 +94,9 @@ namespace IVR
           if (validation == true)
           {
               SystemUser user = new SystemUser();
-              user.ID = 1;
+              user.UserName = Reg.Read("Name");
+              int id = (user.GetSystemUser().Data as SystemUser).ID;
+              user.ID = id;
               user.Password = textBoxPass.Text;
               var res = user.UpdatePassword().message.ShowMessage();
               label7.Text = res;
@@ -119,6 +121,11 @@ namespace IVR
             {
                 pictureBox2_Click(sender, e);
             }
+        }
+
+        private void MyAccount_Load(object sender, EventArgs e)
+        {
+            label3.Text = Reg.Read("Name");
         }
 
     }

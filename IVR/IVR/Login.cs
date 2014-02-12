@@ -13,6 +13,7 @@ namespace IVR
 {
     public partial class Login : Form
     {
+        ModifyRegistry Reg = new ModifyRegistry();
         public Login()
         {
             InitializeComponent();
@@ -22,7 +23,7 @@ namespace IVR
 
         void FillControls()
         {
-
+           
         }
 
         bool ValidateControls()
@@ -31,13 +32,13 @@ namespace IVR
             if (textBoxUserName.Text == "")
             {
                 errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(textBoxUserName, "This field is required");
+                errorProvider1.SetError(textBoxUserName, "من فضلك أدخل اسم المستخدم");
                 check = false;
             }
             if (textBoxPassword.Text == "")
             {
                 errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(textBoxPassword, "This field is required");
+                errorProvider1.SetError(textBoxPassword, "من فضلك ادخل الرقم السري");
                 check = false;
             }
 
@@ -84,7 +85,6 @@ namespace IVR
 
         private void Login_Load(object sender, EventArgs e)
         {
-     
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -97,17 +97,16 @@ namespace IVR
                 user.Password = textBoxPassword.Text;
                 user.UserName = textBoxUserName.Text;
                 var res = user.Login().message.ShowMessage();
-                label4.Text = res;
                 if (res == "SuccessfulLogin")
                 {
+                    bool r = Reg.Write("Name", textBoxUserName.Text);
+                    bool rr = Reg.Write("Password", textBoxPassword);
                     MainScreen MS = new MainScreen();
                     this.Hide();
                     MS.ShowDialog();
                 }
-                else
-                {
-                    label4.Visible = true;
-                }
+                label4.Text = res;
+                label4.Visible = true;
             }
         }
 

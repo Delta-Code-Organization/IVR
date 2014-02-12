@@ -42,13 +42,13 @@ namespace IVR
             DateTime from;
             if (txtfrom.Text != "" && !DateTime.TryParse(txtfrom.Text, out from))
             {
-                errorProvider1.SetError(txtfrom, "من فضلك أدخل التاريخ ");
+                errorProvider1.SetError(txtfrom, "من فضلك أدخل التاريخ");
                 check = false;
             }
             DateTime to;
             if (txtto.Text != "" && !DateTime.TryParse(txtto.Text, out to))
             {
-                errorProvider1.SetError(txtto, "من فضلك أدخل قيمة تاريخ صحيحه");
+                errorProvider1.SetError(txtto, "من فضلك أدخل صيغة تاريخ صحيحه");
                 check = false;
             }
             return check;
@@ -104,12 +104,9 @@ namespace IVR
              if (txt2materialname.Text != "")
              {
                  c.CourseName = txt2materialname.Text;
-                 List<Course> res = c.SearchCoursesByName();
-                 foreach(var r in res)
-                 {
-                     LOOP.Add(r);
-                     LOID.Add(r.CourseID);
-                 }
+                 Course res = c.SearchCoursesByName().Data as Course;
+                     LOOP.Add(res);
+                     LOID.Add(res.CourseID);
              }
              if (comboBoxStudentName.Text != "")
              {
@@ -150,25 +147,33 @@ namespace IVR
                      }
                  }
              }
-             DataTable Dt = new DataTable();
-             Dt.Columns.Add("اسم المادة", typeof(string));
-             Dt.Columns.Add("اليوم", typeof(string));
-             Dt.Columns.Add("من", typeof(DateTime));
-             Dt.Columns.Add("الي", typeof(DateTime));
-             foreach (Course item in LOOP)
+             if (LOOP.Count != 0)
              {
-                 DataRow DR = Dt.NewRow();
-                 DR[0] = item.CourseName;
-                 foreach (TimeTable TT in item.TimeTable)
+                 DataTable Dt = new DataTable();
+                 Dt.Columns.Add("اسم المادة", typeof(string));
+                 Dt.Columns.Add("اليوم", typeof(string));
+                 Dt.Columns.Add("من", typeof(DateTime));
+                 Dt.Columns.Add("الي", typeof(DateTime));
+                 foreach (Course item in LOOP)
                  {
-                     DR[1] = Enum.GetName(typeof(Dayenum), TT.Day);
-                     DR[2] = TT.StartTime;
-                     DR[3] = TT.EndTime;
+                     DataRow DR = Dt.NewRow();
+                     DR[0] = item.CourseName;
+                     foreach (TimeTable TT in item.TimeTable)
+                     {
+                         DR[1] = Enum.GetName(typeof(Dayenum), TT.Day);
+                         DR[2] = TT.StartTime;
+                         DR[3] = TT.EndTime;
+                     }
+                     Dt.Rows.Add(DR);
                  }
-                 Dt.Rows.Add(DR);
+                 dataGridView1.DataSource = Dt;
+                 dataGridView1.Visible = true;
              }
-             dataGridView1.DataSource = Dt;
-             dataGridView1.Visible = true;
+             else
+             {
+                 label10.Text = "لا يوجد نتائج مطابقه للبحث";
+                 label10.Visible = true;
+             }
          }
          }
         private void txt2materialname_KeyDown(object sender, KeyEventArgs e)

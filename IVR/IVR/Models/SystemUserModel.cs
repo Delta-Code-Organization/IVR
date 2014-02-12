@@ -53,5 +53,22 @@ namespace IVR.Models
                 message = Msgs.Wrong_Name_Or_Password
             };
         }
+        public Returner GetSystemUser()
+        {
+            var user = db.SystemUser.Where(p => p.UserName == this.UserName).SingleOrDefault();
+            return new Returner
+            {
+                Data = user
+            };
+        }
+        public Returner DeleteSystemUser()
+        {
+            var user = db.SystemUser.Where(p => p.ID == this.ID).SingleOrDefault();
+            db.SystemUser.Remove(user);
+            return new Returner
+            {
+                message = Msgs.System_User_Deleted_Successfully
+            };
+        }
     }
 }

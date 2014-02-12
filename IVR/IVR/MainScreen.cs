@@ -12,6 +12,7 @@ namespace IVR
 {
     public partial class MainScreen : Form
     {
+        ModifyRegistry Reg=new ModifyRegistry();
         public MainScreen()
         {
             InitializeComponent();
@@ -57,6 +58,17 @@ namespace IVR
             MyAccount ma = new MyAccount();
             this.Hide();
             ma.ShowDialog();
+        }
+
+        private void MainScreen_Load(object sender, EventArgs e)
+        {
+            //if (Reg.Read("Name") == "")
+            //{
+            //    Login log = new Login();
+            //    this.Hide();
+            //    log.ShowDialog();
+            //}
+            Username.Text += Reg.Read("Name");
         }
     }
 }
