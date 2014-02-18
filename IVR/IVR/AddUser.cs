@@ -25,7 +25,24 @@ namespace IVR
         #region  BusinessMethods
         void FillControls()
         {
-
+            SystemUser user = new SystemUser();
+            List<SystemUser> LOU = user.GetAllUsers();
+            DataTable DT = new DataTable();
+            DT.Columns.Add("ID", typeof(int));
+            DT.Columns.Add("اسم المستخدم", typeof(string));
+            DT.Columns.Add("الرقم السري", typeof(string));
+            foreach (SystemUser su in LOU)
+            {
+                DataRow DR = DT.NewRow();
+                DR[0] = su.ID;
+                DR[1] = su.UserName;
+                DR[2] = su.Password;
+                DT.Rows.Add(DR);
+            }
+            dataGridView1.DataSource = DT;
+            dataGridView1.Columns[1].Visible = false;
+            dataGridView1.Visible = true;
+            dataGridView1.Columns[0].DisplayIndex = 3;
         }
 
         bool ValidateControls()
@@ -62,6 +79,11 @@ namespace IVR
 
         }
         #endregion
+
+        private void AddUser_Load(object sender, EventArgs e)
+        {
+            FillControls();
+        }
         private void button1_Click_1(object sender, EventArgs e)
         {
              bool validation = ValidateControls();
@@ -75,19 +97,13 @@ namespace IVR
                 var msg=res.message.ShowMessage();
                 if (msg != "UserNameAlreadyExist")
                 {
-                    DataTable DT = new DataTable();
-                    DT.Columns.Add("اسم المستخدم", typeof(string));
-                    DT.Columns.Add("الرقم السري", typeof(string));
-                    DataRow DR = DT.NewRow();
-                    DR[0] = (res.Data as SystemUser).UserName;
-                    DR[1] = (res.Data as SystemUser).Password;
-                    DT.Rows.Add(DR);
-                    dataGridView1.DataSource = DT;
-                    dataGridView1.Visible = true;
+                    FillControls();
+                }
+                else
+                {
                     label3.Text = msg;
                     label3.Visible = true;
                 }
-                label3.Visible = true;
             }
         }
 
@@ -105,13 +121,21 @@ namespace IVR
         private void txtusername_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == System.Windows.Forms.Keys.Enter)
-                button1_Click_1(sender,e);
+                button1_Click_1(sender, e);
         }
 
         private void txtuserpassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == System.Windows.Forms.Keys.Enter)
                 button1_Click_1(sender, e);
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SystemUser su = new SystemUser();
+            su.ID = (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value;
+            su.DeleteSystemUser();
+            dataGridView1.Rows.RemoveAt(e.RowIndex);
         }
     }
 }

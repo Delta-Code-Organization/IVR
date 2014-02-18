@@ -21,7 +21,30 @@ namespace IVR
 
         void FillControls()
         {
-
+            Student s = new Student();
+            List<Student> LOS = s.GetAllStudents();
+            DataTable DT = new DataTable();
+            DT.Columns.Add("ID", typeof(int));
+            DT.Columns.Add("اسم الطالب", typeof(string));
+            DT.Columns.Add("الايميل", typeof(string));
+            DT.Columns.Add("رقم الهاتف", typeof(string));
+            DT.Columns.Add("الرقم السري", typeof(string));
+            DT.Columns.Add("عدد الساعات", typeof(string));
+            foreach (Student student in LOS)
+            {
+                DataRow DR = DT.NewRow();
+                DR[0] = student.StudentID;
+                DR[1] = student.S_name;
+                DR[2] = student.S_email;
+                DR[3] = student.S_phone;
+                DR[4] = student.S_pw;
+                DR[5] = student.Credits_aquired;
+                DT.Rows.Add(DR);
+            }
+            dataGridView1.DataSource = DT;
+            dataGridView1.Columns[1].Visible = false;
+            dataGridView1.Visible = true;
+            dataGridView1.Columns[0].DisplayIndex = 6;
         }
 
         bool ValidateControls()
@@ -52,6 +75,12 @@ namespace IVR
             if (textBox3.Text == "")
             {
                 errorProvider1.SetError(textBox3, "من فضلك أدخل البريد الالكتروني");
+                check = false;
+            }
+            System.Text.RegularExpressions.Regex rEmail = new System.Text.RegularExpressions.Regex(@"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$");
+            if (textBox3.Text != "" && !rEmail.IsMatch(textBox3.Text.Trim()))
+            {
+                errorProvider1.SetError(textBox3, "أدخل بريد إلكتروني صحيح");
                 check = false;
             }
             if (!int.TryParse(textBox4.Text, out hours))
@@ -88,11 +117,18 @@ namespace IVR
         }
 
         #endregion
+
+        private void AddStudent_Load(object sender, EventArgs e)
+        {
+            FillControls();
+        }
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
+            ValidateControls();
         bool validation=ValidateControls();
         if (validation == true)
         {
+            label7.Visible =false;
             Student s = new Student();
             s.S_email = textBox3.Text;
             s.S_name = txtusername.Text;
@@ -101,26 +137,11 @@ namespace IVR
             s.Credits_aquired = Convert.ToInt32(textBox2.Text);
             var retun = s.CreateStudent();
             label7.Text = retun.message.ShowMessage();
-            label7.Visible = true;
             if (label7.Text != "StudentNameDublicated")
             {
-                Student res = retun.Data as Student;
-                DataTable DT = new DataTable();
-                DT.Columns.Add("اسم الطالب", typeof(string));
-                DT.Columns.Add("الايميل", typeof(string));
-                DT.Columns.Add("رقم الهاتف", typeof(string));
-                DT.Columns.Add("الرقم السري", typeof(string));
-                DT.Columns.Add("عدد الساعات", typeof(string));
-                DataRow DR = DT.NewRow();
-                DR[0] = res.S_name;
-                DR[1] = res.S_email;
-                DR[2] = res.S_phone;
-                DR[3] = res.S_pw;
-                DR[4] = res.Credits_aquired;
-                DT.Rows.Add(DR);
-                dataGridView1.DataSource = DT;
-                dataGridView1.Visible = true;
+                FillControls();
             }
+            label7.Visible = true;
         }
         }
 
@@ -152,6 +173,42 @@ namespace IVR
         {
             if (textBox4.Text != "")
                 errorProvider1.Clear();
+        }
+        private void txtusername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click_1(sender, e);
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click_1(sender, e);
+        }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click_1(sender, e);
+        }
+
+        private void textBox3_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click_1(sender, e);
+        }
+
+        private void textBox4_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click_1(sender, e);
+        }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Student s = new Student();
+            s.StudentID = (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value;
+            s.DeleteStudent();
+            dataGridView1.Rows.RemoveAt(e.RowIndex);
         }
     }
 }

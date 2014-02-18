@@ -93,11 +93,11 @@
             // Username
             // 
             this.Username.AutoSize = true;
-            this.Username.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Username.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Username.ForeColor = System.Drawing.Color.Maroon;
-            this.Username.Location = new System.Drawing.Point(682, 142);
+            this.Username.Location = new System.Drawing.Point(737, 146);
             this.Username.Name = "Username";
-            this.Username.Size = new System.Drawing.Size(55, 19);
+            this.Username.Size = new System.Drawing.Size(48, 17);
             this.Username.TabIndex = 3;
             this.Username.Text = "مرحبا ";
             // 

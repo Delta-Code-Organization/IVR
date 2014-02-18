@@ -44,13 +44,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtto = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.comboBoxStudentName = new System.Windows.Forms.ComboBox();
+            this.comboBoxday = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -117,12 +118,11 @@
             // txt2materialname
             // 
             this.txt2materialname.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txt2materialname.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt2materialname.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt2materialname.ForeColor = System.Drawing.Color.White;
-            this.txt2materialname.Location = new System.Drawing.Point(618, 137);
-            this.txt2materialname.Multiline = true;
+            this.txt2materialname.Location = new System.Drawing.Point(618, 148);
             this.txt2materialname.Name = "txt2materialname";
-            this.txt2materialname.Size = new System.Drawing.Size(192, 40);
+            this.txt2materialname.Size = new System.Drawing.Size(192, 30);
             this.txt2materialname.TabIndex = 2;
             this.txt2materialname.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txt2materialname.TextChanged += new System.EventHandler(this.txt2materialname_TextChanged);
@@ -153,12 +153,11 @@
             // txtfrom
             // 
             this.txtfrom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtfrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtfrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtfrom.ForeColor = System.Drawing.Color.White;
-            this.txtfrom.Location = new System.Drawing.Point(618, 197);
-            this.txtfrom.Multiline = true;
+            this.txtfrom.Location = new System.Drawing.Point(618, 209);
             this.txtfrom.Name = "txtfrom";
-            this.txtfrom.Size = new System.Drawing.Size(192, 40);
+            this.txtfrom.Size = new System.Drawing.Size(192, 30);
             this.txtfrom.TabIndex = 6;
             this.txtfrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtfrom.TextChanged += new System.EventHandler(this.txtfrom_TextChanged);
@@ -178,12 +177,11 @@
             // txtto
             // 
             this.txtto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtto.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtto.ForeColor = System.Drawing.Color.White;
-            this.txtto.Location = new System.Drawing.Point(231, 197);
-            this.txtto.Multiline = true;
+            this.txtto.Location = new System.Drawing.Point(254, 209);
             this.txtto.Name = "txtto";
-            this.txtto.Size = new System.Drawing.Size(192, 40);
+            this.txtto.Size = new System.Drawing.Size(192, 30);
             this.txtto.TabIndex = 8;
             this.txtto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtto.TextChanged += new System.EventHandler(this.txtto_TextChanged);
@@ -203,6 +201,8 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1});
             this.dataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.dataGridView1.Location = new System.Drawing.Point(231, 296);
             this.dataGridView1.Name = "dataGridView1";
@@ -222,6 +222,12 @@
             this.dataGridView1.Size = new System.Drawing.Size(579, 210);
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.Visible = false;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "حذف";
+            this.Column1.Name = "Column1";
             // 
             // label6
             // 
@@ -275,18 +281,18 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // comboBoxStudentName
+            // comboBoxday
             // 
-            this.comboBoxStudentName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.comboBoxStudentName.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.comboBoxStudentName.ForeColor = System.Drawing.Color.White;
-            this.comboBoxStudentName.FormattingEnabled = true;
-            this.comboBoxStudentName.Location = new System.Drawing.Point(209, 148);
-            this.comboBoxStudentName.Name = "comboBoxStudentName";
-            this.comboBoxStudentName.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.comboBoxStudentName.Size = new System.Drawing.Size(239, 27);
-            this.comboBoxStudentName.TabIndex = 15;
-            this.comboBoxStudentName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxStudentName_KeyDown);
+            this.comboBoxday.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.comboBoxday.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Bold);
+            this.comboBoxday.ForeColor = System.Drawing.Color.White;
+            this.comboBoxday.FormattingEnabled = true;
+            this.comboBoxday.Location = new System.Drawing.Point(209, 148);
+            this.comboBoxday.Name = "comboBoxday";
+            this.comboBoxday.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.comboBoxday.Size = new System.Drawing.Size(239, 32);
+            this.comboBoxday.TabIndex = 15;
+            this.comboBoxday.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxStudentName_KeyDown);
             // 
             // label10
             // 
@@ -308,7 +314,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(944, 518);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.comboBoxStudentName);
+            this.Controls.Add(this.comboBoxday);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -360,8 +366,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtfrom;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.ComboBox comboBoxStudentName;
+        private System.Windows.Forms.ComboBox comboBoxday;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.DataGridViewButtonColumn Column1;
 
 
     }

@@ -65,10 +65,16 @@ namespace IVR.Models
         {
             var user = db.SystemUser.Where(p => p.ID == this.ID).SingleOrDefault();
             db.SystemUser.Remove(user);
+            db.SaveChanges();
             return new Returner
             {
                 message = Msgs.System_User_Deleted_Successfully
             };
+        }
+        public List<SystemUser> GetAllUsers()
+        {
+            var all = db.SystemUser.OrderBy(p => p.ID).ToList();
+            return all;
         }
     }
 }

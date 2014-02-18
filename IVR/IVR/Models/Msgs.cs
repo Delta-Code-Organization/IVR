@@ -25,6 +25,7 @@ namespace IVR.Models
         Student_Deleted_Successfully=14,
         Student_Updated_Successfully=15,
         Student_Deleted_From_Course_Successfully=16,
-        System_User_Deleted_Successfully=17
+        System_User_Deleted_Successfully=17,
+        Course_Time_Added_Successfully=18
     }
 }

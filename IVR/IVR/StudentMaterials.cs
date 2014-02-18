@@ -37,6 +37,7 @@ namespace IVR
             comboBoxStudentName.DataSource = DT;
             comboBoxStudentName.DisplayMember = "اسم الطالب";
             comboBoxStudentName.ValueMember = "رقم المسلسل";
+            comboBoxStudentName.SelectedIndex = -1;
             Course c = new Course();
             var res2 = c.GetAllcourses();
             DataTable DT2 = new DataTable();
@@ -52,8 +53,46 @@ namespace IVR
             comboBoxMaterial.DataSource = DT2;
             comboBoxMaterial.DisplayMember = "اسم المادة";
             comboBoxMaterial.ValueMember = "رقم المسلسل";
+            comboBoxMaterial.SelectedIndex = -1;
             this.comboBoxMaterial.SelectedIndexChanged += new System.EventHandler(this.comboBoxMaterial_SelectedIndexChanged);
-        }
+            Student student = new Student();
+            //Course corse=new Course();
+            List<Student> LOS = student.GetAllStudents();
+            List<Course> LOC =c.GetAllcourses();
+            DataTable DT3 = new DataTable();
+            DT3.Columns.Add("StudentID", typeof(int));
+            DT3.Columns.Add("CourseID", typeof(int));
+            DT3.Columns.Add("اسم الطالب", typeof(string));
+            DT3.Columns.Add("اسم المادة", typeof(string));
+            DT3.Columns.Add("ميعاد المحاضرة", typeof(DateTime));
+            foreach (Student std in LOS)
+            {
+                if(std.Course.Count!=0)
+                {
+                    foreach(Course cs in std.Course)
+                    {
+                        DataRow DR2 = DT3.NewRow();
+                        DR2[0] = std.StudentID;
+                        DR2[1] =cs.CourseID;
+                        try { DR2[2] = std.S_name; }
+                        catch (Exception x)
+                        {
+                            throw x;
+                        }
+                        DR2[3] = cs.CourseName;
+                        var time = cs.TimeTable.Where(p => p.Section_ID == cs.CourseID).SingleOrDefault();
+                        DR2[4] = time.StartTime;
+                        textBox1.Text = Convert.ToString(time.StartTime);
+                        DT3.Rows.Add(DR2);
+                    }
+                }
+                }
+            dataGridView1.DataSource = DT3;
+            dataGridView1.Columns[1].Visible = false;
+            dataGridView1.Columns[2].Visible = false;
+            dataGridView1.Visible = true;
+            dataGridView1.Columns[0].DisplayIndex = 5;
+            }
 
         bool ValidateControls()
         {
@@ -118,20 +157,7 @@ namespace IVR
                 var result = res.Data as Course;
                 if (msg != "ThisCourseIsFull")
                 {
-                    DataTable DT = new DataTable();
-                    DT.Columns.Add("اسم الطالب", typeof(string));
-                    DT.Columns.Add("اسم المادة", typeof(string));
-                    DT.Columns.Add("ميعاد المحاضرة", typeof(DateTime));
-                    DataRow DR = DT.NewRow();
-                    var name = result.Student.Where(p => p.StudentID == studentID).SingleOrDefault();
-                    DR[0] = name.S_name;
-                    DR[1] = result.CourseName;
-                    var time = result.TimeTable.Where(p => p.Section_ID == c.CourseID).SingleOrDefault();
-                    DR[2] = time.StartTime;
-                    DT.Rows.Add(DR);
-                    textBox1.Text = Convert.ToString(time.StartTime);
-                    dataGridView1.DataSource = DT;
-                    dataGridView1.Visible = true;
+                    FillControls();
                 }
                 else
                 {
@@ -153,6 +179,7 @@ namespace IVR
             var course = c.GetAllcourses();
             var selectedCourse = course.Where(p => p.CourseID == c.CourseID).SingleOrDefault();
             var time = selectedCourse.TimeTable.Where(p => p.Section_ID == c.CourseID).SingleOrDefault();
+            
             var startTime = time.StartTime;
             textBox1.Text = Convert.ToString(time.StartTime);
         }
@@ -175,6 +202,16 @@ namespace IVR
         {
             if (e.KeyCode == System.Windows.Forms.Keys.Enter)
                 button1_Click_1(sender, e);
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Course c = new Course();
+            int id = (int)dataGridView1.Rows[e.RowIndex].Cells["StudentID"].Value;
+            c.CourseID = (int)dataGridView1.Rows[e.RowIndex].Cells["CourseID"].Value;
+            var res=c.DeleteStudentCourse(id);
+            dataGridView1.Rows.RemoveAt(e.RowIndex);
+            label8.Text = res.message.ShowMessage(); 
         }
     }
 }

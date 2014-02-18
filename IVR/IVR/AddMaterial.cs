@@ -19,7 +19,28 @@ namespace IVR
          #region  BusinessMethods
         void FillControls()
         {
- 
+            Course c = new Course();
+            List<Course> LOC = c.GetAllcourses();
+            DataTable DT = new DataTable();
+            DT.Columns.Add("ID", typeof(int));
+            DT.Columns.Add("اسم المادة", typeof(string));
+            DT.Columns.Add("كود المادة", typeof(int));
+            DT.Columns.Add("الفصل الدراسي", typeof(string));
+            DT.Columns.Add("عدد الساعات", typeof(int));
+            foreach (Course corse in LOC)
+            {
+                DataRow DR = DT.NewRow();
+                DR[0] = corse.CourseID;
+                DR[1] = corse.CourseName;
+                DR[2] = corse.CourseCode;
+                DR[3] = corse.Term_associated;
+                DR[4] = corse.CreditHours;
+                DT.Rows.Add(DR);
+            }
+            dataGridView1.DataSource = DT;
+            dataGridView1.Columns[1].Visible = false;
+            dataGridView1.Visible = true;
+            dataGridView1.Columns[0].DisplayIndex = 5;
         }
 
         bool ValidateControls()
@@ -57,6 +78,43 @@ namespace IVR
                 errorProvider1.SetError(textBoxcode, "لابد ان تكون قيمة رقمية");
                 check = false;
             }
+            if (txtcapacity.TextLength < 1)
+            {
+                errorProvider1.SetError(txtcapacity, "من فضلك أدخل عدد الطلاب");
+                check = false;
+            }
+            if (txtcapacity.TextLength > 1 && !int.TryParse(txtcapacity.Text, out hours))
+            {
+                errorProvider1.SetError(txtcapacity, "لابد ان تكون قيمة رقمية");
+                check = false;
+            }
+            if (txtstartdate.Text == "")
+            {
+                errorProvider1.SetError(txtstartdate, "من فضلك ادخل موعد بدء المحاضره");
+                check = false;
+            }
+            DateTime from;
+            if (txtstartdate.Text != "" && !DateTime.TryParse(txtstartdate.Text, out from))
+            {
+                errorProvider1.SetError(txtstartdate, "من فضلك أدخل التاريخ");
+                check = false;
+            }
+            if (comboBoxday.SelectedItem==null)
+            {
+                errorProvider1.SetError(comboBoxday, "من فضلك إختر يوم المحاضره");
+                check = false;
+            }
+            if (txtenddate.Text == "")
+            {
+                errorProvider1.SetError(txtenddate, "من فضلك ادخل موعد إنتهاء المحاضره");
+                check = false;
+            }
+            DateTime to;
+            if (txtenddate.Text != "" && !DateTime.TryParse(txtenddate.Text, out to))
+            {
+                errorProvider1.SetError(txtenddate, "من فضلك أدخل التاريخ");
+                check = false;
+            }
             return check;
         }
 
@@ -75,12 +133,6 @@ namespace IVR
 
         }
 #endregion
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ValidateControls();
-
-        }
 
         private void txtMaterialname_TextChanged(object sender, EventArgs e)
         {
@@ -105,8 +157,79 @@ namespace IVR
             if (textBoxcode.Text != "")
                 errorProvider1.Clear();
         }
+
+        private void txtcapacity_TextChanged(object sender, EventArgs e)
+        {
+            if (txtcapacity.Text != "")
+                errorProvider1.Clear();
+        }
+        private void txtstartdate_TextChanged(object sender, EventArgs e)
+        {
+            if (txtstartdate.Text != "")
+                errorProvider1.Clear();
+        }
+        private void comboBoxday_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxday.SelectedItem!=null)
+                errorProvider1.Clear();
+        }
+        private void txtenddate_TextChanged(object sender, EventArgs e)
+        {
+            if (txtenddate.Text != "")
+                errorProvider1.Clear();
+        }
+        private void txtMaterialname_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click(sender, e);
+        }
+
+        private void txtyear_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click(sender, e);
+        }
+
+        private void txthoursno_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click(sender, e);
+        }
+
+        private void textBoxcode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click(sender, e);
+        }
+        private void txtcapacity_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click(sender, e);
+        }
+        private void txtstartdate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click(sender, e);
+        }
+        private void comboBoxday_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click(sender, e);
+        }
+        private void txtenddate_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                pictureBox2_Click(sender, e);
+        }
+        private void AddMaterial_Load(object sender, EventArgs e)
+        {
+            comboBoxday.DataSource = Enum.GetValues(typeof(Dayenum));
+            comboBoxday.SelectedIndex = -1;
+            FillControls();
+        }
         private void pictureBox2_Click(object sender, EventArgs e)
         {
+            label9.Visible = false;
          bool validation=ValidateControls();
          if (validation == true)
          {
@@ -115,21 +238,35 @@ namespace IVR
              c.CreditHours = Convert.ToInt32(txthoursno.Text);
              c.Term_associated = txtyear.Text;
              c.CourseCode = Convert.ToInt32(textBoxcode.Text);
-             Course res = c.CreateCourse().Data as Course;
-             DataTable DT = new DataTable();
-             DT.Columns.Add("كود المادة", typeof(int));
-             DT.Columns.Add("اسم المادة", typeof(string));
-             DT.Columns.Add("الفصل الدراسي", typeof(string));
-             DT.Columns.Add("عدد الساعات", typeof(int));
-             DataRow DR = DT.NewRow();
-             DR[0] = res.CourseCode;
-             DR[1] = res.CourseName;
-             DR[2] = res.Term_associated;
-             DR[3] = res.CreditHours;
-             DT.Rows.Add(DR);
-             dataGridView1.DataSource = DT;
-             dataGridView1.Visible = true;
+             var corse = c.CreateCourse();
+             TimeTable tt = new TimeTable();
+             tt.Section_ID = (corse.Data as Course).CourseID;
+             tt.Capacity =Convert.ToInt32(txtcapacity.Text);
+             tt.Day = (int)comboBoxday.SelectedValue;
+             tt.Registered = 0;
+             tt.StartTime = Convert.ToDateTime(txtstartdate.Text);
+             tt.EndTime = Convert.ToDateTime(txtenddate.Text);
+             tt.AddTime();
+             var msg=corse.message.ShowMessage();
+             if (msg != "CourseNameDublicated")
+             {
+                 FillControls();
+             }
+             else
+             {
+                 label9.Text = msg;
+                 label9.Visible = true;
+                 dataGridView1.Visible = false;
+             }
          }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Course c = new Course();
+            c.CourseID = (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value;
+            c.DeleteCourse();
+            dataGridView1.Rows.RemoveAt(e.RowIndex);
         }
     }
 }
