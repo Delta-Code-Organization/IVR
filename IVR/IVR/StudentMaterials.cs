@@ -53,10 +53,9 @@ namespace IVR
             comboBoxMaterial.DataSource = DT2;
             comboBoxMaterial.DisplayMember = "اسم المادة";
             comboBoxMaterial.ValueMember = "رقم المسلسل";
-            comboBoxMaterial.SelectedIndex = -1;
+            //comboBoxMaterial.SelectedIndex = -1;
             this.comboBoxMaterial.SelectedIndexChanged += new System.EventHandler(this.comboBoxMaterial_SelectedIndexChanged);
             Student student = new Student();
-            //Course corse=new Course();
             List<Student> LOS = student.GetAllStudents();
             List<Course> LOC =c.GetAllcourses();
             DataTable DT3 = new DataTable();
@@ -155,9 +154,11 @@ namespace IVR
                 var res = c.AddStudentCourse(studentID);
                 var msg = res.message.ShowMessage();
                 var result = res.Data as Course;
-                if (msg != "ThisCourseIsFull")
+                if (msg != "ThisCourseIsFull" && msg != "StudentAlreadyExistInThisCourse")
                 {
                     FillControls();
+                    label8.Text = msg;
+                    label8.Visible = true;
                 }
                 else
                 {

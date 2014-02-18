@@ -239,6 +239,9 @@ namespace IVR
              c.Term_associated = txtyear.Text;
              c.CourseCode = Convert.ToInt32(textBoxcode.Text);
              var corse = c.CreateCourse();
+             var msg = corse.message.ShowMessage();
+             if (msg != "CourseNameDublicated")
+             {
              TimeTable tt = new TimeTable();
              tt.Section_ID = (corse.Data as Course).CourseID;
              tt.Capacity =Convert.ToInt32(txtcapacity.Text);
@@ -247,16 +250,14 @@ namespace IVR
              tt.StartTime = Convert.ToDateTime(txtstartdate.Text);
              tt.EndTime = Convert.ToDateTime(txtenddate.Text);
              tt.AddTime();
-             var msg=corse.message.ShowMessage();
-             if (msg != "CourseNameDublicated")
-             {
                  FillControls();
+                 label9.Text = msg;
+                 label9.Visible = true;
              }
              else
              {
                  label9.Text = msg;
                  label9.Visible = true;
-                 dataGridView1.Visible = false;
              }
          }
         }

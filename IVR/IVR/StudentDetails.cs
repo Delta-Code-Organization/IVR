@@ -93,10 +93,10 @@ namespace IVR
         }
         private void pictureBox2_Click(object sender, EventArgs e)
         {
+            label6.Visible = false;
          bool validation=ValidateControls();
          if (validation == true)
          {
-              label6.Visible = false;
              List<Student> LOS = new List<Student>();
              List<int> LOID = new List<int>();
              Student s = new Student();

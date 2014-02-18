@@ -25,7 +25,7 @@ namespace IVR.Models
             return new Returner
             {
                 Data = lastCourseName,
-                message = Msgs.Course_Name_Created_Successfully
+                message = Msgs.Course_Created_Successfully
             };
         }
         public Returner AddStudentCourse(int _ID)
@@ -35,13 +35,21 @@ namespace IVR.Models
             {
                 var course = db.Course.Where(p => p.CourseID == this.CourseID).SingleOrDefault();
                 var student = db.Student.Where(p => p.StudentID == _ID).SingleOrDefault();
+                if (course.Student.Any(p => p.StudentID == student.StudentID))
+                {
+                    return new Returner
+                    {
+                        message = Msgs.Student_Already_Exist_In_This_Course
+                    };
+                }
                 var time = course.TimeTable.Where(p => p.Section_ID == this.CourseID).SingleOrDefault();
                 time.Registered++;
                 course.Student.Add(student);
                 db.SaveChanges();
                 return new Returner
                 {
-                    Data = course
+                    Data = course,
+                    message= Msgs.Student_Added_Successfully
                 };
             }
             return new Returner
