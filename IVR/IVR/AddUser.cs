@@ -89,20 +89,18 @@ namespace IVR
              bool validation = ValidateControls();
             if (validation == true)
             {
+                label3.Visible = false;
                 SystemUser su = new SystemUser();
                 su.Password = txtuserpassword.Text;
                 su.UserName = txtusername.Text;
                 su.Status = 1;
                 var res = su.CreateUser();
                 var msg=res.message.ShowMessage();
+                label3.Text = msg;
+                label3.Visible = true;
                 if (msg != "UserNameAlreadyExist")
                 {
                     FillControls();
-                }
-                else
-                {
-                    label3.Text = msg;
-                    label3.Visible = true;
                 }
             }
         }

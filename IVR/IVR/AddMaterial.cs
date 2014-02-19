@@ -240,6 +240,8 @@ namespace IVR
              c.CourseCode = Convert.ToInt32(textBoxcode.Text);
              var corse = c.CreateCourse();
              var msg = corse.message.ShowMessage();
+             label9.Text = msg;
+             label9.Visible = true;
              if (msg != "CourseNameDublicated")
              {
              TimeTable tt = new TimeTable();
@@ -251,14 +253,12 @@ namespace IVR
              tt.EndTime = Convert.ToDateTime(txtenddate.Text);
              tt.AddTime();
                  FillControls();
-                 label9.Text = msg;
-                 label9.Visible = true;
              }
-             else
-             {
-                 label9.Text = msg;
-                 label9.Visible = true;
-             }
+             //else
+             //{
+             //    label9.Text = msg;
+             //    label9.Visible = true;
+             //}
          }
         }
 

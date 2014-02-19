@@ -63,6 +63,23 @@ namespace IVR.Models
                message = Msgs.Not_Found
            };
        }
+       public Returner SearchStudentsByNameAndPhone()
+       {
+           var exist = db.Student.Any(p => p.S_phone == this.S_phone&&p.S_name==this.S_name);
+           if (exist == true)
+           {
+               var searchStudent = db.Student.Where(p => p.S_phone == this.S_phone && p.S_name == this.S_name).SingleOrDefault();
+               return new Returner
+               {
+                   Data = searchStudent,
+                   message = Msgs.Is_Found
+               };
+           }
+           return new Returner
+           {
+               message = Msgs.Not_Found
+           };
+       }
        public List<Student> GetAllStudents()
        {
            List<Student> all = db.Student.OrderBy(p => p.StudentID).ToList();

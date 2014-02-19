@@ -154,16 +154,11 @@ namespace IVR
                 var res = c.AddStudentCourse(studentID);
                 var msg = res.message.ShowMessage();
                 var result = res.Data as Course;
+                label8.Text = msg;
+                label8.Visible = true;
                 if (msg != "ThisCourseIsFull" && msg != "StudentAlreadyExistInThisCourse")
                 {
                     FillControls();
-                    label8.Text = msg;
-                    label8.Visible = true;
-                }
-                else
-                {
-                    label8.Text = msg;
-                    label8.Visible = true;
                 }
             }
 

@@ -414,7 +414,7 @@ namespace IVR
              {
                  label10.Text = "لا يوجد نتائج مطابقه للبحث";
                  label10.Visible = true;
-                 dataGridView1.Visible = false;
+                 //dataGridView1.Visible = false;
              }
          }
          }

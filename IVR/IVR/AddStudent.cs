@@ -137,11 +137,12 @@ namespace IVR
             s.Credits_aquired = Convert.ToInt32(textBox2.Text);
             var retun = s.CreateStudent();
             label7.Text = retun.message.ShowMessage();
+            label7.Visible = true;
             if (label7.Text != "StudentNameDublicated")
             {
                 FillControls();
             }
-            label7.Visible = true;
+           // label7.Visible = true;
         }
         }
 

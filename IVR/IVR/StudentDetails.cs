@@ -100,7 +100,7 @@ namespace IVR
              List<Student> LOS = new List<Student>();
              List<int> LOID = new List<int>();
              Student s = new Student();
-             if (textBoxName.Text!= "")
+             if (textBoxName.Text!= ""&&textBoxNumber.Text=="")
              {
                  s.S_name = textBoxName.Text;
                  var res = s.SearchStudentsByName();
@@ -110,10 +110,20 @@ namespace IVR
                      LOID.Add((res.Data as Student).StudentID);
                  }
              }
-             if (textBoxNumber.Text != "")
+             if (textBoxNumber.Text != ""&&textBoxName.Text=="")
              {
                  s.S_phone = textBoxNumber.Text;
                  var res = s.SearchStudentsByPhone();
+                 if (res.message.ShowMessage() != "NotFound")
+                 {
+                     if (!LOID.Contains((res.Data as Student).StudentID))
+                         LOS.Add(res.Data as Student);
+                 }
+             }
+             if (textBoxNumber.Text != "" && textBoxName.Text != "")
+             {
+                 s.S_phone = textBoxNumber.Text;
+                 var res = s.SearchStudentsByNameAndPhone();
                  if (res.message.ShowMessage() != "NotFound")
                  {
                      if (!LOID.Contains((res.Data as Student).StudentID))
@@ -143,9 +153,9 @@ namespace IVR
              }
              else
              {
-                 label6.Text = "لا يوجد نتائج بحث مطابقه";
                  label6.Visible = true;
-                 dataGridView1.Visible = false;
+                 label6.Text = "لا يوجد نتائج بحث مطابقه";
+                // dataGridView1.Visible = false;
              }
          }
         }

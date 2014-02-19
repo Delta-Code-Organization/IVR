@@ -44,3 +44,5 @@ C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.MyAccount.resources
 C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.StudentDetails.resources
 C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.StudentMaterials.resources
 C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.AddStudent.resources
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.UpdateStudent.resources
+C:\Users\Delta code\Desktop\ivr\trunk\IVR\IVR\obj\Debug\IVR.CallForm.resources
