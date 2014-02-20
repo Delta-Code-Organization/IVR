@@ -135,5 +135,12 @@ namespace IVR
             su.DeleteSystemUser();
             dataGridView1.Rows.RemoveAt(e.RowIndex);
         }
+
+        private void AddUser_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainScreen mn = new MainScreen();
+            this.Hide();
+            mn.ShowDialog();
+        }
     }
 }

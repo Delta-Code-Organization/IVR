@@ -207,5 +207,12 @@ namespace IVR
                 us.ShowDialog();
             }
         }
+
+        private void StudentDetails_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainScreen mn = new MainScreen();
+            this.Hide();
+            mn.ShowDialog();
+        }
     }
 }

@@ -220,6 +220,8 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "UpdateStudent";
             this.Text = "UpdateStudent";
             this.Load += new System.EventHandler(this.UpdateStudent_Load);

@@ -62,13 +62,14 @@ namespace IVR
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
-            //if (Reg.Read("Name") == "")
-            //{
-            //    Login log = new Login();
-            //    this.Hide();
-            //    log.ShowDialog();
-            //}
-            Username.Text += Reg.Read("Name");
+          label2.Text =" مرحبا " +Reg.Read("Name");
+        }
+
+        private void MainScreen_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Login log = new Login();
+            this.Hide();
+            log.ShowDialog();
         }
     }
 }

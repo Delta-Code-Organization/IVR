@@ -63,6 +63,36 @@ namespace IVR.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _129118_simple_red_square_icon_media_a_media35_add {
+            get {
+                object obj = ResourceManager.GetObject("129118-simple-red-square-icon-media-a-media35-add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _129118_simple_red_square_icon_media_a_media35_add1 {
+            get {
+                object obj = ResourceManager.GetObject("129118-simple-red-square-icon-media-a-media35-add1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _129118_simple_red_square_icon_media_a_media35_add2 {
+            get {
+                object obj = ResourceManager.GetObject("129118-simple-red-square-icon-media-a-media35-add2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap addsubjecticon {
             get {
                 object obj = ResourceManager.GetObject("addsubjecticon", resourceCulture);

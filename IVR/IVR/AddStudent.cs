@@ -211,5 +211,12 @@ namespace IVR
             s.DeleteStudent();
             dataGridView1.Rows.RemoveAt(e.RowIndex);
         }
+
+        private void AddStudent_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainScreen mn = new MainScreen();
+            this.Hide();
+            mn.ShowDialog();
+        }
     }
 }

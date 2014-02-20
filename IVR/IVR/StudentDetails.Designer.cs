@@ -261,6 +261,7 @@
             this.MaximizeBox = false;
             this.Name = "StudentDetails";
             this.Text = "Student Details";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StudentDetails_FormClosed);
             this.Load += new System.EventHandler(this.StudentDetails_Load);
             this.StudentsDetails.ResumeLayout(false);
             this.StudentsDetails.PerformLayout();

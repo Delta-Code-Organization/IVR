@@ -125,7 +125,14 @@ namespace IVR
 
         private void MyAccount_Load(object sender, EventArgs e)
         {
-            label3.Text = Reg.Read("Name");
+            label2.Text = "   المستخدم الحالي   " +Reg.Read("Name");
+        }
+
+        private void MyAccount_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainScreen mn = new MainScreen();
+            this.Hide();
+            mn.ShowDialog();
         }
 
     }

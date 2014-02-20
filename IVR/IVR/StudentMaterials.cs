@@ -209,5 +209,12 @@ namespace IVR
             dataGridView1.Rows.RemoveAt(e.RowIndex);
             label8.Text = res.message.ShowMessage(); 
         }
+
+        private void StudentMaterials_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainScreen mn = new MainScreen();
+            this.Hide();
+            mn.ShowDialog();
+        }
     }
 }
