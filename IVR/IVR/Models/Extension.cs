@@ -10,7 +10,7 @@ namespace IVR.Models
     {
         public static string ShowMessage(this Msgs Message)
         {
-            return Message.ToString().Replace("_","");
+            return Message.ToString().Replace("_"," ");
         }
     }
 }

@@ -82,7 +82,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(586, 217);
+            this.label2.Location = new System.Drawing.Point(588, 217);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(176, 24);
             this.label2.TabIndex = 1;
@@ -95,16 +95,16 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label3.Location = new System.Drawing.Point(586, 298);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(136, 24);
+            this.label3.Size = new System.Drawing.Size(178, 24);
             this.label3.TabIndex = 2;
-            this.label3.Text = ":  كلمه المرور";
+            this.label3.Text = ":       كلمه المرور  ";
             // 
             // textBoxUserName
             // 
             this.textBoxUserName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.textBoxUserName.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.textBoxUserName.ForeColor = System.Drawing.Color.White;
-            this.textBoxUserName.Location = new System.Drawing.Point(270, 217);
+            this.textBoxUserName.Location = new System.Drawing.Point(235, 217);
             this.textBoxUserName.Name = "textBoxUserName";
             this.textBoxUserName.Size = new System.Drawing.Size(305, 27);
             this.textBoxUserName.TabIndex = 3;
@@ -117,7 +117,7 @@
             this.textBoxPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.textBoxPassword.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.textBoxPassword.ForeColor = System.Drawing.Color.White;
-            this.textBoxPassword.Location = new System.Drawing.Point(270, 295);
+            this.textBoxPassword.Location = new System.Drawing.Point(235, 299);
             this.textBoxPassword.MaxLength = 9;
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '*';
@@ -172,6 +172,7 @@
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "           ";
             this.Load += new System.EventHandler(this.Login_Load);
             this.panel1.ResumeLayout(false);

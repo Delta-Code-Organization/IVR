@@ -52,11 +52,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(809, 135);
+            this.label2.Location = new System.Drawing.Point(819, 135);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 17);
+            this.label2.Size = new System.Drawing.Size(107, 17);
             this.label2.TabIndex = 5;
-            this.label2.Text = " : اسم الطالب";
+            this.label2.Text = " :   اسم الطالب";
             // 
             // panel2
             // 
@@ -108,29 +108,29 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(302, 135);
+            this.label3.Location = new System.Drawing.Point(330, 135);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 17);
+            this.label3.Size = new System.Drawing.Size(126, 17);
             this.label3.TabIndex = 14;
-            this.label3.Text = " : الإيميل";
+            this.label3.Text = " : البريد الإلكتروني";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label5.Location = new System.Drawing.Point(302, 218);
+            this.label5.Location = new System.Drawing.Point(337, 218);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(91, 17);
+            this.label5.Size = new System.Drawing.Size(119, 17);
             this.label5.TabIndex = 15;
-            this.label5.Text = " : رقم الهاتف";
+            this.label5.Text = " :        رقم الهاتف";
             // 
             // txtcredit
             // 
             this.txtcredit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtcredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtcredit.ForeColor = System.Drawing.Color.White;
-            this.txtcredit.Location = new System.Drawing.Point(620, 296);
+            this.txtcredit.Location = new System.Drawing.Point(620, 295);
             this.txtcredit.Name = "txtcredit";
             this.txtcredit.Size = new System.Drawing.Size(192, 30);
             this.txtcredit.TabIndex = 16;
@@ -166,7 +166,7 @@
             this.txtphone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtphone.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtphone.ForeColor = System.Drawing.Color.White;
-            this.txtphone.Location = new System.Drawing.Point(104, 212);
+            this.txtphone.Location = new System.Drawing.Point(132, 212);
             this.txtphone.Name = "txtphone";
             this.txtphone.Size = new System.Drawing.Size(192, 30);
             this.txtphone.TabIndex = 19;
@@ -178,7 +178,7 @@
             this.txtmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.txtmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtmail.ForeColor = System.Drawing.Color.White;
-            this.txtmail.Location = new System.Drawing.Point(104, 129);
+            this.txtmail.Location = new System.Drawing.Point(132, 125);
             this.txtmail.Name = "txtmail";
             this.txtmail.Size = new System.Drawing.Size(192, 30);
             this.txtmail.TabIndex = 20;
@@ -223,6 +223,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "UpdateStudent";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UpdateStudent";
             this.Load += new System.EventHandler(this.UpdateStudent_Load);
             this.panel2.ResumeLayout(false);

@@ -60,6 +60,20 @@ namespace IVR
             ma.ShowDialog();
         }
 
+        private void pictureBox9_Click(object sender, EventArgs e)
+        {
+            AddUser au = new AddUser();
+            this.Hide();
+            au.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CallForm cf = new CallForm();
+            this.Hide();
+            cf.ShowDialog();
+        }
+       
         private void MainScreen_Load(object sender, EventArgs e)
         {
           label2.Text =" مرحبا " +Reg.Read("Name");
