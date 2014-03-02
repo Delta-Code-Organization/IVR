@@ -40,9 +40,6 @@ namespace IVR
             Dt.Columns.Add("الي", typeof(DateTime));
             foreach (Course item in LOOP)
             {
-                //DataRow DR = Dt.NewRow();
-                //DR[0] = item.CourseID;
-                //DR[1] = item.CourseName;
                 foreach (TimeTable TT in item.TimeTable)
                 {
                     DataRow DR = Dt.NewRow();
@@ -143,27 +140,19 @@ namespace IVR
                 {
                     c.CourseName = txt2materialname.Text;
                     var res = c.SearchCoursesByName();
-                    if (res.message.ShowMessage() != "Not Found")
+                    if (res.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         LOOP.AddRange(res.Data as List<TimeTable>);
-                        //LOID.Add((res.Data as List<TimeTable>).FirstOrDefault().Course.CourseID);
-                    }
+                    };
                 }
                 if (txt2materialname.Text == "" && comboBoxday.Text != "" && txtfrom.Text == "" && txtto.Text == "")
                 {
 
                     time.Day = (int)comboBoxday.SelectedValue;
                     var res = time.SearchCoursesByDay();
-                    if (res.message.ShowMessage() != "Not Found")
+                    if (res.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         LOOP.AddRange(res.Data as List<TimeTable>);
-                        //foreach (TimeTable tt in res.Data as List<TimeTable>)
-                        //{
-                        //    if(!LOID.Contains(tt.TimeTableID))
-                        //    {
-                        //        LOOP.Add(tt);
-                        //        LOID.Add(tt.TimeTableID);
-                        //    }
                     }
 
 
@@ -174,7 +163,7 @@ namespace IVR
                     time.StartTime = Convert.ToDateTime(txtfrom.Text);
                     string hour = ((DateTime)time.StartTime).ToHours();
                     var res = time.SearchCoursesByStartTime(hour);
-                    if (res.message.ShowMessage() != "Not Found")
+                    if (res.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         LOOP.AddRange(res.Data as List<TimeTable>);
 
@@ -186,7 +175,7 @@ namespace IVR
                     time.EndTime = Convert.ToDateTime(txtto.Text);
                     string hour = ((DateTime)time.EndTime).ToHours();
                     var res = time.SearchCoursesByEndTime(hour);
-                    if (res.message.ShowMessage() != "Not Found")
+                    if (res.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         LOOP.AddRange(res.Data as List<TimeTable>);
 
@@ -198,7 +187,7 @@ namespace IVR
                     time.Day = (int)comboBoxday.SelectedValue;
                     string hour = ((DateTime)time.StartTime).ToHours();
                     var res = time.SearchBothDayStart(hour);
-                    if (res.message.ShowMessage() != "Not Found")
+                    if (res.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         LOOP.AddRange(res.Data as List<TimeTable>);
                     }
@@ -209,11 +198,11 @@ namespace IVR
                     time.StartTime = Convert.ToDateTime(txtfrom.Text);
                     c.CourseName = txt2materialname.Text;
                     var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "Not Found")
+                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         string hour = ((DateTime)time.StartTime).ToHours();
                         var res = time.SearchBothNamestart((corse.Data as Course).CourseID, hour);
-                        if (res.message.ShowMessage() != "Not Found")
+                        if (res.message.ShowMessage() != "لا يوجد نتائج")
                         {
                             LOOP.AddRange(res.Data as List<TimeTable>);
                         }
@@ -224,34 +213,23 @@ namespace IVR
                     time.EndTime = Convert.ToDateTime(txtto.Text);
                     c.CourseName = txt2materialname.Text;
                     var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "Not Found")
+                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         string hour = ((DateTime)time.EndTime).ToHours();
                         var res = time.SearchBothNameEnd((corse.Data as Course).CourseID, hour);
-                        if (res.message.ShowMessage() != "Not Found")
+                        if (res.message.ShowMessage() != "لا يوجد نتائج")
                         {
                             LOOP.AddRange(res.Data as List<TimeTable>);
                         }
                     }
                 }
-                //if (txt2materialname.Text == "" && comboBoxday.Text != "" && txtfrom.Text != "" && txtto.Text == "")
-                //{
-                //    time.StartTime = Convert.ToDateTime(txtfrom.Text);
-                //    time.Day = (int)comboBoxday.SelectedValue;
-                //    var res = time.SearchBothDayStart();
-                //    var x = res.Data as List<TimeTable>;
-                //    if (res.message.ShowMessage() != "Not Found")
-                //    {
-                //        LOOP.AddRange(res.Data as List<TimeTable>);
-                //    }
-                //}
                 if (txt2materialname.Text == "" && comboBoxday.Text != "" && txtfrom.Text == "" && txtto.Text != "")
                 {
                     time.Day = (int)comboBoxday.SelectedValue;
                     time.EndTime = Convert.ToDateTime(txtto.Text);
                     string hour = ((DateTime)time.EndTime).ToHours();
                     var res = time.SearchBothDayEnd(hour);
-                    if (res.message.ShowMessage() != "Not Found")
+                    if (res.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         LOOP.AddRange(res.Data as List<TimeTable>);
                     }
@@ -263,7 +241,7 @@ namespace IVR
                     time.EndTime = Convert.ToDateTime(txtto.Text);
                     string ehour = ((DateTime)time.EndTime).ToHours();
                     var res = time.SearchBothStartEnd(shour, ehour);
-                    if (res.message.ShowMessage() != "Not Found")
+                    if (res.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         LOOP.AddRange(res.Data as List<TimeTable>);
                     }
@@ -276,7 +254,7 @@ namespace IVR
                     time.EndTime = Convert.ToDateTime(txtto.Text);
                     string ehour = ((DateTime)time.EndTime).ToHours();
                     var res = time.SearchDayStartEnd(shour, ehour);
-                    if (res.message.ShowMessage() != "Not Found")
+                    if (res.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         LOOP.AddRange(res.Data as List<TimeTable>);
                     }
@@ -288,10 +266,10 @@ namespace IVR
                     time.StartTime = Convert.ToDateTime(txtfrom.Text);
                     string hour = ((DateTime)time.StartTime).ToHours();
                     var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "Not Found")
+                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         var res = time.SearchNameDayStart((corse.Data as Course).CourseID, hour);
-                        if (res.message.ShowMessage() != "Not Found")
+                        if (res.message.ShowMessage() != "لا يوجد نتائج")
                         {
                             LOOP.AddRange(res.Data as List<TimeTable>);
                         }
@@ -305,10 +283,10 @@ namespace IVR
                     time.StartTime = Convert.ToDateTime(txtfrom.Text);
                     string shour = ((DateTime)time.StartTime).ToHours();
                     var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "Not Found")
+                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         var res = time.SearchNameStartEnd((corse.Data as Course).CourseID, shour, ehour);
-                        if (res.message.ShowMessage() != "Not Found")
+                        if (res.message.ShowMessage() != "لا يوجد نتائج")
                         {
                             LOOP.AddRange(res.Data as List<TimeTable>);
                         }
@@ -321,10 +299,10 @@ namespace IVR
                     time.EndTime = Convert.ToDateTime(txtto.Text);
                     string hour = (((DateTime)time.EndTime).ToHours());
                     var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "Not Found")
+                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         var res = time.SearchNameDayEnd((corse.Data as Course).CourseID, hour);
-                        if (res.message.ShowMessage() != "Not Found")
+                        if (res.message.ShowMessage() != "لا يوجد نتائج")
                         {
                             LOOP.AddRange(res.Data as List<TimeTable>);
                         }
@@ -339,10 +317,10 @@ namespace IVR
                     time.EndTime = Convert.ToDateTime(txtto.Text);
                     string ehour = ((DateTime)time.EndTime).ToHours();
                     var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "Not Found")
+                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         var res = time.Searchall((corse.Data as Course).CourseID, shour, ehour);
-                        if (res.message.ShowMessage() != "Not Found")
+                        if (res.message.ShowMessage() != "لا يوجد نتائج")
                         {
                             LOOP.Add(res.Data as TimeTable);
                         }
@@ -353,18 +331,17 @@ namespace IVR
                     time.Day = (int)comboBoxday.SelectedValue;
                     c.CourseName = txt2materialname.Text;
                     var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "Not Found")
+                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         var res = time.SearchBothNameDay((corse.Data as Course).CourseID);
                         List<Course> LOC = new List<Course>();
                         LOC = res.Data as List<Course>;
-                        if (res.message.ShowMessage() != "Not Found")
+                        if (res.message.ShowMessage() != "لا يوجد نتائج")
                         {
                             LOOP.AddRange(res.Data as List<TimeTable>);
                         }
                     }
                 }
-                //}
                 if (LOOP.Count != 0)
                 {
                     DataTable Dt = new DataTable();
@@ -392,7 +369,6 @@ namespace IVR
                 {
                     label10.Text = "لا يوجد نتائج مطابقه للبحث";
                     label10.Visible = true;
-                    //dataGridView1.Visible = false;
                 }
             }
         }

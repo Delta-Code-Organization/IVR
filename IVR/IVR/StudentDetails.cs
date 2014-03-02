@@ -104,7 +104,7 @@ namespace IVR
                 {
                     s.S_name = textBoxName.Text;
                     var res = s.SearchStudentsByName();
-                    if (res.message.ShowMessage() != "Not Found")
+                    if (res.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         LOS.Add(res.Data as Student);
                         LOID.Add((res.Data as Student).StudentID);
@@ -114,7 +114,7 @@ namespace IVR
                 {
                     s.S_phone = textBoxNumber.Text;
                     var res = s.SearchStudentsByPhone();
-                    if (res.message.ShowMessage() != "Not Found")
+                    if (res.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         if (!LOID.Contains((res.Data as Student).StudentID))
                             LOS.Add(res.Data as Student);
@@ -125,7 +125,7 @@ namespace IVR
                     s.S_phone = textBoxNumber.Text;
                     s.S_name = textBoxName.Text;
                     var res = s.SearchStudentsByNameAndPhone();
-                    if (res.message.ShowMessage() != "Not Found")
+                    if (res.message.ShowMessage() != "لا يوجد نتائج")
                     {
                         if (!LOID.Contains((res.Data as Student).StudentID))
                             LOS.Add(res.Data as Student);

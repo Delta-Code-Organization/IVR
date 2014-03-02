@@ -139,7 +139,7 @@ namespace IVR
                 var retun = s.CreateStudent();
                 label7.Text = retun.message.ShowMessage();
                 label7.Visible = true;
-                if (label7.Text != "Student Name Dublicated")
+                if (label7.Text != "إسم الطالب موجود بالفعل")
                 {
                     FillControls();
                 }

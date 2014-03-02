@@ -97,7 +97,7 @@ namespace IVR
                 user.Password = textBoxPassword.Text;
                 user.UserName = textBoxUserName.Text;
                 var res = user.Login().message.ShowMessage();
-                if (res == "Successful Login")
+                if (res == "دخول ناجح")
                 {
                     bool r = Reg.Write("Name", textBoxUserName.Text);
                     bool rr = Reg.Write("Password", textBoxPassword);

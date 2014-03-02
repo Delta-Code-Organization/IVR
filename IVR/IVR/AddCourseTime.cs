@@ -59,7 +59,7 @@ namespace IVR
             comboBoxMaterial.DataSource = DT2;
             comboBoxMaterial.DisplayMember = "اسم المادة";
             comboBoxMaterial.ValueMember = "رقم المسلسل";
-            comboBoxMaterial.SelectedIndex = -1;
+            
         }
         bool ValidateControls()
         {
@@ -131,7 +131,7 @@ namespace IVR
             bool validation = ValidateControls();
             if (validation == true)
             {
-
+                label9.Visible = false;
                 TimeTable tt = new TimeTable();
                 Course course = new Course();
                 course.CourseName = comboBoxMaterial.Text;
@@ -146,6 +146,8 @@ namespace IVR
                 tt.EndTime = Convert.ToDateTime(txtenddate.Text);
                 tt.AddTime();
                 FillControls();
+                label9.Visible = true;
+                label9.Text = "تم إضافة ميعاد للمادة بنجاح";
             }
         }
 
@@ -183,6 +185,7 @@ namespace IVR
         {
             comboBoxday.DataSource = Enum.GetValues(typeof(Dayenum));
             comboBoxday.SelectedIndex = -1;
+            comboBoxMaterial.SelectedIndex = -1;
             FillControls();
         }
 

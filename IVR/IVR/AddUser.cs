@@ -98,7 +98,7 @@ namespace IVR
                 var msg = res.message.ShowMessage();
                 label3.Text = msg;
                 label3.Visible = true;
-                if (msg != "User Name Already Exist")
+                if (msg != "إسم المستخدم موجود بالفعل")
                 {
                     FillControls();
                 }

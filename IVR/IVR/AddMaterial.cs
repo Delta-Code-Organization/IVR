@@ -159,7 +159,7 @@ namespace IVR
                 var msg = corse.message.ShowMessage();
                 label9.Text = msg;
                 label9.Visible = true;
-                if (msg != "Course Name Dublicated")
+                if (msg != " إسم المادة موجود بالفعل")
                 {
                     FillControls();
                 }

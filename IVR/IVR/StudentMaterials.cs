@@ -174,7 +174,7 @@ namespace IVR
                 var result = res.Data as Course;
                 label8.Text = msg;
                 label8.Visible = true;
-                if (msg != "This Course Is Full" && msg != "Student Already Exist In This Course")
+                if (msg != "عدد الطلاب مكتمل" && msg != "هذا الطالب مضاف بالفعل لهذه الماده")
                 {
                     FillControls();
                 }
@@ -208,7 +208,6 @@ namespace IVR
             comboBoxTime.DisplayMember = "بداية المحاضرة";
             comboBoxTime.ValueMember = "ID";
             comboBoxTime.SelectedIndex = -1;
-            //var startTime = time.StartTime;
         }
 
         private void comboBoxStudentName_SelectedIndexChanged(object sender, EventArgs e)
