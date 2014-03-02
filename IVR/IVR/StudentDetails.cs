@@ -156,7 +156,6 @@ namespace IVR
                 {
                     label6.Visible = true;
                     label6.Text = "لا يوجد نتائج بحث مطابقه";
-                    // dataGridView1.Visible = false;
                 }
             }
         }

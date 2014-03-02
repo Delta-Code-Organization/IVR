@@ -15,12 +15,6 @@ namespace IVR.Models
           if (exist == true)
           {
               var searchcourse = db.TimeTable.Where(p => p.Day == this.Day).ToList();
-              // List<Course> final = new List<Course>();
-              //foreach (var s in searchcourse)
-              //{
-              //    var res = s.Course;
-              //    final.Add(res);
-              //}
               return new Returner
               {
                   Data = searchcourse,

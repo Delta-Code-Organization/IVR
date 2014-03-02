@@ -143,7 +143,6 @@ namespace IVR
                 {
                     FillControls();
                 }
-                // label7.Visible = true;
             }
         }
 

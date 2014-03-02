@@ -78,43 +78,6 @@ namespace IVR
                 errorProvider1.SetError(textBoxcode, "لابد ان تكون قيمة رقمية");
                 check = false;
             }
-            //    if (txtcapacity.TextLength < 1)
-            //    {
-            //        errorProvider1.SetError(txtcapacity, "من فضلك أدخل عدد الطلاب");
-            //        check = false;
-            //    }
-            //    if (txtcapacity.TextLength > 1 && !int.TryParse(txtcapacity.Text, out hours))
-            //    {
-            //        errorProvider1.SetError(txtcapacity, "لابد ان تكون قيمة رقمية");
-            //        check = false;
-            //    }
-            //    if (txtstartdate.Text == "")
-            //    {
-            //        errorProvider1.SetError(txtstartdate, "من فضلك ادخل موعد بدء المحاضره");
-            //        check = false;
-            //    }
-            //    DateTime from;
-            //    if (txtstartdate.Text != "" && !DateTime.TryParse(txtstartdate.Text, out from))
-            //    {
-            //        errorProvider1.SetError(txtstartdate, "من فضلك أدخل التاريخ");
-            //        check = false;
-            //    }
-            //    if (comboBoxday.SelectedItem==null)
-            //    {
-            //        errorProvider1.SetError(comboBoxday, "من فضلك إختر يوم المحاضره");
-            //        check = false;
-            //    }
-            //    if (txtenddate.Text == "")
-            //    {
-            //        errorProvider1.SetError(txtenddate, "من فضلك ادخل موعد إنتهاء المحاضره");
-            //        check = false;
-            //    }
-            //    DateTime to;
-            //    if (txtenddate.Text != "" && !DateTime.TryParse(txtenddate.Text, out to))
-            //    {
-            //        errorProvider1.SetError(txtenddate, "من فضلك أدخل التاريخ");
-            //        check = false;
-            //    }
             return check;
         }
 
@@ -157,26 +120,6 @@ namespace IVR
             if (textBoxcode.Text != "")
                 errorProvider1.Clear();
         }
-        //private void txtcapacity_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (txtcapacity.Text != "")
-        //        errorProvider1.Clear();
-        //}
-        //private void txtstartdate_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (txtstartdate.Text != "")
-        //        errorProvider1.Clear();
-        //}
-        //private void comboBoxday_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    if (comboBoxday.SelectedItem!=null)
-        //        errorProvider1.Clear();
-        //}
-        //private void txtenddate_TextChanged(object sender, EventArgs e)
-        //{
-        //    if (txtenddate.Text != "")
-        //        errorProvider1.Clear();
-        //}
         private void txtMaterialname_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == System.Windows.Forms.Keys.Enter)
@@ -201,32 +144,6 @@ namespace IVR
                 pictureBox2_Click(sender, e);
         }
 
-        //private void txtcapacity_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == System.Windows.Forms.Keys.Enter)
-        //        pictureBox2_Click(sender, e);
-        //}
-        //private void txtstartdate_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == System.Windows.Forms.Keys.Enter)
-        //        pictureBox2_Click(sender, e);
-        //}
-        //private void comboBoxday_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == System.Windows.Forms.Keys.Enter)
-        //        pictureBox2_Click(sender, e);
-        //}
-        //private void txtenddate_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == System.Windows.Forms.Keys.Enter)
-        //        pictureBox2_Click(sender, e);
-        //}
-        //private void AddMaterial_Load(object sender, EventArgs e)
-        //{
-        //    comboBoxday.DataSource = Enum.GetValues(typeof(Dayenum));
-        //    comboBoxday.SelectedIndex = -1;
-        //    FillControls();
-        //}
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             label9.Visible = false;
@@ -244,14 +161,6 @@ namespace IVR
                 label9.Visible = true;
                 if (msg != "Course Name Dublicated")
                 {
-                    //TimeTable tt = new TimeTable();
-                    //tt.Section_ID = (corse.Data as Course).CourseID;
-                    //tt.Capacity = Convert.ToInt32(txtcapacity.Text);
-                    //tt.Day = (int)comboBoxday.SelectedValue;
-                    //tt.Registered = 0;
-                    //tt.StartTime = Convert.ToDateTime(txtstartdate.Text);
-                    //tt.EndTime = Convert.ToDateTime(txtenddate.Text);
-                    //tt.AddTime();
                     FillControls();
                 }
                 else

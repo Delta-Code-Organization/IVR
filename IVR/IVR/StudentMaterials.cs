@@ -80,7 +80,6 @@ namespace IVR
                             DR2[3] = cs.CourseName;
                             DR2[4] = ttb.StartTime;
                         }
-                        //textBox1.Text = Convert.ToString(time.StartTime);
                         DT3.Rows.Add(DR2);
                     }
                 }

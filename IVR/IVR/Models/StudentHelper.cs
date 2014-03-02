@@ -32,14 +32,13 @@ namespace IVR.Models
         {
             List<TimeTable> LOTT = new List<TimeTable>();
             Student student = db.Student.Where(p => p.StudentID == _ID).SingleOrDefault();
-            //var courses = db.Course.Where(p=>p.Student.Contains(student)).ToList();
             if (student.Course.Any())
             {
                 var courses = student.Course;
                 foreach (Course c in courses)
                 {
-                    var time = c.TimeTable.SingleOrDefault();
-                    LOTT.Add(time);
+                    var time = c.TimeTable.ToList();
+                    LOTT.AddRange(time);
                 }
                 return new Returner
                 {

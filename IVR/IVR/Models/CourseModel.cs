@@ -104,7 +104,6 @@ namespace IVR.Models
             if (db.TimeTable.Any(p => p.Section_ID == this.CourseID))
             {
                 var time = db.TimeTable.Where(p => p.Section_ID == this.CourseID).ToList();
-                // course.TimeTable.Remove(time);
                 foreach (TimeTable tt in time)
                 {
                     db.TimeTable.Remove(tt);
@@ -133,7 +132,6 @@ namespace IVR.Models
         {
             var course = db.Course.Where(p => p.CourseID == this.CourseID).SingleOrDefault();
             var student = db.Student.Where(p => p.StudentID == _ID).SingleOrDefault();
-            //course.Student.Remove(student);
             var time = course.TimeTable.Where(p => p.Section_ID == this.CourseID).ToList();
             foreach (TimeTable tt in time)
             {

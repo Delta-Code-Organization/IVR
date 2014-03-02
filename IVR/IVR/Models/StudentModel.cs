@@ -103,14 +103,9 @@ namespace IVR.Models
                if (student.Course.Any(p => p.CourseID == crse.CourseID))
                {
                    crse.DeleteStudentCourse(student.StudentID);
-                   //student.Course.Remove(crse);
-                   //db.SaveChanges();
                }
            }
            student.Delete();
-           //var student1 = db.Student.Where(p => p.StudentID == this.StudentID).SingleOrDefault();
-           //db.Student.Remove(student1);
-           //db.SaveChanges();
            return new Returner
            {
                Data = student,
