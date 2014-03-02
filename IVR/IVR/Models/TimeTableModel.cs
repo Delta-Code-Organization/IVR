@@ -401,6 +401,6 @@ namespace IVR.Models
               message = Msgs.تم_إضافة_ميعاد_للمادة_بنجاح
           };
       }
-      }
-    }
+  }
+}
 
