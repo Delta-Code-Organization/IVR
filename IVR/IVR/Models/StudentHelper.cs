@@ -17,7 +17,7 @@ namespace IVR.Models
             {
                 return new Returner
                 {
-                    message = Msgs.Student_Name_Dublicated
+                    message = Msgs.إسم_الطالب_موجود_بالفعل
                 };
             }
             db.Student.Add(S);
@@ -25,7 +25,7 @@ namespace IVR.Models
             db.SaveChanges();
             return new Returner
             {
-                message = Msgs.Student_Added_Successfully
+                message = Msgs.تم_إضافة_الطالب_بنجاح
             };
         }
         public Returner Time(int _ID)
@@ -48,7 +48,7 @@ namespace IVR.Models
             }
             return new Returner
             {
-                message = Msgs.Not_Found
+                message = Msgs.لا_يوجد_نتائج
             };
         }
     }

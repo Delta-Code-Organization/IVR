@@ -16,7 +16,7 @@ namespace IVR.Models
            {
                return new Returner
                {
-                   message = Msgs.Student_Name_Dublicated
+                   message = Msgs.إسم_الطالب_موجود_بالفعل
                };
            }
            db.Student.Add(this);
@@ -24,28 +24,28 @@ namespace IVR.Models
            var lastStudent = db.Student.OrderByDescending(p => p.StudentID).FirstOrDefault();
            return new Returner
            {
-               message = Msgs.Student_created_Successfuly,
+               message = Msgs.تم_إضافة_الطالب_بنجاح,
                Data = lastStudent
            };
        }
        public Returner SearchStudentsByName()
        {
-               var exist = db.Student.Any(p => p.S_name == this.S_name);
-               if (exist == true)
-               {
-                   var searchStudent = db.Student.Where(p => p.S_name == this.S_name).SingleOrDefault();
-                   return new Returner
-                   {
-                       Data = searchStudent,
-                       message = Msgs.Is_Found
-                   };
-               }
+           var exist = db.Student.Any(p => p.S_name == this.S_name);
+           if (exist == true)
+           {
+               var searchStudent = db.Student.Where(p => p.S_name == this.S_name).SingleOrDefault();
                return new Returner
                {
-                   message = Msgs.Not_Found
+                   Data = searchStudent,
+                   message = Msgs.يوجد_نتائج
                };
            }
-       
+           return new Returner
+           {
+               message = Msgs.لا_يوجد_نتائج
+           };
+       }
+
        public Returner SearchStudentsByPhone()
        {
            var exist = db.Student.Any(p => p.S_phone == this.S_phone);
@@ -55,29 +55,29 @@ namespace IVR.Models
                return new Returner
                {
                    Data = searchStudent,
-                   message = Msgs.Is_Found
+                   message = Msgs.يوجد_نتائج
                };
            }
            return new Returner
            {
-               message = Msgs.Not_Found
+               message = Msgs.لا_يوجد_نتائج
            };
        }
        public Returner SearchStudentsByNameAndPhone()
        {
-           var exist = db.Student.Any(p => p.S_phone == this.S_phone&&p.S_name==this.S_name);
+           var exist = db.Student.Any(p => p.S_phone == this.S_phone && p.S_name == this.S_name);
            if (exist == true)
            {
                var searchStudent = db.Student.Where(p => p.S_phone == this.S_phone && p.S_name == this.S_name).SingleOrDefault();
                return new Returner
                {
                    Data = searchStudent,
-                   message = Msgs.Is_Found
+                   message = Msgs.يوجد_نتائج
                };
            }
            return new Returner
            {
-               message = Msgs.Not_Found
+               message = Msgs.لا_يوجد_نتائج
            };
        }
        public List<Student> GetAllStudents()
@@ -111,16 +111,16 @@ namespace IVR.Models
            //var student1 = db.Student.Where(p => p.StudentID == this.StudentID).SingleOrDefault();
            //db.Student.Remove(student1);
            //db.SaveChanges();
-               return new Returner
-               {
-                   Data = student,
-                   message = Msgs.Student_Deleted_Successfully
-               };
+           return new Returner
+           {
+               Data = student,
+               message = Msgs.تم_حذف_الطالب_بنجاح
+           };
        }
-        public Returner UpdateStudent()
+       public Returner UpdateStudent()
        {
            var student = db.Student.Where(p => p.StudentID == this.StudentID).SingleOrDefault();
-           student.S_name= this.S_name;
+           student.S_name = this.S_name;
            student.S_email = this.S_email;
            student.S_phone = this.S_phone;
            student.S_pw = this.S_pw;
@@ -129,7 +129,7 @@ namespace IVR.Models
            return new Returner
            {
                Data = student,
-               message = Msgs.Student_Updated_Successfully
+               message = Msgs.نم_تعديل_بيانات_الطالب_بنجاح
            };
        }
        public Returner Delete()
@@ -139,7 +139,7 @@ namespace IVR.Models
            db.SaveChanges();
            return new Returner
            {
-               message = Msgs.Student_Deleted_Successfully
+               message = Msgs.تم_حذف_الطالب_بنجاح
            };
        }
     }

@@ -16,7 +16,7 @@ namespace IVR.Models
             {
                 return new Returner
                 {
-                    message= Msgs.User_Name_Already_Exist
+                    message= Msgs.إسم_المستخدم_موجود_بالفعل
                 };
             }
             db.SystemUser.Add(this);
@@ -25,7 +25,7 @@ namespace IVR.Models
             return new Returner
             {
                 Data = lastUser,
-                message = Msgs.User_Created_Successfull
+                message = Msgs.تم_إضافة_المستخدم_بنجاح
             };
         }
         public Returner UpdatePassword()
@@ -35,7 +35,7 @@ namespace IVR.Models
             db.SaveChanges();
             return new Returner
             {
-                message = Msgs.Password_Updated_Successfully
+                message = Msgs.نم_تعديل_الرقم_السري_بنجاح
             };
         }
         public Returner Login()
@@ -45,12 +45,12 @@ namespace IVR.Models
             {
                 return new Returner
                 {
-                    message = Msgs.Successful_Login
+                    message = Msgs.دخول_ناجح
                 };
             }
             return new Returner
             {
-                message = Msgs.Wrong_Name_Or_Password
+                message = Msgs.يوجد_خطأ_بالبريد_الالكتروني_أو_الرقم_السري
             };
         }
         public Returner GetSystemUser()
@@ -68,7 +68,7 @@ namespace IVR.Models
             db.SaveChanges();
             return new Returner
             {
-                message = Msgs.System_User_Deleted_Successfully
+                message = Msgs.تم_حذف_المستخدم_بنجاح
             };
         }
         public List<SystemUser> GetAllUsers()

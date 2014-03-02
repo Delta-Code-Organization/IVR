@@ -15,67 +15,387 @@ namespace IVR.Models
           if (exist == true)
           {
               var searchcourse = db.TimeTable.Where(p => p.Day == this.Day).ToList();
-              List<Course> final = new List<Course>();
-              foreach (var s in searchcourse)
-              {
-                  var res = s.Course;
-                  final.Add(res);
-              }
+              // List<Course> final = new List<Course>();
+              //foreach (var s in searchcourse)
+              //{
+              //    var res = s.Course;
+              //    final.Add(res);
+              //}
               return new Returner
               {
-                  Data = final,
-                  message = Msgs.Is_Found
+                  Data = searchcourse,
+                  message = Msgs.يوجد_نتائج
               };
           }
           return new Returner
           {
-              message = Msgs.Not_Found
+              message = Msgs.لا_يوجد_نتائج
           };
       }
-      public Returner SearchCoursesByStartTime()
+      public Returner SearchCoursesByStartTime(string _Hour)
       {
-          var exist = db.TimeTable.Any(p => p.StartTime == this.StartTime);
-          if (exist == true)
+          List<TimeTable> LOTT = new List<TimeTable>();
+          var searchcourse = db.TimeTable.OrderBy(p => p.TimeTableID);
+          foreach (TimeTable tt in searchcourse)
           {
-              var searchcourse = db.TimeTable.Where(p => p.StartTime == this.StartTime).ToList();
-              List<Course> final = new List<Course>();
-              foreach (var s in searchcourse)
+
+              var time = ((DateTime)tt.StartTime).ToHours();
+              if (time == _Hour)
               {
-                  var res = s.Course;
-                  final.Add(res);
+                  LOTT.Add(tt);
               }
+          }
+          if (LOTT.Count != 0)
+          {
               return new Returner
               {
-                  Data = final,
-                  message = Msgs.Is_Found
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
               };
           }
+
           return new Returner
           {
-              message = Msgs.Not_Found
+              message = Msgs.لا_يوجد_نتائج
           };
       }
-      public Returner SearchCoursesByEndTime()
+      public Returner SearchCoursesByEndTime(string _Hour)
       {
-          var exist = db.TimeTable.Any(p => p.EndTime == this.EndTime);
-          if (exist == true)
+          List<TimeTable> LOTT = new List<TimeTable>();
+          var searchcourse = db.TimeTable.OrderBy(p => p.TimeTableID);
+          foreach (TimeTable tt in searchcourse)
           {
-              var searchcourse = db.TimeTable.Where(p => p.EndTime == this.EndTime).ToList();
-              List<Course> final = new List<Course>();
-              foreach (var s in searchcourse)
+
+              var time = ((DateTime)tt.EndTime).ToHours();
+              if (time == _Hour)
               {
-                  var res = s.Course;
-                  final.Add(res);
+                  LOTT.Add(tt);
               }
+          }
+          if (LOTT.Count != 0)
+          {
               return new Returner
               {
-                  Data = final,
-                  message = Msgs.Is_Found
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
+              };
+          }
+
+          return new Returner
+          {
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+
+      public Returner SearchBothNameDay(int _ID)
+      {
+          var exist = db.TimeTable.Any(p => p.Section_ID == _ID && p.Day == this.Day);
+          if (exist == true)
+          {
+              var result = db.TimeTable.Where(p => p.Section_ID == _ID && p.Day == this.Day).ToList();
+              return new Returner
+              {
+                  Data = result,
+                  message = Msgs.يوجد_نتائج
               };
           }
           return new Returner
           {
-              message = Msgs.Not_Found
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+      public Returner SearchBothNamestart(int _ID, string _Hour)
+      {
+          var searchcourse = db.TimeTable.Where(p => p.Section_ID == _ID).ToList();
+          List<TimeTable> LOTT = new List<TimeTable>();
+          foreach (TimeTable tt in searchcourse)
+          {
+              var time = ((DateTime)tt.StartTime).ToHours();
+              if (time == _Hour)
+              {
+                  LOTT.Add(tt);
+              }
+          }
+          if (LOTT.Count != 0)
+          {
+              return new Returner
+              {
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
+              };
+          }
+
+          return new Returner
+          {
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+      public Returner SearchBothNameEnd(int _ID, string _Hour)
+      {
+          var searchcourse = db.TimeTable.Where(p => p.Section_ID == _ID).ToList();
+          List<TimeTable> LOTT = new List<TimeTable>();
+          foreach (TimeTable tt in searchcourse)
+          {
+              var time = ((DateTime)tt.EndTime).ToHours();
+              if (time == _Hour)
+              {
+                  LOTT.Add(tt);
+              }
+          }
+          if (LOTT.Count != 0)
+          {
+              return new Returner
+              {
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
+              };
+          }
+
+          return new Returner
+          {
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+      public Returner SearchNameDayStart(int _ID, string _Hour)
+      {
+          var searchcourse = db.TimeTable.Where(p => p.Section_ID == _ID && p.Day == this.Day).ToList();
+          List<TimeTable> LOTT = new List<TimeTable>();
+          foreach (TimeTable tt in searchcourse)
+          {
+              var time = ((DateTime)tt.StartTime).ToHours();
+              if (time == _Hour)
+              {
+                  LOTT.Add(tt);
+              }
+          }
+          if (LOTT.Count != 0)
+          {
+              return new Returner
+              {
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
+              };
+          }
+
+          return new Returner
+          {
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+      public Returner SearchNameStartEnd(int _ID, string _Shour, string _Ehour)
+      {
+          var searchcourse = db.TimeTable.Where(p => p.Section_ID == _ID).ToList();
+          List<TimeTable> LOTT = new List<TimeTable>();
+          foreach (TimeTable tt in searchcourse)
+          {
+              var stime = ((DateTime)tt.StartTime).ToHours();
+              var etime = ((DateTime)tt.EndTime).ToHours();
+              if (stime == _Shour && etime == _Ehour)
+              {
+                  LOTT.Add(tt);
+              }
+          }
+          if (LOTT.Count != 0)
+          {
+              return new Returner
+              {
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
+              };
+          }
+
+          return new Returner
+          {
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+      public Returner SearchNameDayEnd(int _ID, string _Hour)
+      {
+          var searchcourse = db.TimeTable.Where(p => p.Section_ID == _ID && p.Day == this.Day).ToList();
+          List<TimeTable> LOTT = new List<TimeTable>();
+          foreach (TimeTable tt in searchcourse)
+          {
+              var time = ((DateTime)tt.EndTime).ToHours();
+              if (time == _Hour)
+              {
+                  LOTT.Add(tt);
+              }
+          }
+          if (LOTT.Count != 0)
+          {
+              return new Returner
+              {
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
+              };
+          }
+
+          return new Returner
+          {
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+      public Returner Searchall(int _ID, string _Shour, string _Ehour)
+      {
+          var searchcourse = db.TimeTable.Where(p => p.Section_ID == _ID && p.Day == this.Day).ToList();
+          List<TimeTable> LOTT = new List<TimeTable>();
+          foreach (TimeTable tt in searchcourse)
+          {
+              var stime = ((DateTime)tt.StartTime).ToHours();
+              var etime = ((DateTime)tt.EndTime).ToHours();
+              if (stime == _Shour && etime == _Ehour)
+              {
+                  LOTT.Add(tt);
+              }
+          }
+          if (LOTT.Count != 0)
+          {
+              return new Returner
+              {
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
+              };
+          }
+
+          return new Returner
+          {
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+      public Returner SearchBothDayStart(string _Hour)
+      {
+          var searchcourse = db.TimeTable.Where(p => p.Day == this.Day).ToList();
+          List<TimeTable> LOTT = new List<TimeTable>();
+          foreach (TimeTable tt in searchcourse)
+          {
+              var time = ((DateTime)tt.StartTime).ToHours();
+              if (time == _Hour)
+              {
+                  LOTT.Add(tt);
+              }
+          }
+          if (LOTT.Count != 0)
+          {
+              return new Returner
+              {
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
+              };
+          }
+
+          return new Returner
+          {
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+      public Returner SearchBothDayEnd(string _Hour)
+      {
+          var searchcourse = db.TimeTable.Where(p => p.Day == this.Day).ToList();
+          List<TimeTable> LOTT = new List<TimeTable>();
+          foreach (TimeTable tt in searchcourse)
+          {
+              var time = ((DateTime)tt.EndTime).ToHours();
+              if (time == _Hour)
+              {
+                  LOTT.Add(tt);
+              }
+          }
+          if (LOTT.Count != 0)
+          {
+              return new Returner
+              {
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
+              };
+          }
+
+          return new Returner
+          {
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+      public Returner SearchBothStartEnd(string _Shour, string _Ehour)
+      {
+          var searchcourse = db.TimeTable.OrderBy(p => p.TimeTableID).ToList();
+          List<TimeTable> LOTT = new List<TimeTable>();
+          foreach (TimeTable tt in searchcourse)
+          {
+              var stime = ((DateTime)tt.StartTime).ToHours();
+              var etime = ((DateTime)tt.EndTime).ToHours();
+              if (stime == _Shour && etime == _Ehour)
+              {
+                  LOTT.Add(tt);
+              }
+          }
+          if (LOTT.Count != 0)
+          {
+              return new Returner
+              {
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
+              };
+          }
+
+          return new Returner
+          {
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+      public Returner SearchDayStartEnd(string _Shour, string _Ehour)
+      {
+          var searchcourse = db.TimeTable.Where(p => p.Day == this.Day).ToList();
+          List<TimeTable> LOTT = new List<TimeTable>();
+          foreach (TimeTable tt in searchcourse)
+          {
+              var stime = ((DateTime)tt.StartTime).ToHours();
+              var etime = ((DateTime)tt.EndTime).ToHours();
+              if (stime == _Shour && etime == _Ehour)
+              {
+                  LOTT.Add(tt);
+              }
+          }
+          if (LOTT.Count != 0)
+          {
+              return new Returner
+              {
+                  Data = LOTT,
+                  message = Msgs.يوجد_نتائج
+              };
+          }
+
+          return new Returner
+          {
+              message = Msgs.لا_يوجد_نتائج
+          };
+      }
+
+      public Returner GetAllTimes()
+      {
+          var times = db.TimeTable.OrderBy(p => p.TimeTableID).ToList();
+          return new Returner
+          {
+              Data = times
+          };
+      }
+
+      public Returner DeleteTime()
+      {
+          var time = db.TimeTable.Where(p => p.TimeTableID == this.TimeTableID).SingleOrDefault();
+          db.TimeTable.Remove(time);
+          db.SaveChanges();
+          return new Returner
+          {
+              message = Msgs.تم_حذف_ميعاد_المادة_بنجاح
+          };
+      }
+
+
+      public Returner GetCourseStartTime()
+      {
+          var time = db.TimeTable.OrderBy(p => p.Section_ID).ToList();
+          return new Returner
+          {
+              Data = time
           };
       }
       public Returner AddTime()
@@ -84,219 +404,7 @@ namespace IVR.Models
           db.SaveChanges();
           return new Returner
           {
-              message = Msgs.Course_Time_Added_Successfully
-          };
-      }
-
-      public Returner SearchBothNameDay(int _ID)
-      {
-          var exist = db.TimeTable.Any(p => p.Section_ID == _ID&&p.Day==this.Day);
-          if (exist == true)
-          {
-              var result = db.TimeTable.Where(p => p.Section_ID == _ID && p.Day == this.Day).SingleOrDefault();
-              return new Returner
-              {
-                  Data = result.Course,
-                  message = Msgs.Is_Found
-              };
-          }
-              return new Returner
-              {
-                  message = Msgs.Not_Found
-              };
-          }
-      public Returner SearchBothNamestart(int _ID)
-      {
-          var exist = db.TimeTable.Any(p => p.Section_ID == _ID && p.StartTime == this.StartTime);
-          if (exist == true)
-          {
-              var result = db.TimeTable.Where(p => p.Section_ID == _ID && p.StartTime == this.StartTime).SingleOrDefault();
-              return new Returner
-              {
-                  Data = result.Course,
-                  message = Msgs.Is_Found
-              };
-          }
-          return new Returner
-          {
-              message = Msgs.Not_Found
-          };
-      }
-      public Returner SearchBothNameEnd(int _ID)
-      {
-          var exist = db.TimeTable.Any(p => p.Section_ID == _ID && p.EndTime == this.EndTime);
-          if (exist == true)
-          {
-              var result = db.TimeTable.Where(p => p.Section_ID == _ID && p.EndTime == this.EndTime).SingleOrDefault();
-              return new Returner
-              {
-                  Data = result.Course,
-                  message = Msgs.Is_Found
-              };
-          }
-          return new Returner
-          {
-              message = Msgs.Not_Found
-          };
-      }
-      public Returner SearchNameDayStart(int _ID)
-      {
-          var exist = db.TimeTable.Any(p => p.Section_ID == _ID && p.Day == this.Day && p.StartTime == this.StartTime);
-          if (exist == true)
-          {
-              var result = db.TimeTable.Where(p => p.Section_ID == _ID && p.Day == this.Day && p.StartTime == this.StartTime).SingleOrDefault();
-              return new Returner
-              {
-                  Data = result.Course,
-                  message = Msgs.Is_Found
-              };
-          }
-          return new Returner
-          {
-              message = Msgs.Not_Found
-          };
-      }
-      public Returner SearchNameStartEnd(int _ID)
-      {
-          var exist = db.TimeTable.Any(p => p.Section_ID == _ID && p.EndTime == this.EndTime && p.StartTime == this.StartTime);
-          if (exist == true)
-          {
-              var result = db.TimeTable.Where(p => p.Section_ID == _ID && p.EndTime == this.EndTime && p.StartTime == this.StartTime).SingleOrDefault();
-              return new Returner
-              {
-                  Data = result.Course,
-                  message = Msgs.Is_Found
-              };
-          }
-          return new Returner
-          {
-              message = Msgs.Not_Found
-          };
-      }
-      public Returner SearchNameDayEnd(int _ID)
-      {
-          var exist = db.TimeTable.Any(p => p.Section_ID == _ID && p.EndTime == this.EndTime && p.Day == this.Day);
-          if (exist == true)
-          {
-              var result = db.TimeTable.Where(p => p.Section_ID == _ID && p.EndTime == this.EndTime && p.Day == this.Day).SingleOrDefault();
-              return new Returner
-              {
-                  Data = result.Course,
-                  message = Msgs.Is_Found
-              };
-          }
-          return new Returner
-          {
-              message = Msgs.Not_Found
-          };
-      }
-      public Returner Searchall(int _ID)
-      {
-          var exist = db.TimeTable.Any(p => p.Section_ID == _ID && p.EndTime == this.EndTime && p.Day == this.Day && p.StartTime == this.StartTime);
-          if (exist == true)
-          {
-              var result = db.TimeTable.Where(p => p.Section_ID == _ID && p.EndTime == this.EndTime && p.Day == this.Day && p.StartTime == this.StartTime).SingleOrDefault();
-              return new Returner
-              {
-                  Data = result.Course,
-                  message = Msgs.Is_Found
-              };
-          }
-          return new Returner
-          {
-              message = Msgs.Not_Found
-          };
-      }
-      public Returner SearchBothDayStart()
-      {
-          var exist = db.TimeTable.Any(p => p.Day == this.Day && p.StartTime == this.StartTime);
-          if (exist == true)
-          {
-              var result = db.TimeTable.Where(p => p.Day == this.Day && p.StartTime == this.StartTime).ToList();
-              List<Course> final = new List<Course>();
-              foreach (var s in result)
-              {
-                  var res = s.Course;
-                  final.Add(res);
-              }
-              return new Returner
-              {
-                  Data = final,
-                  message = Msgs.Is_Found
-              };
-          }
-          return new Returner
-          {
-              message = Msgs.Not_Found
-          };
-      }
-      public Returner SearchBothDayEnd()
-      {
-          var exist = db.TimeTable.Any(p => p.Day == this.Day && p.EndTime == this.EndTime);
-          if (exist == true)
-          {
-              var result = db.TimeTable.Where(p => p.Day == this.Day && p.EndTime == this.EndTime).ToList();
-              List<Course> final = new List<Course>();
-              foreach (var s in result)
-              {
-                  var res = s.Course;
-                  final.Add(res);
-              }
-              return new Returner
-              {
-                  Data = final,
-                  message = Msgs.Is_Found
-              };
-          }
-          return new Returner
-          {
-              message = Msgs.Not_Found
-          };
-      }
-      public Returner SearchBothStartEnd()
-      {
-          var exist = db.TimeTable.Any(p => p.StartTime == this.StartTime && p.EndTime == this.EndTime);
-          if (exist == true)
-          {
-              var result = db.TimeTable.Where(p => p.StartTime == this.StartTime && p.EndTime == this.EndTime).ToList();
-              List<Course> final = new List<Course>();
-              foreach (var s in result)
-              {
-                  var res = s.Course;
-                  final.Add(res);
-              }
-              return new Returner
-              {
-                  Data = final,
-                  message = Msgs.Is_Found
-              };
-          }
-          return new Returner
-          {
-              message = Msgs.Not_Found
-          };
-      }
-      public Returner SearchDayStartEnd()
-      {
-          var exist = db.TimeTable.Any(p => p.StartTime == this.StartTime && p.EndTime == this.EndTime && p.Day == this.Day);
-          if (exist == true)
-          {
-              var result = db.TimeTable.Where(p => p.StartTime == this.StartTime && p.EndTime == this.EndTime && p.Day == this.Day).ToList();
-              List<Course> final = new List<Course>();
-              foreach (var s in result)
-              {
-                  var res = s.Course;
-                  final.Add(res);
-              }
-              return new Returner
-              {
-                  Data = final,
-                  message = Msgs.Is_Found
-              };
-          }
-          return new Returner
-          {
-              message = Msgs.Not_Found
+              message = Msgs.تم_إضافة_ميعاد_للمادة_بنجاح
           };
       }
       }

@@ -29,41 +29,34 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtMaterialname = new System.Windows.Forms.TextBox();
-            this.txtyear = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txthoursno = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBoxcode = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.txtcapacity = new System.Windows.Forms.TextBox();
-            this.txtstartdate = new System.Windows.Forms.TextBox();
-            this.txtenddate = new System.Windows.Forms.TextBox();
-            this.comboBoxday = new System.Windows.Forms.ComboBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.textBoxcode = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txthoursno = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtyear = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtMaterialname = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -78,6 +71,16 @@
             this.panel1.Size = new System.Drawing.Size(948, 91);
             this.panel1.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::IVR.Properties.Resources.addsubjectscreenicon;
+            this.pictureBox1.Location = new System.Drawing.Point(567, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(69, 67);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -90,103 +93,51 @@
             this.label1.Text = "إضافة ماده";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(836, 122);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 17);
-            this.label2.TabIndex = 2;
-            this.label2.Text = " : إسم الماده";
-            // 
-            // txtMaterialname
-            // 
-            this.txtMaterialname.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtMaterialname.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaterialname.ForeColor = System.Drawing.Color.White;
-            this.txtMaterialname.Location = new System.Drawing.Point(618, 112);
-            this.txtMaterialname.Name = "txtMaterialname";
-            this.txtMaterialname.Size = new System.Drawing.Size(192, 30);
-            this.txtMaterialname.TabIndex = 3;
-            this.txtMaterialname.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtMaterialname.TextChanged += new System.EventHandler(this.txtMaterialname_TextChanged);
-            this.txtMaterialname.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMaterialname_KeyDown);
-            // 
-            // txtyear
-            // 
-            this.txtyear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtyear.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtyear.ForeColor = System.Drawing.Color.White;
-            this.txtyear.Location = new System.Drawing.Point(171, 109);
-            this.txtyear.Name = "txtyear";
-            this.txtyear.Size = new System.Drawing.Size(192, 30);
-            this.txtyear.TabIndex = 5;
-            this.txtyear.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtyear.TextChanged += new System.EventHandler(this.txtyear_TextChanged);
-            this.txtyear.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtyear_KeyDown);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label4.Location = new System.Drawing.Point(820, 161);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(109, 17);
-            this.label4.TabIndex = 6;
-            this.label4.Text = " : عدد الساعات";
-            // 
-            // txthoursno
-            // 
-            this.txthoursno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txthoursno.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txthoursno.ForeColor = System.Drawing.Color.White;
-            this.txthoursno.Location = new System.Drawing.Point(618, 161);
-            this.txthoursno.Name = "txthoursno";
-            this.txthoursno.Size = new System.Drawing.Size(192, 30);
-            this.txthoursno.TabIndex = 7;
-            this.txthoursno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txthoursno.TextChanged += new System.EventHandler(this.txthoursno_TextChanged);
-            this.txthoursno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txthoursno_KeyDown);
-            // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1});
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.NullValue = "حذف";
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.dataGridView1.Location = new System.Drawing.Point(192, 320);
+            this.dataGridView1.Location = new System.Drawing.Point(201, 290);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView1.RowTemplate.Height = 35;
             this.dataGridView1.Size = new System.Drawing.Size(579, 210);
             this.dataGridView1.TabIndex = 11;
-            this.dataGridView1.Visible = false;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Column1
@@ -225,41 +176,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(369, 119);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(137, 17);
-            this.label3.TabIndex = 4;
-            this.label3.Text = " : الفصل الدراسي   ";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(390, 161);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(88, 17);
-            this.label8.TabIndex = 15;
-            this.label8.Text = " : كود المادة";
-            // 
-            // textBoxcode
-            // 
-            this.textBoxcode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.textBoxcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxcode.ForeColor = System.Drawing.Color.White;
-            this.textBoxcode.Location = new System.Drawing.Point(171, 161);
-            this.textBoxcode.Name = "textBoxcode";
-            this.textBoxcode.Size = new System.Drawing.Size(192, 30);
-            this.textBoxcode.TabIndex = 16;
-            this.textBoxcode.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxcode.TextChanged += new System.EventHandler(this.textBoxcode_TextChanged);
-            this.textBoxcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxcode_KeyDown);
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -273,103 +189,6 @@
             this.label9.Text = "label9";
             this.label9.Visible = false;
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label10.Location = new System.Drawing.Point(804, 213);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(128, 17);
-            this.label10.TabIndex = 18;
-            this.label10.Text = " : عدد طلاب الماده";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label11.Location = new System.Drawing.Point(369, 213);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(144, 17);
-            this.label11.TabIndex = 19;
-            this.label11.Text = " : ميعاد بدء المحاضره";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label12.Location = new System.Drawing.Point(369, 259);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(158, 17);
-            this.label12.TabIndex = 20;
-            this.label12.Text = " : موعد إنتهاء المحاضره";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label13.Location = new System.Drawing.Point(827, 259);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(109, 17);
-            this.label13.TabIndex = 21;
-            this.label13.Text = " : يوم المحاضره";
-            // 
-            // txtcapacity
-            // 
-            this.txtcapacity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtcapacity.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtcapacity.ForeColor = System.Drawing.Color.White;
-            this.txtcapacity.Location = new System.Drawing.Point(618, 203);
-            this.txtcapacity.Name = "txtcapacity";
-            this.txtcapacity.Size = new System.Drawing.Size(192, 30);
-            this.txtcapacity.TabIndex = 22;
-            this.txtcapacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtcapacity.TextChanged += new System.EventHandler(this.txtcapacity_TextChanged);
-            this.txtcapacity.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtcapacity_KeyDown);
-            // 
-            // txtstartdate
-            // 
-            this.txtstartdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtstartdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtstartdate.ForeColor = System.Drawing.Color.White;
-            this.txtstartdate.Location = new System.Drawing.Point(171, 213);
-            this.txtstartdate.Name = "txtstartdate";
-            this.txtstartdate.Size = new System.Drawing.Size(192, 30);
-            this.txtstartdate.TabIndex = 24;
-            this.txtstartdate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtstartdate.TextChanged += new System.EventHandler(this.txtstartdate_TextChanged);
-            this.txtstartdate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtstartdate_KeyDown);
-            // 
-            // txtenddate
-            // 
-            this.txtenddate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.txtenddate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtenddate.ForeColor = System.Drawing.Color.White;
-            this.txtenddate.Location = new System.Drawing.Point(171, 259);
-            this.txtenddate.Name = "txtenddate";
-            this.txtenddate.Size = new System.Drawing.Size(192, 30);
-            this.txtenddate.TabIndex = 25;
-            this.txtenddate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtenddate.TextChanged += new System.EventHandler(this.txtenddate_TextChanged);
-            this.txtenddate.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtenddate_KeyDown);
-            // 
-            // comboBoxday
-            // 
-            this.comboBoxday.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.comboBoxday.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Bold);
-            this.comboBoxday.ForeColor = System.Drawing.Color.White;
-            this.comboBoxday.FormattingEnabled = true;
-            this.comboBoxday.Location = new System.Drawing.Point(582, 257);
-            this.comboBoxday.Name = "comboBoxday";
-            this.comboBoxday.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.comboBoxday.Size = new System.Drawing.Size(239, 32);
-            this.comboBoxday.TabIndex = 26;
-            this.comboBoxday.SelectedIndexChanged += new System.EventHandler(this.comboBoxday_SelectedIndexChanged);
-            this.comboBoxday.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxday_KeyDown);
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::IVR.Properties.Resources._129118_simple_red_square_icon_media_a_media35_add1;
@@ -381,15 +200,101 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // pictureBox1
+            // textBoxcode
             // 
-            this.pictureBox1.Image = global::IVR.Properties.Resources.addsubjectscreenicon;
-            this.pictureBox1.Location = new System.Drawing.Point(567, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(69, 67);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.textBoxcode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.textBoxcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxcode.ForeColor = System.Drawing.Color.White;
+            this.textBoxcode.Location = new System.Drawing.Point(183, 181);
+            this.textBoxcode.Name = "textBoxcode";
+            this.textBoxcode.Size = new System.Drawing.Size(192, 30);
+            this.textBoxcode.TabIndex = 25;
+            this.textBoxcode.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxcode.TextChanged += new System.EventHandler(this.textBoxcode_TextChanged_1);
+            this.textBoxcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxcode_KeyDown);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label8.Location = new System.Drawing.Point(393, 194);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(132, 17);
+            this.label8.TabIndex = 24;
+            this.label8.Text = " :            كود المادة";
+            // 
+            // txthoursno
+            // 
+            this.txthoursno.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txthoursno.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txthoursno.ForeColor = System.Drawing.Color.White;
+            this.txthoursno.Location = new System.Drawing.Point(588, 194);
+            this.txthoursno.Name = "txthoursno";
+            this.txthoursno.Size = new System.Drawing.Size(192, 30);
+            this.txthoursno.TabIndex = 23;
+            this.txthoursno.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txthoursno.TextChanged += new System.EventHandler(this.txthoursno_TextChanged_1);
+            this.txthoursno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txthoursno_KeyDown);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label4.Location = new System.Drawing.Point(793, 194);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(125, 17);
+            this.label4.TabIndex = 22;
+            this.label4.Text = " :     عدد الساعات";
+            // 
+            // txtyear
+            // 
+            this.txtyear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtyear.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtyear.ForeColor = System.Drawing.Color.White;
+            this.txtyear.Location = new System.Drawing.Point(183, 107);
+            this.txtyear.Name = "txtyear";
+            this.txtyear.Size = new System.Drawing.Size(192, 30);
+            this.txtyear.TabIndex = 21;
+            this.txtyear.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtyear.TextChanged += new System.EventHandler(this.txtyear_TextChanged);
+            this.txtyear.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtyear_KeyDown);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label3.Location = new System.Drawing.Point(396, 114);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(129, 17);
+            this.label3.TabIndex = 20;
+            this.label3.Text = " : الفصل الدراسي ";
+            // 
+            // txtMaterialname
+            // 
+            this.txtMaterialname.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.txtMaterialname.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaterialname.ForeColor = System.Drawing.Color.White;
+            this.txtMaterialname.Location = new System.Drawing.Point(588, 117);
+            this.txtMaterialname.Name = "txtMaterialname";
+            this.txtMaterialname.Size = new System.Drawing.Size(192, 30);
+            this.txtMaterialname.TabIndex = 19;
+            this.txtMaterialname.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtMaterialname.TextChanged += new System.EventHandler(this.txtMaterialname_TextChanged);
+            this.txtMaterialname.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMaterialname_KeyDown_1);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label2.Location = new System.Drawing.Point(789, 117);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(129, 17);
+            this.label2.TabIndex = 18;
+            this.label2.Text = " :          إسم الماده";
             // 
             // AddMaterial
             // 
@@ -397,41 +302,34 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(948, 615);
-            this.Controls.Add(this.comboBoxday);
-            this.Controls.Add(this.txtenddate);
-            this.Controls.Add(this.txtstartdate);
-            this.Controls.Add(this.txtcapacity);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.textBoxcode);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.txthoursno);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtyear);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtMaterialname);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "AddMaterial";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddMaterial";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddMaterial_FormClosed);
             this.Load += new System.EventHandler(this.AddMaterial_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -442,29 +340,21 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtMaterialname;
-        private System.Windows.Forms.TextBox txtyear;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txthoursno;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ErrorProvider errorProvider1;
-        private System.Windows.Forms.TextBox textBoxcode;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewButtonColumn Column1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtcapacity;
-        private System.Windows.Forms.TextBox txtenddate;
-        private System.Windows.Forms.TextBox txtstartdate;
-        private System.Windows.Forms.ComboBox comboBoxday;
+        private System.Windows.Forms.TextBox textBoxcode;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txthoursno;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtyear;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtMaterialname;
+        private System.Windows.Forms.Label label2;
     }
 }

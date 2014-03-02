@@ -12,5 +12,10 @@ namespace IVR.Models
         {
             return Message.ToString().Replace("_"," ");
         }
+        public static string ToHours(this DateTime DT)
+        {
+
+            return ((DateTime)DT).ToString("hh:mm tt");
+        }
     }
 }

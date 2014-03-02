@@ -53,7 +53,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(948, 100);
+            this.panel1.Size = new System.Drawing.Size(952, 100);
             this.panel1.TabIndex = 0;
             // 
             // pictureBox1
@@ -86,7 +86,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(176, 24);
             this.label2.TabIndex = 1;
-            this.label2.Text = ":  أسم المستخدم";
+            this.label2.Text = ":  إسم المستخدم";
             // 
             // label3
             // 
@@ -131,7 +131,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::IVR.Properties.Resources.loginicon;
-            this.pictureBox2.Location = new System.Drawing.Point(145, 378);
+            this.pictureBox2.Location = new System.Drawing.Point(146, 419);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 94);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -162,7 +162,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(948, 522);
+            this.ClientSize = new System.Drawing.Size(952, 642);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.textBoxPassword);

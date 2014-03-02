@@ -23,12 +23,12 @@ namespace IVR
         {
             Student s = new Student();
             s.StudentID = Convert.ToInt32(Reg.Read("ID"));
-          s=(Student)s.GetStudent().Data;
-          txtname.Text=s.S_name;
-          txtmail.Text=s.S_email;
-          txtphone.Text=s.S_phone;
-          txtpass.Text=s.S_pw;
-          txtcredit.Text =Convert.ToString(s.Credits_aquired);
+            s = (Student)s.GetStudent().Data;
+            txtname.Text = s.S_name;
+            txtmail.Text = s.S_email;
+            txtphone.Text = s.S_phone;
+            txtpass.Text = s.S_pw;
+            txtcredit.Text = Convert.ToString(s.Credits_aquired);
         }
 
         //bool ValidateControls()
@@ -59,7 +59,7 @@ namespace IVR
             s.S_email = txtmail.Text;
             s.S_phone = txtphone.Text;
             s.S_pw = txtpass.Text;
-            s.Credits_aquired =Convert.ToInt32(txtcredit.Text);
+            s.Credits_aquired = Convert.ToInt32(txtcredit.Text);
             s.UpdateStudent();
             StudentDetails detail = new StudentDetails();
             this.Hide();
@@ -69,7 +69,7 @@ namespace IVR
         private void txtname_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == System.Windows.Forms.Keys.Enter)
-                button1_Click(sender,e);
+                button1_Click(sender, e);
         }
 
         private void txtpass_KeyDown(object sender, KeyEventArgs e)
@@ -99,6 +99,14 @@ namespace IVR
         private void UpdateStudent_Load(object sender, EventArgs e)
         {
             FillControls();
+        }
+
+        private void UpdateStudent_FormClosed_1(object sender, FormClosedEventArgs e)
+        {
+            StudentDetails sd = new StudentDetails();
+            this.Hide();
+            sd.ShowDialog();
+
         }
     }
 }

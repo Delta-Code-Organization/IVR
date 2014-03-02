@@ -16,5 +16,12 @@ namespace IVR
         {
             InitializeComponent();
         }
+
+        private void CallForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainScreen mn = new MainScreen();
+            this.Hide();
+            mn.ShowDialog();
+        }
     }
 }

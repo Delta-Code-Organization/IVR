@@ -86,7 +86,7 @@ namespace IVR
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-             bool validation = ValidateControls();
+            bool validation = ValidateControls();
             if (validation == true)
             {
                 label3.Visible = false;
@@ -95,10 +95,10 @@ namespace IVR
                 su.UserName = txtusername.Text;
                 su.Status = 1;
                 var res = su.CreateUser();
-                var msg=res.message.ShowMessage();
+                var msg = res.message.ShowMessage();
                 label3.Text = msg;
                 label3.Visible = true;
-                if (msg != "UserNameAlreadyExist")
+                if (msg != "User Name Already Exist")
                 {
                     FillControls();
                 }

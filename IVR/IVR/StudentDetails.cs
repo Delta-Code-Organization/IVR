@@ -24,7 +24,7 @@ namespace IVR
         void FillControls()
         {
             Student student = new Student();
-           List<Student> LOS=student.GetAllStudents();
+            List<Student> LOS = student.GetAllStudents();
             DataTable DT = new DataTable();
             DT.Columns.Add("ID", typeof(int));
             DT.Columns.Add("اسم الطالب", typeof(string));
@@ -94,70 +94,71 @@ namespace IVR
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             label6.Visible = false;
-         bool validation=ValidateControls();
-         if (validation == true)
-         {
-             List<Student> LOS = new List<Student>();
-             List<int> LOID = new List<int>();
-             Student s = new Student();
-             if (textBoxName.Text!= ""&&textBoxNumber.Text=="")
-             {
-                 s.S_name = textBoxName.Text;
-                 var res = s.SearchStudentsByName();
-                 if (res.message.ShowMessage() != "NotFound")
-                 {
-                     LOS.Add(res.Data as Student);
-                     LOID.Add((res.Data as Student).StudentID);
-                 }
-             }
-             if (textBoxNumber.Text != ""&&textBoxName.Text=="")
-             {
-                 s.S_phone = textBoxNumber.Text;
-                 var res = s.SearchStudentsByPhone();
-                 if (res.message.ShowMessage() != "NotFound")
-                 {
-                     if (!LOID.Contains((res.Data as Student).StudentID))
-                         LOS.Add(res.Data as Student);
-                 }
-             }
-             if (textBoxNumber.Text != "" && textBoxName.Text != "")
-             {
-                 s.S_phone = textBoxNumber.Text;
-                 var res = s.SearchStudentsByNameAndPhone();
-                 if (res.message.ShowMessage() != "NotFound")
-                 {
-                     if (!LOID.Contains((res.Data as Student).StudentID))
-                         LOS.Add(res.Data as Student);
-                 }
-             }
-             if (LOS.Count != 0)
-             {
-                 DataTable DT = new DataTable();
-                 DT.Columns.Add("ID",typeof(int));
-                 DT.Columns.Add("اسم الطالب", typeof(string));
-                 DT.Columns.Add("رقم التليفون", typeof(string));
-                 foreach (var v in LOS)
-                 {
-                     DataRow DR = DT.NewRow();
-                     DR[0] = v.StudentID;
-                     DR[1] = v.S_name;
-                     DR[2] = v.S_phone;
-                     DT.Rows.Add(DR);
-                 }
+            bool validation = ValidateControls();
+            if (validation == true)
+            {
+                List<Student> LOS = new List<Student>();
+                List<int> LOID = new List<int>();
+                Student s = new Student();
+                if (textBoxName.Text != "" && textBoxNumber.Text == "")
+                {
+                    s.S_name = textBoxName.Text;
+                    var res = s.SearchStudentsByName();
+                    if (res.message.ShowMessage() != "Not Found")
+                    {
+                        LOS.Add(res.Data as Student);
+                        LOID.Add((res.Data as Student).StudentID);
+                    }
+                }
+                if (textBoxNumber.Text != "" && textBoxName.Text == "")
+                {
+                    s.S_phone = textBoxNumber.Text;
+                    var res = s.SearchStudentsByPhone();
+                    if (res.message.ShowMessage() != "Not Found")
+                    {
+                        if (!LOID.Contains((res.Data as Student).StudentID))
+                            LOS.Add(res.Data as Student);
+                    }
+                }
+                if (textBoxNumber.Text != "" && textBoxName.Text != "")
+                {
+                    s.S_phone = textBoxNumber.Text;
+                    s.S_name = textBoxName.Text;
+                    var res = s.SearchStudentsByNameAndPhone();
+                    if (res.message.ShowMessage() != "Not Found")
+                    {
+                        if (!LOID.Contains((res.Data as Student).StudentID))
+                            LOS.Add(res.Data as Student);
+                    }
+                }
+                if (LOS.Count != 0)
+                {
+                    DataTable DT = new DataTable();
+                    DT.Columns.Add("ID", typeof(int));
+                    DT.Columns.Add("اسم الطالب", typeof(string));
+                    DT.Columns.Add("رقم التليفون", typeof(string));
+                    foreach (var v in LOS)
+                    {
+                        DataRow DR = DT.NewRow();
+                        DR[0] = v.StudentID;
+                        DR[1] = v.S_name;
+                        DR[2] = v.S_phone;
+                        DT.Rows.Add(DR);
+                    }
 
-                 dataGridView1.DataSource = DT;
-                 dataGridView1.Columns[2].Visible = false;
-                 dataGridView1.Visible = true;
-                 dataGridView1.Columns[0].DisplayIndex = 4;
-                 dataGridView1.Columns[1].DisplayIndex = 3;
-             }
-             else
-             {
-                 label6.Visible = true;
-                 label6.Text = "لا يوجد نتائج بحث مطابقه";
-                // dataGridView1.Visible = false;
-             }
-         }
+                    dataGridView1.DataSource = DT;
+                    dataGridView1.Columns[2].Visible = false;
+                    dataGridView1.Visible = true;
+                    dataGridView1.Columns[0].DisplayIndex = 4;
+                    dataGridView1.Columns[1].DisplayIndex = 3;
+                }
+                else
+                {
+                    label6.Visible = true;
+                    label6.Text = "لا يوجد نتائج بحث مطابقه";
+                    // dataGridView1.Visible = false;
+                }
+            }
         }
         private void textBoxName_KeyDown(object sender, KeyEventArgs e)
         {
@@ -194,12 +195,12 @@ namespace IVR
         {
             Student s = new Student();
             s.StudentID = (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value;
-            if (e.ColumnIndex ==0)
+            if (e.ColumnIndex == 0)
             {
                 s.DeleteStudent();
                 dataGridView1.Rows.RemoveAt(e.RowIndex);
             }
-            if (e.ColumnIndex ==1)
+            if (e.ColumnIndex == 1)
             {
                 Reg.Write("ID", s.StudentID.ToString());
                 UpdateStudent us = new UpdateStudent();

@@ -61,13 +61,13 @@ namespace IVR
                 errorProvider1.SetError(textBox1, "من فضلك أدخل الرقم السري");
                 check = false;
             }
-                int hours;
-            if(!int.TryParse(textBox2.Text,out hours))
+            int hours;
+            if (!int.TryParse(textBox2.Text, out hours))
             {
-                 errorProvider1.SetError(textBox2, "من فضلك أدخل قيمة رقمية");
+                errorProvider1.SetError(textBox2, "من فضلك أدخل قيمة رقمية");
                 check = false;
             }
-            if (textBox2.TextLength<1)
+            if (textBox2.TextLength < 1)
             {
                 errorProvider1.SetError(textBox2, "من فضلك أدخل عدد الساعات");
                 check = false;
@@ -77,7 +77,8 @@ namespace IVR
                 errorProvider1.SetError(textBox3, "من فضلك أدخل البريد الالكتروني");
                 check = false;
             }
-            System.Text.RegularExpressions.Regex rEmail = new System.Text.RegularExpressions.Regex(@"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$");
+            System.Text.RegularExpressions.Regex rEmail = new System.Text.RegularExpressions.Regex("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+            //  System.Text.RegularExpressions.Regex rEmail = new System.Text.RegularExpressions.Regex(@"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$");
             if (textBox3.Text != "" && !rEmail.IsMatch(textBox3.Text.Trim()))
             {
                 errorProvider1.SetError(textBox3, "أدخل بريد إلكتروني صحيح");
@@ -90,7 +91,7 @@ namespace IVR
             }
             if (textBox4.Text == "")
             {
-                errorProvider1.SetError(textBox4, "من فضلك أدخل رقم الهاتف"); 
+                errorProvider1.SetError(textBox4, "من فضلك أدخل رقم الهاتف");
                 check = false;
             }
             return check;
@@ -125,25 +126,25 @@ namespace IVR
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
             ValidateControls();
-        bool validation=ValidateControls();
-        if (validation == true)
-        {
-            label7.Visible =false;
-            Student s = new Student();
-            s.S_email = textBox3.Text;
-            s.S_name = txtusername.Text;
-            s.S_phone = textBox4.Text;
-            s.S_pw = textBox1.Text;
-            s.Credits_aquired = Convert.ToInt32(textBox2.Text);
-            var retun = s.CreateStudent();
-            label7.Text = retun.message.ShowMessage();
-            label7.Visible = true;
-            if (label7.Text != "StudentNameDublicated")
+            bool validation = ValidateControls();
+            if (validation == true)
             {
-                FillControls();
+                label7.Visible = false;
+                Student s = new Student();
+                s.S_email = textBox3.Text;
+                s.S_name = txtusername.Text;
+                s.S_phone = textBox4.Text;
+                s.S_pw = textBox1.Text;
+                s.Credits_aquired = Convert.ToInt32(textBox2.Text);
+                var retun = s.CreateStudent();
+                label7.Text = retun.message.ShowMessage();
+                label7.Visible = true;
+                if (label7.Text != "Student Name Dublicated")
+                {
+                    FillControls();
+                }
+                // label7.Visible = true;
             }
-           // label7.Visible = true;
-        }
         }
 
         private void txtusername_TextChanged(object sender, EventArgs e)

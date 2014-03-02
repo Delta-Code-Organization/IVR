@@ -13,7 +13,7 @@ namespace IVR
 {
     public partial class MyAccount : Form
     {
-        ModifyRegistry Reg=new ModifyRegistry();
+        ModifyRegistry Reg = new ModifyRegistry();
         public MyAccount()
         {
             InitializeComponent();
@@ -40,7 +40,7 @@ namespace IVR
                 errorProvider1.SetError(textBoxConfirmPass, "ادخل الرقم مرة اخري هنا");
                 check = false;
             }
-            if (textBoxConfirmPass.Text!= "" && textBoxPass.Text != textBoxConfirmPass.Text)
+            if (textBoxConfirmPass.Text != "" && textBoxPass.Text != textBoxConfirmPass.Text)
             {
                 errorProvider1.RightToLeft = true;
                 errorProvider1.SetError(textBoxConfirmPass, "تأكد من ان الرقمين متطابقين");
@@ -90,21 +90,21 @@ namespace IVR
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-          bool validation=ValidateControls();
-          if (validation == true)
-          {
-              SystemUser user = new SystemUser();
-              user.UserName = Reg.Read("Name");
-              int id = (user.GetSystemUser().Data as SystemUser).ID;
-              user.ID = id;
-              user.Password = textBoxPass.Text;
-              var res = user.UpdatePassword().message.ShowMessage();
-              label7.Text = res;
-              label7.Visible = true;
-              MainScreen ms = new MainScreen();
-              this.Hide();
-              ms.ShowDialog();
-          }
+            bool validation = ValidateControls();
+            if (validation == true)
+            {
+                SystemUser user = new SystemUser();
+                user.UserName = Reg.Read("Name");
+                int id = (user.GetSystemUser().Data as SystemUser).ID;
+                user.ID = id;
+                user.Password = textBoxPass.Text;
+                var res = user.UpdatePassword().message.ShowMessage();
+                label7.Text = res;
+                label7.Visible = true;
+                MainScreen ms = new MainScreen();
+                this.Hide();
+                ms.ShowDialog();
+            }
         }
 
         private void textBoxPass_KeyDown(object sender, KeyEventArgs e)
@@ -125,7 +125,7 @@ namespace IVR
 
         private void MyAccount_Load(object sender, EventArgs e)
         {
-            label2.Text = "   المستخدم الحالي   " +Reg.Read("Name");
+            label2.Text = "   المستخدم الحالي   " + Reg.Read("Name");
         }
 
         private void MyAccount_FormClosed(object sender, FormClosedEventArgs e)

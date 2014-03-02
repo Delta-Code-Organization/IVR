@@ -37,7 +37,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(874, 46);
+            this.label1.Location = new System.Drawing.Point(878, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 0;
@@ -46,7 +46,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(874, 113);
+            this.label2.Location = new System.Drawing.Point(879, 113);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 1;
@@ -82,7 +82,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "CallForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CallForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CallForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

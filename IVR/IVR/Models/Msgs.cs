@@ -8,25 +8,28 @@ namespace IVR.Models
 {
     public enum Msgs
     {
-        Course_Name_Dublicated=0,
-        Course_Created_Successfully=1,
-        Student_Name_Dublicated=2,
-        Student_created_Successfuly=3,
-        Student_Added_Successfully=4,
-        User_Name_Already_Exist=5,
-        User_Created_Successfull=6,
-        Password_Updated_Successfully = 7,
-        Successful_Login = 8,
-        Wrong_Name_Or_Password = 9,
-        This_Course_Is_Full=10,
-       Not_Found=11,
-        Is_Found=12,
-        Course_Deleted_Successfully=13,
-        Student_Deleted_Successfully=14,
-        Student_Updated_Successfully=15,
-        Student_Deleted_From_Course_Successfully=16,
-        System_User_Deleted_Successfully=17,
-        Course_Time_Added_Successfully=18,
-        Student_Already_Exist_In_This_Course=19
+        
+        إسم_المادة_موجود_بالفعل=0,
+        تم_إضافة_المادة_بنجاح=1,
+        إسم_الطالب_موجود_بالفعل =2,
+        تم_إضافة_الطالب_بنجاح = 3,
+        تم_إضافة_الطالب_للمادة_بنجاح =4,
+        إسم_المستخدم_موجود_بالفعل =5,
+        تم_إضافة_المستخدم_بنجاح =6,
+       نم_تعديل_الرقم_السري_بنجاح=7,
+        دخول_ناجح=8,
+       يوجد_خطأ_بالبريد_الالكتروني_أو_الرقم_السري=9,
+       عدد_الطلاب_مكتمل=10,
+       لا_يوجد_نتائج=11,
+        يوجد_نتائج=12,
+       تم_حذف_المادة_بنجاح=13,
+       تم_حذف_الطالب_بنجاح = 14,
+       نم_تعديل_بيانات_الطالب_بنجاح =15,
+       تم_حذف_الطالب_من_المادة_بنجاح =16,
+       تم_حذف_المستخدم_بنجاح =17,
+       تم_إضافة_ميعاد_للمادة_بنجاح =18,
+        هذا_الطالب_مضاف_بالفعل_لهذه_الماده=19,
+        تم_حذف_ميعاد_المادة_بنجاح = 20,
+        عدد_الساعات_المتاحه_لدي_الطالب_لا_تكفي=21
     }
 }

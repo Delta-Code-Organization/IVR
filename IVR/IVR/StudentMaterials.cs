@@ -57,7 +57,7 @@ namespace IVR
             this.comboBoxMaterial.SelectedIndexChanged += new System.EventHandler(this.comboBoxMaterial_SelectedIndexChanged);
             Student student = new Student();
             List<Student> LOS = student.GetAllStudents();
-            List<Course> LOC =c.GetAllcourses();
+            List<Course> LOC = c.GetAllcourses();
             DataTable DT3 = new DataTable();
             DT3.Columns.Add("StudentID", typeof(int));
             DT3.Columns.Add("CourseID", typeof(int));
@@ -66,46 +66,67 @@ namespace IVR
             DT3.Columns.Add("ميعاد المحاضرة", typeof(DateTime));
             foreach (Student std in LOS)
             {
-                if(std.Course.Count!=0)
+                if (std.Course.Count != 0)
                 {
-                    foreach(Course cs in std.Course)
+                    foreach (Course cs in std.Course)
                     {
                         DataRow DR2 = DT3.NewRow();
-                        DR2[0] = std.StudentID;
-                        DR2[1] =cs.CourseID;
-                        try { DR2[2] = std.S_name; }
-                        catch (Exception x)
+                        var time = cs.TimeTable.Where(p => p.Section_ID == cs.CourseID).ToList();
+                        foreach (TimeTable ttb in time)
                         {
-                            throw x;
+                            DR2[0] = std.StudentID;
+                            DR2[1] = cs.CourseID;
+                            DR2[2] = std.S_name;
+                            DR2[3] = cs.CourseName;
+                            DR2[4] = ttb.StartTime;
                         }
-                        DR2[3] = cs.CourseName;
-                        var time = cs.TimeTable.Where(p => p.Section_ID == cs.CourseID).SingleOrDefault();
-                        DR2[4] = time.StartTime;
-                        textBox1.Text = Convert.ToString(time.StartTime);
+                        //textBox1.Text = Convert.ToString(time.StartTime);
                         DT3.Rows.Add(DR2);
                     }
                 }
-                }
+            }
             dataGridView1.DataSource = DT3;
             dataGridView1.Columns[1].Visible = false;
             dataGridView1.Columns[2].Visible = false;
             dataGridView1.Visible = true;
             dataGridView1.Columns[0].DisplayIndex = 5;
+            TimeTable startTime = new TimeTable();
+            var res3 = startTime.GetCourseStartTime().Data as List<TimeTable>;
+            DataTable DT4 = new DataTable();
+            DT4.Columns.Add("ID", typeof(int));
+            DT4.Columns.Add("بداية المحاضرة", typeof(DateTime));
+            foreach (TimeTable t in res3)
+            {
+                DataRow DR4 = DT4.NewRow();
+                DR4[0] = t.Section_ID;
+                DR4[1] = t.StartTime;
+                DT4.Rows.Add(DR4);
             }
+            comboBoxTime.DataSource = DT4;
+            comboBoxTime.DisplayMember = "بداية المحاضرة";
+            comboBoxTime.ValueMember = "ID";
+            comboBoxTime.SelectedIndex = -1;
+
+        }
 
         bool ValidateControls()
         {
+            errorProvider1.RightToLeft = true;
             bool Check = true;
             if (comboBoxMaterial.SelectedItem == null)
             {
-                errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(comboBoxMaterial, " من فضلك اختر اسم المادة ");
+                errorProvider1.SetError(comboBoxMaterial, " من فضلك إختر اسم المادة ");
                 Check = false;
             }
             if (comboBoxStudentName.SelectedItem == null)
             {
-                errorProvider1.RightToLeft = true;
-                errorProvider1.SetError(comboBoxStudentName, "من فضلك ادخل اسم الطالب");
+                errorProvider1.SetError(comboBoxStudentName, "من فضلك إختر اسم الطالب");
+                Check = false;
+            }
+
+            if (comboBoxTime.SelectedItem == null)
+            {
+                errorProvider1.SetError(comboBoxTime, "من فضلك إختر ميعاد المحاضره");
                 Check = false;
             }
             return Check;
@@ -133,10 +154,7 @@ namespace IVR
 
         #endregion
 
-        private void label2_Click(object sender, EventArgs e)
-        {
 
-        }
         private void StudentMaterials_Load(object sender, EventArgs e)
         {
             FillControls();
@@ -151,12 +169,13 @@ namespace IVR
                 Course c = new Course();
                 int studentID = (int)comboBoxStudentName.SelectedValue;
                 c.CourseID = (int)comboBoxMaterial.SelectedValue;
-                var res = c.AddStudentCourse(studentID);
+                DateTime start = Convert.ToDateTime(comboBoxTime.Text);
+                var res = c.AddStudentCourse(studentID, start);
                 var msg = res.message.ShowMessage();
                 var result = res.Data as Course;
                 label8.Text = msg;
                 label8.Visible = true;
-                if (msg != "ThisCourseIsFull" && msg != "StudentAlreadyExistInThisCourse")
+                if (msg != "This Course Is Full" && msg != "Student Already Exist In This Course")
                 {
                     FillControls();
                 }
@@ -174,10 +193,23 @@ namespace IVR
             c.CourseID = (int)comboBoxMaterial.SelectedValue;
             var course = c.GetAllcourses();
             var selectedCourse = course.Where(p => p.CourseID == c.CourseID).SingleOrDefault();
-            var time = selectedCourse.TimeTable.Where(p => p.Section_ID == c.CourseID).SingleOrDefault();
-            
-            var startTime = time.StartTime;
-            textBox1.Text = Convert.ToString(time.StartTime);
+            var time = selectedCourse.TimeTable.Where(p => p.Section_ID == c.CourseID).ToList();
+            comboBoxTime.DataSource = time;
+            DataTable DT4 = new DataTable();
+            DT4.Columns.Add("ID", typeof(int));
+            DT4.Columns.Add("بداية المحاضرة", typeof(DateTime));
+            foreach (TimeTable t in time)
+            {
+                DataRow DR4 = DT4.NewRow();
+                DR4[0] = t.Section_ID;
+                DR4[1] = t.StartTime;
+                DT4.Rows.Add(DR4);
+            }
+            comboBoxTime.DataSource = DT4;
+            comboBoxTime.DisplayMember = "بداية المحاضرة";
+            comboBoxTime.ValueMember = "ID";
+            comboBoxTime.SelectedIndex = -1;
+            //var startTime = time.StartTime;
         }
 
         private void comboBoxStudentName_SelectedIndexChanged(object sender, EventArgs e)
@@ -187,7 +219,18 @@ namespace IVR
                 errorProvider1.Clear();
             }
         }
-
+        private void comboBoxTime_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (comboBoxTime.SelectedItem != null)
+            {
+                errorProvider1.Clear();
+            }
+        }
+        private void comboBoxTime_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                button1_Click_1(sender, e);
+        }
         private void comboBoxMaterial_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == System.Windows.Forms.Keys.Enter)
@@ -205,9 +248,9 @@ namespace IVR
             Course c = new Course();
             int id = (int)dataGridView1.Rows[e.RowIndex].Cells["StudentID"].Value;
             c.CourseID = (int)dataGridView1.Rows[e.RowIndex].Cells["CourseID"].Value;
-            var res=c.DeleteStudentCourse(id);
+            var res = c.DeleteStudentCourse(id);
             dataGridView1.Rows.RemoveAt(e.RowIndex);
-            label8.Text = res.message.ShowMessage(); 
+            label8.Text = res.message.ShowMessage();
         }
 
         private void StudentMaterials_FormClosed(object sender, FormClosedEventArgs e)
@@ -216,5 +259,9 @@ namespace IVR
             this.Hide();
             mn.ShowDialog();
         }
+
+       
+
+       
     }
 }

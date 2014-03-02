@@ -12,7 +12,7 @@ namespace IVR
 {
     public partial class MainScreen : Form
     {
-        ModifyRegistry Reg=new ModifyRegistry();
+        ModifyRegistry Reg = new ModifyRegistry();
         public MainScreen()
         {
             InitializeComponent();
@@ -73,10 +73,16 @@ namespace IVR
             this.Hide();
             cf.ShowDialog();
         }
-       
+        private void pictureBox10_Click(object sender, EventArgs e)
+        {
+            AddCourseTime act = new AddCourseTime();
+            this.Hide();
+            act.ShowDialog();
+        }
+
         private void MainScreen_Load(object sender, EventArgs e)
         {
-          label2.Text =" مرحبا " +Reg.Read("Name");
+            label2.Text = " مرحبا " + Reg.Read("Name");
         }
 
         private void MainScreen_FormClosed(object sender, FormClosedEventArgs e)
@@ -85,5 +91,7 @@ namespace IVR
             this.Hide();
             log.ShowDialog();
         }
+
+
     }
 }
