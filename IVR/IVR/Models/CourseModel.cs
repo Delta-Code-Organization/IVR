@@ -28,9 +28,9 @@ namespace IVR.Models
                 message = Msgs.تم_إضافة_المادة_بنجاح
             };
         }
-        public Returner AddStudentCourse(int _ID, DateTime _startTime)
+        public Returner AddStudentCourse(int _ID, string _StartIime,int _Day)
         {
-            var fullOrEmpty = db.TimeTable.Any(p => p.Section_ID == this.CourseID && p.StartTime == _startTime && p.Registered < p.Capacity);
+            var fullOrEmpty = db.TimeTable.Any(p => p.Section_ID == this.CourseID && p.Day == _Day && p.Registered < p.Capacity);
             if (fullOrEmpty == true)
             {
                 var course = db.Course.Where(p => p.CourseID == this.CourseID).SingleOrDefault();
@@ -44,16 +44,21 @@ namespace IVR.Models
                 }
                 if (student.Credits_aquired + course.CreditHours <= 12)
                 {
-                    var time = course.TimeTable.Where(p => p.Section_ID == this.CourseID && p.StartTime == _startTime && p.Registered < p.Capacity).FirstOrDefault();
-
-                    time.Registered++;
-                    course.Student.Add(student);
-                    db.SaveChanges();
-                    return new Returner
+                    var time = course.TimeTable.Where(p => p.Section_ID == this.CourseID && p.Day == _Day && p.Registered < p.Capacity).ToList();
+                    foreach (TimeTable tt in time)
                     {
-                        Data = course,
-                        message = Msgs.تم_إضافة_الطالب_للمادة_بنجاح
-                    };
+                        if ((((DateTime)tt.StartTime).TimeOfDay).ToString() == _StartIime)
+                        {
+                        tt.Registered++;
+                        course.Student.Add(student);
+                        db.SaveChanges();
+                        return new Returner
+                        {
+                            Data = course,
+                            message = Msgs.تم_إضافة_الطالب_للمادة_بنجاح
+                        };
+                    }
+                }
                 }
                 else
                 {

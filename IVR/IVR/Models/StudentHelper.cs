@@ -21,14 +21,14 @@ namespace IVR.Models
                 };
             }
             db.Student.Add(S);
-
             db.SaveChanges();
             return new Returner
             {
+                Data=S,
                 message = Msgs.تم_إضافة_الطالب_بنجاح
             };
         }
-        public Returner Time(int _ID)
+        public Returner CourseTime(int _ID)
         {
             List<TimeTable> LOTT = new List<TimeTable>();
             Student student = db.Student.Where(p => p.StudentID == _ID).SingleOrDefault();

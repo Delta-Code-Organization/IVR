@@ -21,7 +21,6 @@ namespace IVR.Models
         public Nullable<System.DateTime> EndTime { get; set; }
         public Nullable<int> Day { get; set; }
         public Nullable<int> Registered { get; set; }
-        public string CourseTime { get; set; }
     
         public virtual Course Course { get; set; }
     }

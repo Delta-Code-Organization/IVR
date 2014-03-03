@@ -7,7 +7,17 @@ using System.Threading.Tasks;
 namespace IVR.Models
 {
   public partial class TimeTable
-    {
+  {
+      #region Properties
+      public string CourseTime {
+          get {
+              TimeSpan TS = ((DateTime)StartTime).TimeOfDay;
+              string D = Enum.GetName(typeof(Dayenum), Day);
+              return D.ToString() + " " + TS.ToString();
+          }
+      }
+      #endregion
+
       IVRDBEntities2 db = new IVRDBEntities2();
       public Returner SearchCoursesByDay()
       {

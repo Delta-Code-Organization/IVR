@@ -63,7 +63,7 @@ namespace IVR
             DT3.Columns.Add("CourseID", typeof(int));
             DT3.Columns.Add("اسم الطالب", typeof(string));
             DT3.Columns.Add("اسم المادة", typeof(string));
-            DT3.Columns.Add("ميعاد المحاضرة", typeof(DateTime));
+            DT3.Columns.Add("ميعاد المحاضرة", typeof(string));
             foreach (Student std in LOS)
             {
                 if (std.Course.Count != 0)
@@ -78,7 +78,7 @@ namespace IVR
                             DR2[1] = cs.CourseID;
                             DR2[2] = std.S_name;
                             DR2[3] = cs.CourseName;
-                            DR2[4] = ttb.StartTime;
+                            DR2[4] = ttb.CourseTime;
                         }
                         DT3.Rows.Add(DR2);
                     }
@@ -93,12 +93,12 @@ namespace IVR
             var res3 = startTime.GetCourseStartTime().Data as List<TimeTable>;
             DataTable DT4 = new DataTable();
             DT4.Columns.Add("ID", typeof(int));
-            DT4.Columns.Add("بداية المحاضرة", typeof(DateTime));
+            DT4.Columns.Add("بداية المحاضرة", typeof(string));
             foreach (TimeTable t in res3)
             {
                 DataRow DR4 = DT4.NewRow();
                 DR4[0] = t.Section_ID;
-                DR4[1] = t.StartTime;
+                DR4[1] = t.CourseTime;
                 DT4.Rows.Add(DR4);
             }
             comboBoxTime.DataSource = DT4;
@@ -168,8 +168,11 @@ namespace IVR
                 Course c = new Course();
                 int studentID = (int)comboBoxStudentName.SelectedValue;
                 c.CourseID = (int)comboBoxMaterial.SelectedValue;
-                DateTime start = Convert.ToDateTime(comboBoxTime.Text);
-                var res = c.AddStudentCourse(studentID, start);
+                string[] startday = (comboBoxTime.Text).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                string Day = startday[0];
+                int day = (int) Enum.Parse(typeof (Dayenum),Day);
+                string time=startday[1];
+                var res = c.AddStudentCourse(studentID, time, day);
                 var msg = res.message.ShowMessage();
                 var result = res.Data as Course;
                 label8.Text = msg;
@@ -196,12 +199,12 @@ namespace IVR
             comboBoxTime.DataSource = time;
             DataTable DT4 = new DataTable();
             DT4.Columns.Add("ID", typeof(int));
-            DT4.Columns.Add("بداية المحاضرة", typeof(DateTime));
+            DT4.Columns.Add("بداية المحاضرة", typeof(string));
             foreach (TimeTable t in time)
             {
                 DataRow DR4 = DT4.NewRow();
                 DR4[0] = t.Section_ID;
-                DR4[1] = t.StartTime;
+                DR4[1] = t.CourseTime;
                 DT4.Rows.Add(DR4);
             }
             comboBoxTime.DataSource = DT4;
