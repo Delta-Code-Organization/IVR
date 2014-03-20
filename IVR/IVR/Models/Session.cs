@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace IVR.Models
 {
-  public enum Status
+  public class Session
     {
-      Confirmed=1
+      public static string Name{set;get;}
+      public static int ID{set;get;}
     }
 }

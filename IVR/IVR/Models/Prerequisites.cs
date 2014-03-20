@@ -16,6 +16,7 @@ namespace IVR.Models
     {
         public int PRID { get; set; }
         public Nullable<int> PRCode { get; set; }
+        public Nullable<int> CourseID { get; set; }
     
         public virtual Course Course { get; set; }
     }

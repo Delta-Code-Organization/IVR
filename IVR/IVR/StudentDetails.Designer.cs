@@ -40,6 +40,8 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.textBoxNumber = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -47,8 +49,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewButtonColumn();
             this.StudentsDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -165,6 +165,22 @@
             this.dataGridView1.Visible = false;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
+            // Column1
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = "حذف";
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.Column1.HeaderText = "حذف";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.NullValue = "تعديل";
+            this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column2.HeaderText = "تعديل";
+            this.Column2.Name = "Column2";
+            // 
             // textBoxNumber
             // 
             this.textBoxNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
@@ -210,7 +226,7 @@
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.label6.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(438, 599);
+            this.label6.Location = new System.Drawing.Point(449, 276);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(72, 24);
@@ -240,22 +256,6 @@
             this.label7.Size = new System.Drawing.Size(58, 16);
             this.label7.TabIndex = 11;
             this.label7.Text = ":  الإسم";
-            // 
-            // Column1
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = "حذف";
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Column1.HeaderText = "حذف";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = "تعديل";
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column2.HeaderText = "تعديل";
-            this.Column2.Name = "Column2";
             // 
             // StudentDetails
             // 

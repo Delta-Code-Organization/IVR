@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IVR.Models
 {
- partial class Prerequisites
+public partial class Prerequisites
     {
     }
 }

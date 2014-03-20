@@ -45,6 +45,7 @@
             <PropertyRef Name="PRID" />
           </Key>
           <Property Name="PRID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CourseID" Type="int" />
           <Property Name="PRCode" Type="int" />
         </EntityType>
         <EntityType Name="Student">
@@ -60,11 +61,11 @@
         </EntityType>
         <EntityType Name="StudentCourse">
           <Key>
-            <PropertyRef Name="StudentID" />
             <PropertyRef Name="CourseID" />
+            <PropertyRef Name="StudentID" />
           </Key>
-          <Property Name="StudentID" Type="int" Nullable="false" />
           <Property Name="CourseID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -105,7 +106,7 @@
               <PropertyRef Name="CourseID" />
             </Principal>
             <Dependent Role="Prerequisites">
-              <PropertyRef Name="PRCode" />
+              <PropertyRef Name="CourseID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -155,10 +156,6 @@
           <EntitySet Name="Student" EntityType="IVRDBModel.Student" />
           <EntitySet Name="sysdiagrams" EntityType="IVRDBModel.sysdiagrams" />
           <EntitySet Name="TimeTable" EntityType="IVRDBModel.TimeTable" />
-          <AssociationSet Name="FK_Prerequisites_Course" Association="IVRDBModel.FK_Prerequisites_Course">
-            <End Role="Course" EntitySet="Course" />
-            <End Role="Prerequisites" EntitySet="Prerequisites" />
-          </AssociationSet>
           <AssociationSet Name="FK_TimeTable_Course" Association="IVRDBModel.FK_TimeTable_Course">
             <End Role="Course" EntitySet="Course" />
             <End Role="TimeTable" EntitySet="TimeTable" />
@@ -168,6 +165,10 @@
             <End Role="Student" EntitySet="Student" />
           </AssociationSet>
           <EntitySet Name="SystemUser" EntityType="IVRDBModel.SystemUser" />
+          <AssociationSet Name="FK_Prerequisites_Course" Association="IVRDBModel.FK_Prerequisites_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Prerequisites" EntitySet="Prerequisites" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Course">
           <Key>
@@ -178,9 +179,9 @@
           <Property Name="CourseName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Term_associated" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="CreditHours" Type="Int32" />
-          <NavigationProperty Name="Prerequisites" Relationship="IVRDBModel.FK_Prerequisites_Course" FromRole="Course" ToRole="Prerequisites" />
           <NavigationProperty Name="TimeTable" Relationship="IVRDBModel.FK_TimeTable_Course" FromRole="Course" ToRole="TimeTable" />
           <NavigationProperty Name="Student" Relationship="IVRDBModel.StudentCourse" FromRole="Course" ToRole="Student" />
+          <NavigationProperty Name="Prerequisites" Relationship="IVRDBModel.FK_Prerequisites_Course" FromRole="Course" ToRole="Prerequisites" />
         </EntityType>
         <EntityType Name="Prerequisites">
           <Key>
@@ -188,6 +189,7 @@
           </Key>
           <Property Name="PRID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="PRCode" Type="Int32" />
+          <Property Type="Int32" Name="CourseID" />
           <NavigationProperty Name="Course" Relationship="IVRDBModel.FK_Prerequisites_Course" FromRole="Prerequisites" ToRole="Course" />
         </EntityType>
         <EntityType Name="Student">
@@ -225,18 +227,6 @@
           <Property Name="Registered" Type="Int32" />
           <NavigationProperty Name="Course" Relationship="IVRDBModel.FK_TimeTable_Course" FromRole="TimeTable" ToRole="Course" />
         </EntityType>
-        <Association Name="FK_Prerequisites_Course">
-          <End Role="Course" Type="IVRDBModel.Course" Multiplicity="0..1" />
-          <End Role="Prerequisites" Type="IVRDBModel.Prerequisites" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="CourseID" />
-            </Principal>
-            <Dependent Role="Prerequisites">
-              <PropertyRef Name="PRCode" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TimeTable_Course">
           <End Role="Course" Type="IVRDBModel.Course" Multiplicity="0..1" />
           <End Role="TimeTable" Type="IVRDBModel.TimeTable" Multiplicity="*" />
@@ -262,6 +252,18 @@
           <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="Status" />
         </EntityType>
+        <Association Name="FK_Prerequisites_Course">
+          <End Type="IVRDBModel.Course" Role="Course" Multiplicity="0..1" />
+          <End Type="IVRDBModel.Prerequisites" Role="Prerequisites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Prerequisites">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -282,6 +284,7 @@
           <EntitySetMapping Name="Prerequisites">
             <EntityTypeMapping TypeName="IVRDBModel.Prerequisites">
               <MappingFragment StoreEntitySet="Prerequisites">
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
                 <ScalarProperty Name="PRID" ColumnName="PRID" />
                 <ScalarProperty Name="PRCode" ColumnName="PRCode" />
               </MappingFragment>

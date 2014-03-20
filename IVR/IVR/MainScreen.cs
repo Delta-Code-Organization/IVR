@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using IVR.Models;
 
 namespace IVR
 {
     public partial class MainScreen : Form
     {
-        ModifyRegistry Reg = new ModifyRegistry();
         public MainScreen()
         {
             InitializeComponent();
@@ -82,7 +82,7 @@ namespace IVR
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
-            label2.Text = " مرحبا " + Reg.Read("Name");
+            label2.Text = " مرحبا " + Session.Name;
         }
 
         private void MainScreen_FormClosed(object sender, FormClosedEventArgs e)

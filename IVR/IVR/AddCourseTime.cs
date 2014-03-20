@@ -20,13 +20,15 @@ namespace IVR
         #region  BusinessMethods
         void FillControls()
         {
+            comboBoxday.DataSource = Enum.GetValues(typeof(Dayenum));
+            comboBoxday.SelectedIndex = -1;
             TimeTable time = new TimeTable();
             List<TimeTable> LOTT = time.GetAllTimes().Data as List<TimeTable>;
             DataTable DT = new DataTable();
             DT.Columns.Add("ID", typeof(int));
             DT.Columns.Add("اسم المادة", typeof(string));
-            DT.Columns.Add("من", typeof(DateTime));
-            DT.Columns.Add("إلي", typeof(DateTime));
+            DT.Columns.Add("من", typeof(string));
+            DT.Columns.Add("إلي", typeof(string));
             DT.Columns.Add("عدد الطلاب", typeof(int));
             DT.Columns.Add("اليوم", typeof(string));
             foreach (TimeTable tt in LOTT)
@@ -34,8 +36,8 @@ namespace IVR
                 DataRow DR = DT.NewRow();
                 DR[0] = tt.TimeTableID;
                 DR[1] = tt.Course.CourseName;
-                DR[2] = tt.StartTime;
-                DR[3] = tt.EndTime;
+                DR[2] = ((DateTime)tt.StartTime).ToString("hh:mm tt");
+                DR[3] = ((DateTime)tt.EndTime).ToString("hh:mm tt");
                 DR[4] = tt.Capacity;
                 DR[5] = Enum.GetName(typeof(Dayenum), tt.Day); ;
                 DT.Rows.Add(DR);
@@ -59,8 +61,8 @@ namespace IVR
             comboBoxMaterial.DataSource = DT2;
             comboBoxMaterial.DisplayMember = "اسم المادة";
             comboBoxMaterial.ValueMember = "رقم المسلسل";
-            
         }
+
         bool ValidateControls()
         {
             errorProvider1.RightToLeft = true;
@@ -89,7 +91,7 @@ namespace IVR
             DateTime from;
             if (txtstartdate.Text != "" && !DateTime.TryParse(txtstartdate.Text, out from))
             {
-                errorProvider1.SetError(txtstartdate, "من فضلك أدخل التاريخ");
+                errorProvider1.SetError(txtstartdate, "من فضلك أدخل الوقت hh:mm");
                 check = false;
             }
             if (comboBoxday.SelectedItem == null)
@@ -105,14 +107,25 @@ namespace IVR
             DateTime to;
             if (txtenddate.Text != "" && !DateTime.TryParse(txtenddate.Text, out to))
             {
-                errorProvider1.SetError(txtenddate, "من فضلك أدخل التاريخ");
+                errorProvider1.SetError(txtenddate, "من فضلك أدخل الوقت hh:mm");
                 check = false;
             }
             return check;
         }
-        void Collect()
+        TimeTable Collect()
         {
-
+            TimeTable tt = new TimeTable();
+            Course course = new Course();
+            course.CourseName = comboBoxMaterial.Text;
+            var res = course.GetCourse();
+            int ID = (res.Data as Course).CourseID;
+            tt.Section_ID = ID;
+            tt.Capacity = Convert.ToInt32(txtcapacity.Text);
+            tt.Day = (int)comboBoxday.SelectedValue;
+            tt.Registered = 0;
+            tt.StartTime = Convert.ToDateTime(txtstartdate.Text);
+            tt.EndTime = Convert.ToDateTime(txtenddate.Text);
+            return tt;
         }
 
         void PushData()
@@ -124,27 +137,18 @@ namespace IVR
         {
 
         }
+        void Delete()
+        {
+ 
+        }
         #endregion
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
             label9.Visible = false;
-            bool validation = ValidateControls();
-            if (validation == true)
+            if (ValidateControls() == true)
             {
                 label9.Visible = false;
-                TimeTable tt = new TimeTable();
-                Course course = new Course();
-                course.CourseName = comboBoxMaterial.Text;
-                var res = course.GetCourse();
-                string msg = res.message.ShowMessage();
-                int ID = (res.Data as Course).CourseID;
-                tt.Section_ID = ID;
-                tt.Capacity = Convert.ToInt32(txtcapacity.Text);
-                tt.Day = (int)comboBoxday.SelectedValue;
-                tt.Registered = 0;
-                tt.StartTime = Convert.ToDateTime(txtstartdate.Text);
-                tt.EndTime = Convert.ToDateTime(txtenddate.Text);
-                tt.AddTime();
+                Collect().AddTime();
                 FillControls();
                 label9.Visible = true;
                 label9.Text = "تم إضافة ميعاد للمادة بنجاح";
@@ -183,9 +187,6 @@ namespace IVR
 
         private void AddCourseTime_Load_1(object sender, EventArgs e)
         {
-            comboBoxday.DataSource = Enum.GetValues(typeof(Dayenum));
-            comboBoxday.SelectedIndex = -1;
-            comboBoxMaterial.SelectedIndex = -1;
             FillControls();
         }
 
@@ -230,6 +231,6 @@ namespace IVR
             mn.ShowDialog();
         }
 
-    
+
     }
 }

@@ -81,9 +81,14 @@ namespace IVR
             return check;
         }
 
-        void Collect()
+        Course Collect()
         {
-
+            Course c = new Course();
+            c.CourseName = txtMaterialname.Text;
+            c.CreditHours = Convert.ToInt32(txthoursno.Text);
+            c.Term_associated = txtyear.Text;
+            c.CourseCode = Convert.ToInt32(textBoxcode.Text);
+            return c;
         }
 
         void PushData()
@@ -94,6 +99,9 @@ namespace IVR
         void Save()
         {
 
+        }
+        void Delete()
+        { 
         }
         #endregion
 
@@ -147,26 +155,15 @@ namespace IVR
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             label9.Visible = false;
-            bool validation = ValidateControls();
-            if (validation == true)
+            if (ValidateControls() == true)
             {
-                Course c = new Course();
-                c.CourseName = txtMaterialname.Text;
-                c.CreditHours = Convert.ToInt32(txthoursno.Text);
-                c.Term_associated = txtyear.Text;
-                c.CourseCode = Convert.ToInt32(textBoxcode.Text);
-                var corse = c.CreateCourse();
+                var corse = Collect().CreateCourse();
                 var msg = corse.message.ShowMessage();
                 label9.Text = msg;
                 label9.Visible = true;
-                if (msg != " إسم المادة موجود بالفعل")
+                if (msg != "إسم المادة موجود بالفعل")
                 {
                     FillControls();
-                }
-                else
-                {
-                    label9.Text = msg;
-                    label9.Visible = true;
                 }
             }
         }

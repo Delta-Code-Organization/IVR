@@ -16,9 +16,9 @@ namespace IVR.Models
     {
         public Course()
         {
-            this.Prerequisites = new HashSet<Prerequisites>();
             this.TimeTable = new HashSet<TimeTable>();
             this.Student = new HashSet<Student>();
+            this.Prerequisites = new HashSet<Prerequisites>();
         }
     
         public int CourseID { get; set; }
@@ -27,8 +27,8 @@ namespace IVR.Models
         public string Term_associated { get; set; }
         public Nullable<int> CreditHours { get; set; }
     
-        public virtual ICollection<Prerequisites> Prerequisites { get; set; }
         public virtual ICollection<TimeTable> TimeTable { get; set; }
         public virtual ICollection<Student> Student { get; set; }
+        public virtual ICollection<Prerequisites> Prerequisites { get; set; }
     }
 }

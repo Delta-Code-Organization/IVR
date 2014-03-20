@@ -97,9 +97,15 @@ namespace IVR
             return check;
         }
 
-        void Collect()
+        Student Collect()
         {
-
+            Student s = new Student();
+            s.S_email = textBox3.Text;
+            s.S_name = txtusername.Text;
+            s.S_phone = textBox4.Text;
+            s.S_pw = textBox1.Text;
+            s.Credits_aquired = Convert.ToInt32(textBox2.Text);
+            return s;
         }
 
         void PushData()
@@ -126,17 +132,10 @@ namespace IVR
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
             ValidateControls();
-            bool validation = ValidateControls();
-            if (validation == true)
+            if (ValidateControls() == true)
             {
                 label7.Visible = false;
-                Student s = new Student();
-                s.S_email = textBox3.Text;
-                s.S_name = txtusername.Text;
-                s.S_phone = textBox4.Text;
-                s.S_pw = textBox1.Text;
-                s.Credits_aquired = Convert.ToInt32(textBox2.Text);
-                var retun = s.CreateStudent();
+                var retun = Collect().CreateStudent();
                 label7.Text = retun.message.ShowMessage();
                 label7.Visible = true;
                 if (label7.Text != "إسم الطالب موجود بالفعل")

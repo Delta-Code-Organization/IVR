@@ -17,11 +17,6 @@ namespace IVR
         {
             InitializeComponent();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
         #region  BusinessMethods
         void FillControls()
         {
@@ -64,9 +59,13 @@ namespace IVR
             return check;
         }
 
-        void Collect()
+        SystemUser Collect()
         {
-
+            SystemUser su = new SystemUser();
+            su.Password = txtuserpassword.Text;
+            su.UserName = txtusername.Text;
+            su.Status = 1;
+            return su;
         }
 
         void PushData()
@@ -86,15 +85,10 @@ namespace IVR
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            bool validation = ValidateControls();
-            if (validation == true)
+            if (ValidateControls() == true)
             {
                 label3.Visible = false;
-                SystemUser su = new SystemUser();
-                su.Password = txtuserpassword.Text;
-                su.UserName = txtusername.Text;
-                su.Status = 1;
-                var res = su.CreateUser();
+                var res = Collect().CreateUser();
                 var msg = res.message.ShowMessage();
                 label3.Text = msg;
                 label3.Visible = true;

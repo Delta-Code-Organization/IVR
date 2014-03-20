@@ -13,7 +13,6 @@ namespace IVR
 {
     public partial class StudentDetails : Form
     {
-        ModifyRegistry Reg = new ModifyRegistry();
         public StudentDetails()
         {
             InitializeComponent();
@@ -65,9 +64,12 @@ namespace IVR
             return check;
         }
 
-        void Collect()
+        Student Collect()
         {
-
+            Student student = new Student();
+            student.S_name = textBoxName.Text;
+            student.S_phone = textBoxNumber.Text;
+            return student;
         }
 
         void PushData()
@@ -94,58 +96,20 @@ namespace IVR
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             label6.Visible = false;
-            bool validation = ValidateControls();
-            if (validation == true)
+            if (ValidateControls() == true)
             {
-                List<Student> LOS = new List<Student>();
-                List<int> LOID = new List<int>();
-                Student s = new Student();
-                if (textBoxName.Text != "" && textBoxNumber.Text == "")
-                {
-                    s.S_name = textBoxName.Text;
-                    var res = s.SearchStudentsByName();
-                    if (res.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        LOS.Add(res.Data as Student);
-                        LOID.Add((res.Data as Student).StudentID);
-                    }
-                }
-                if (textBoxNumber.Text != "" && textBoxName.Text == "")
-                {
-                    s.S_phone = textBoxNumber.Text;
-                    var res = s.SearchStudentsByPhone();
-                    if (res.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        if (!LOID.Contains((res.Data as Student).StudentID))
-                            LOS.Add(res.Data as Student);
-                    }
-                }
-                if (textBoxNumber.Text != "" && textBoxName.Text != "")
-                {
-                    s.S_phone = textBoxNumber.Text;
-                    s.S_name = textBoxName.Text;
-                    var res = s.SearchStudentsByNameAndPhone();
-                    if (res.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        if (!LOID.Contains((res.Data as Student).StudentID))
-                            LOS.Add(res.Data as Student);
-                    }
-                }
-                if (LOS.Count != 0)
+                var res = Collect().SearchStudents().Data as Student;
+                if (res != null)
                 {
                     DataTable DT = new DataTable();
                     DT.Columns.Add("ID", typeof(int));
                     DT.Columns.Add("اسم الطالب", typeof(string));
                     DT.Columns.Add("رقم التليفون", typeof(string));
-                    foreach (var v in LOS)
-                    {
-                        DataRow DR = DT.NewRow();
-                        DR[0] = v.StudentID;
-                        DR[1] = v.S_name;
-                        DR[2] = v.S_phone;
-                        DT.Rows.Add(DR);
-                    }
-
+                    DataRow DR = DT.NewRow();
+                    DR[0] = res.StudentID;
+                    DR[1] = res.S_name;
+                    DR[2] = res.S_phone;
+                    DT.Rows.Add(DR);
                     dataGridView1.DataSource = DT;
                     dataGridView1.Columns[2].Visible = false;
                     dataGridView1.Visible = true;
@@ -154,6 +118,7 @@ namespace IVR
                 }
                 else
                 {
+                    dataGridView1.Visible = false;
                     label6.Visible = true;
                     label6.Text = "لا يوجد نتائج بحث مطابقه";
                 }
@@ -201,7 +166,7 @@ namespace IVR
             }
             if (e.ColumnIndex == 1)
             {
-                Reg.Write("ID", s.StudentID.ToString());
+                Session.ID = s.StudentID;
                 UpdateStudent us = new UpdateStudent();
                 this.Hide();
                 us.ShowDialog();

@@ -28,13 +28,28 @@ namespace IVR.Models
                 message = Msgs.تم_إضافة_المادة_بنجاح
             };
         }
-        public Returner AddStudentCourse(int _ID, string _StartIime,int _Day)
+        public Returner AddStudentCourse(int _ID, string _StartIime, int _Day)
         {
             var fullOrEmpty = db.TimeTable.Any(p => p.Section_ID == this.CourseID && p.Day == _Day && p.Registered < p.Capacity);
             if (fullOrEmpty == true)
             {
                 var course = db.Course.Where(p => p.CourseID == this.CourseID).SingleOrDefault();
+                List<Prerequisites> LOPS = new List<Prerequisites>();
+                List<Course> LOC = new List<Course>();
+                LOPS.AddRange(course.Prerequisites);
+                foreach (Prerequisites p in LOPS)
+                {
+                    var corse = db.Course.Where(t => t.CourseID == p.PRCode).SingleOrDefault();
+                    LOC.Add(corse);
+                }
                 var student = db.Student.Where(p => p.StudentID == _ID).SingleOrDefault();
+                if (!(student.Course.Intersect(LOC).Count() == LOC.Count()))
+                {
+                    return new Returner
+                    {
+                        message = Msgs.الطالب_ليس_لديه_المتطلبات_اللازمه_لدراسة_هذه_المادة
+                    };
+                }
                 if (course.Student.Any(p => p.StudentID == student.StudentID))
                 {
                     return new Returner
@@ -49,16 +64,17 @@ namespace IVR.Models
                     {
                         if ((((DateTime)tt.StartTime).TimeOfDay).ToString() == _StartIime)
                         {
-                        tt.Registered++;
-                        course.Student.Add(student);
-                        db.SaveChanges();
-                        return new Returner
-                        {
-                            Data = course,
-                            message = Msgs.تم_إضافة_الطالب_للمادة_بنجاح
-                        };
+                            tt.Registered++;
+                            course.Student.Add(student);
+                            student.Credits_aquired -= course.CreditHours;
+                            db.SaveChanges();
+                            return new Returner
+                            {
+                                Data = course,
+                                message = Msgs.تم_إضافة_الطالب_للمادة_بنجاح
+                            };
+                        }
                     }
-                }
                 }
                 else
                 {
@@ -74,35 +90,11 @@ namespace IVR.Models
                 message = Msgs.عدد_الطلاب_مكتمل
             };
         }
-
-        public Returner SearchCoursesByName()
-        {
-            var exist = db.Course.Any(p => p.CourseName == this.CourseName);
-            if (exist == true)
-            {
-                List<TimeTable> LOTT = new List<TimeTable>();
-                var searchcourse = db.Course.Where(p => p.CourseName == this.CourseName).SingleOrDefault();
-                foreach (TimeTable tt in searchcourse.TimeTable)
-                {
-                    LOTT.Add(tt);
-                }
-                return new Returner
-                {
-                    Data = LOTT,
-                    message = Msgs.يوجد_نتائج
-                };
-            }
-            return new Returner
-            {
-                message = Msgs.لا_يوجد_نتائج
-            };
-        }
         public List<Course> GetAllcourses()
         {
             var all = db.Course.OrderBy(p => p.CourseID).ToList();
             return all;
         }
-
         public Returner DeleteCourse()
         {
             var course = db.Course.Where(p => p.CourseID == this.CourseID).SingleOrDefault();
@@ -115,10 +107,9 @@ namespace IVR.Models
                     db.SaveChanges();
                 }
             }
-            var exit = course.Student.Any();
-            if (exit == true)
+            List<Student> LOS = course.Student.ToList();
+            if (LOS.Count != 0)
             {
-                List<Student> LOS = course.Student.ToList();
                 foreach (Student s in LOS)
                 {
                     s.Course.Remove(course);
@@ -137,7 +128,7 @@ namespace IVR.Models
         {
             var course = db.Course.Where(p => p.CourseID == this.CourseID).SingleOrDefault();
             var student = db.Student.Where(p => p.StudentID == _ID).SingleOrDefault();
-            var time = course.TimeTable.Where(p => p.Section_ID == this.CourseID).ToList();
+            var time = course.TimeTable.ToList();
             foreach (TimeTable tt in time)
             {
                 if (tt.Course.Student.Contains(student))

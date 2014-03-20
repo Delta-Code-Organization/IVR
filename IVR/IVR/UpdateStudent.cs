@@ -13,7 +13,6 @@ namespace IVR
 {
     public partial class UpdateStudent : Form
     {
-        ModifyRegistry Reg = new ModifyRegistry();
         public UpdateStudent()
         {
             InitializeComponent();
@@ -21,19 +20,11 @@ namespace IVR
         #region  BusinessMethods
         void FillControls()
         {
-            Student s = new Student();
-            s.StudentID = Convert.ToInt32(Reg.Read("ID"));
-            s = (Student)s.GetStudent().Data;
-            txtname.Text = s.S_name;
-            txtmail.Text = s.S_email;
-            txtphone.Text = s.S_phone;
-            txtpass.Text = s.S_pw;
-            txtcredit.Text = Convert.ToString(s.Credits_aquired);
+           
         }
-
-        //bool ValidateControls()
-        //{
-        //}
+        void ValidateControls()
+        {
+        }
 
         void Collect()
         {
@@ -42,7 +33,14 @@ namespace IVR
 
         void PushData()
         {
-
+            Student s = new Student();
+            s.StudentID = Session.ID;
+            s = (Student)s.GetStudent().Data;
+            txtname.Text = s.S_name;
+            txtmail.Text = s.S_email;
+            txtphone.Text = s.S_phone;
+            txtpass.Text = s.S_pw;
+            txtcredit.Text = Convert.ToString(s.Credits_aquired);
         }
 
         void Save()
@@ -54,7 +52,7 @@ namespace IVR
         private void button1_Click(object sender, EventArgs e)
         {
             Student s = new Student();
-            s.StudentID = Convert.ToInt32(Reg.Read("ID"));
+            s.StudentID = Session.ID;
             s.S_name = txtname.Text;
             s.S_email = txtmail.Text;
             s.S_phone = txtphone.Text;
@@ -98,7 +96,7 @@ namespace IVR
 
         private void UpdateStudent_Load(object sender, EventArgs e)
         {
-            FillControls();
+            PushData();
         }
 
         private void UpdateStudent_FormClosed_1(object sender, FormClosedEventArgs e)

@@ -12,9 +12,6 @@ namespace IVR
 {
     public partial class ManageMaterials : Form
     {
-
-
-
         public ManageMaterials()
         {
             InitializeComponent();
@@ -22,22 +19,21 @@ namespace IVR
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            comboBoxday.DataSource = Enum.GetValues(typeof(Dayenum));
-            comboBoxday.SelectedIndex = -1;
             FillControls();
         }
         #region  BusinessMethods
         void FillControls()
         {
-
+            comboBoxday.DataSource = Enum.GetValues(typeof(Dayenum));
+            comboBoxday.SelectedIndex = -1;
             Course corse = new Course();
             List<Course> LOOP = corse.GetAllcourses();
             DataTable Dt = new DataTable();
             Dt.Columns.Add("ID", typeof(int));
             Dt.Columns.Add("اسم المادة", typeof(string));
             Dt.Columns.Add("اليوم", typeof(string));
-            Dt.Columns.Add("من", typeof(DateTime));
-            Dt.Columns.Add("الي", typeof(DateTime));
+            Dt.Columns.Add("من", typeof(string));
+            Dt.Columns.Add("الي", typeof(string));
             foreach (Course item in LOOP)
             {
                 foreach (TimeTable TT in item.TimeTable)
@@ -46,8 +42,8 @@ namespace IVR
                     DR[0] = item.CourseID;
                     DR[1] = item.CourseName;
                     DR[2] = Enum.GetName(typeof(Dayenum), TT.Day);
-                    DR[3] = TT.StartTime;
-                    DR[4] = TT.EndTime;
+                    DR[3] = ((DateTime)TT.StartTime).ToString("hh:mm tt");
+                    DR[4] = ((DateTime)TT.EndTime).ToString("hh:mm tt");
                     Dt.Rows.Add(DR);
                 }
 
@@ -97,11 +93,6 @@ namespace IVR
 
         }
         #endregion
-        private void button1_Click_2(object sender, EventArgs e)
-        {
-            ValidateControls();
-        }
-
         private void txt2materialname_TextChanged(object sender, EventArgs e)
         {
             if (txt2materialname.Text != "")
@@ -128,234 +119,28 @@ namespace IVR
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             label10.Visible = false;
-            bool validation = ValidateControls();
-            List<int> LOID = new List<int>();
-            List<TimeTable> LOOP = new List<TimeTable>();
-            TimeTable time = new TimeTable();
-            if (validation == true)
+            if (ValidateControls() == true)
             {
-                Course c = new Course();
-
-                if (txt2materialname.Text != "" && comboBoxday.Text == "" && txtfrom.Text == "" && txtto.Text == "")
-                {
-                    c.CourseName = txt2materialname.Text;
-                    var res = c.SearchCoursesByName();
-                    if (res.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        LOOP.AddRange(res.Data as List<TimeTable>);
-                    };
-                }
-                if (txt2materialname.Text == "" && comboBoxday.Text != "" && txtfrom.Text == "" && txtto.Text == "")
-                {
-
-                    time.Day = (int)comboBoxday.SelectedValue;
-                    var res = time.SearchCoursesByDay();
-                    if (res.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        LOOP.AddRange(res.Data as List<TimeTable>);
-                    }
-
-
-                }
-                if (txt2materialname.Text == "" && comboBoxday.Text == "" && txtfrom.Text != "" && txtto.Text == "")
-                {
-
-                    time.StartTime = Convert.ToDateTime(txtfrom.Text);
-                    string hour = ((DateTime)time.StartTime).ToHours();
-                    var res = time.SearchCoursesByStartTime(hour);
-                    if (res.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        LOOP.AddRange(res.Data as List<TimeTable>);
-
-                    }
-                }
-                if (txt2materialname.Text == "" && comboBoxday.Text == "" && txtfrom.Text == "" && txtto.Text != "")
-                {
-
-                    time.EndTime = Convert.ToDateTime(txtto.Text);
-                    string hour = ((DateTime)time.EndTime).ToHours();
-                    var res = time.SearchCoursesByEndTime(hour);
-                    if (res.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        LOOP.AddRange(res.Data as List<TimeTable>);
-
-                    }
-                }
-                if (txt2materialname.Text == "" && comboBoxday.Text != "" && txtfrom.Text != "" && txtto.Text == "")
-                {
-                    time.StartTime = Convert.ToDateTime(txtfrom.Text);
-                    time.Day = (int)comboBoxday.SelectedValue;
-                    string hour = ((DateTime)time.StartTime).ToHours();
-                    var res = time.SearchBothDayStart(hour);
-                    if (res.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        LOOP.AddRange(res.Data as List<TimeTable>);
-                    }
-
-                }
-                if (txt2materialname.Text != "" && comboBoxday.Text == "" && txtfrom.Text != "" && txtto.Text == "")
-                {
-                    time.StartTime = Convert.ToDateTime(txtfrom.Text);
-                    c.CourseName = txt2materialname.Text;
-                    var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        string hour = ((DateTime)time.StartTime).ToHours();
-                        var res = time.SearchBothNamestart((corse.Data as Course).CourseID, hour);
-                        if (res.message.ShowMessage() != "لا يوجد نتائج")
-                        {
-                            LOOP.AddRange(res.Data as List<TimeTable>);
-                        }
-                    }
-                }
-                if (txt2materialname.Text != "" && comboBoxday.Text == "" && txtfrom.Text == "" && txtto.Text != "")
-                {
-                    time.EndTime = Convert.ToDateTime(txtto.Text);
-                    c.CourseName = txt2materialname.Text;
-                    var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        string hour = ((DateTime)time.EndTime).ToHours();
-                        var res = time.SearchBothNameEnd((corse.Data as Course).CourseID, hour);
-                        if (res.message.ShowMessage() != "لا يوجد نتائج")
-                        {
-                            LOOP.AddRange(res.Data as List<TimeTable>);
-                        }
-                    }
-                }
-                if (txt2materialname.Text == "" && comboBoxday.Text != "" && txtfrom.Text == "" && txtto.Text != "")
-                {
-                    time.Day = (int)comboBoxday.SelectedValue;
-                    time.EndTime = Convert.ToDateTime(txtto.Text);
-                    string hour = ((DateTime)time.EndTime).ToHours();
-                    var res = time.SearchBothDayEnd(hour);
-                    if (res.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        LOOP.AddRange(res.Data as List<TimeTable>);
-                    }
-                }
-                if (txt2materialname.Text == "" && comboBoxday.Text == "" && txtfrom.Text != "" && txtto.Text != "")
-                {
-                    time.StartTime = Convert.ToDateTime(txtfrom.Text);
-                    string shour = ((DateTime)time.StartTime).ToHours();
-                    time.EndTime = Convert.ToDateTime(txtto.Text);
-                    string ehour = ((DateTime)time.EndTime).ToHours();
-                    var res = time.SearchBothStartEnd(shour, ehour);
-                    if (res.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        LOOP.AddRange(res.Data as List<TimeTable>);
-                    }
-                }
-                if (comboBoxday.Text != "" && txtfrom.Text != "" && txtto.Text != "" && txt2materialname.Text == "")
-                {
-                    time.Day = (int)comboBoxday.SelectedValue;
-                    time.StartTime = Convert.ToDateTime(txtfrom.Text);
-                    string shour = ((DateTime)time.StartTime).ToHours();
-                    time.EndTime = Convert.ToDateTime(txtto.Text);
-                    string ehour = ((DateTime)time.EndTime).ToHours();
-                    var res = time.SearchDayStartEnd(shour, ehour);
-                    if (res.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        LOOP.AddRange(res.Data as List<TimeTable>);
-                    }
-                }
-                if (comboBoxday.Text != "" && txtfrom.Text != "" && txt2materialname.Text != "" && txtto.Text == "")
-                {
-                    c.CourseName = txt2materialname.Text;
-                    time.Day = (int)comboBoxday.SelectedValue;
-                    time.StartTime = Convert.ToDateTime(txtfrom.Text);
-                    string hour = ((DateTime)time.StartTime).ToHours();
-                    var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        var res = time.SearchNameDayStart((corse.Data as Course).CourseID, hour);
-                        if (res.message.ShowMessage() != "لا يوجد نتائج")
-                        {
-                            LOOP.AddRange(res.Data as List<TimeTable>);
-                        }
-                    }
-                }
-                if (comboBoxday.Text == "" && txtfrom.Text != "" && txt2materialname.Text != "" && txtto.Text != "")
-                {
-                    c.CourseName = txt2materialname.Text;
-                    time.EndTime = Convert.ToDateTime(txtto.Text);
-                    string ehour = ((DateTime)time.EndTime).ToHours();
-                    time.StartTime = Convert.ToDateTime(txtfrom.Text);
-                    string shour = ((DateTime)time.StartTime).ToHours();
-                    var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        var res = time.SearchNameStartEnd((corse.Data as Course).CourseID, shour, ehour);
-                        if (res.message.ShowMessage() != "لا يوجد نتائج")
-                        {
-                            LOOP.AddRange(res.Data as List<TimeTable>);
-                        }
-                    }
-                }
-                if (comboBoxday.Text != "" && txtfrom.Text == "" && txt2materialname.Text != "" && txtto.Text != "")
-                {
-                    c.CourseName = txt2materialname.Text;
-                    time.Day = (int)comboBoxday.SelectedValue;
-                    time.EndTime = Convert.ToDateTime(txtto.Text);
-                    string hour = (((DateTime)time.EndTime).ToHours());
-                    var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        var res = time.SearchNameDayEnd((corse.Data as Course).CourseID, hour);
-                        if (res.message.ShowMessage() != "لا يوجد نتائج")
-                        {
-                            LOOP.AddRange(res.Data as List<TimeTable>);
-                        }
-                    }
-                }
-                if (comboBoxday.Text != "" && txtfrom.Text != "" && txt2materialname.Text != "" && txtto.Text != "")
-                {
-                    c.CourseName = txt2materialname.Text;
-                    time.Day = (int)comboBoxday.SelectedValue;
-                    time.StartTime = Convert.ToDateTime(txtfrom.Text);
-                    string shour = ((DateTime)time.StartTime).ToHours();
-                    time.EndTime = Convert.ToDateTime(txtto.Text);
-                    string ehour = ((DateTime)time.EndTime).ToHours();
-                    var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        var res = time.Searchall((corse.Data as Course).CourseID, shour, ehour);
-                        if (res.message.ShowMessage() != "لا يوجد نتائج")
-                        {
-                            LOOP.Add(res.Data as TimeTable);
-                        }
-                    }
-                }
-                if (txt2materialname.Text != "" && comboBoxday.Text != "" && txtfrom.Text == "" && txtto.Text == "")
-                {
-                    time.Day = (int)comboBoxday.SelectedValue;
-                    c.CourseName = txt2materialname.Text;
-                    var corse = c.GetCourse();
-                    if (corse.message.ShowMessage() != "لا يوجد نتائج")
-                    {
-                        var res = time.SearchBothNameDay((corse.Data as Course).CourseID);
-                        List<Course> LOC = new List<Course>();
-                        LOC = res.Data as List<Course>;
-                        if (res.message.ShowMessage() != "لا يوجد نتائج")
-                        {
-                            LOOP.AddRange(res.Data as List<TimeTable>);
-                        }
-                    }
-                }
-                if (LOOP.Count != 0)
+                TimeTable time = new TimeTable();
+                var coursename = txt2materialname.Text;
+                var day = comboBoxday.Text;
+                var start = txtfrom.Text;
+                var end = txtto.Text;
+                var res = time.searchCourses(coursename, day, start, end).Data as List<TimeTable>;
+                if (res.Count != 0)
                 {
                     DataTable Dt = new DataTable();
                     Dt.Columns.Add("ID", typeof(int));
                     Dt.Columns.Add("اسم المادة", typeof(string));
                     Dt.Columns.Add("اليوم", typeof(string));
-                    Dt.Columns.Add("من", typeof(DateTime));
-                    Dt.Columns.Add("الي", typeof(DateTime));
-                    foreach (TimeTable TT in LOOP)
+                    Dt.Columns.Add("من", typeof(string));
+                    Dt.Columns.Add("الي", typeof(string));
+                    foreach (TimeTable TT in res)
                     {
                         DataRow DR = Dt.NewRow();
                         DR[2] = Enum.GetName(typeof(Dayenum), TT.Day);
-                        DR[3] = TT.StartTime;
-                        DR[4] = TT.EndTime;
+                        DR[3] = ((DateTime)TT.StartTime).ToString("hh:mm tt");
+                        DR[4] = ((DateTime)TT.EndTime).ToString("hh:mm tt");
                         DR[0] = TT.Course.CourseID;
                         DR[1] = TT.Course.CourseName;
                         Dt.Rows.Add(DR);
@@ -419,8 +204,5 @@ namespace IVR
             this.Hide();
             mn.ShowDialog();
         }
-
-        
-
     }
 }

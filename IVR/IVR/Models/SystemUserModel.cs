@@ -11,12 +11,12 @@ namespace IVR.Models
         IVRDBEntities2 db = new IVRDBEntities2();
         public Returner CreateUser()
         {
-            var exist = db.SystemUser.Any(p=>p.UserName==this.UserName);
+            var exist = db.SystemUser.Any(p => p.UserName == this.UserName);
             if (exist == true)
             {
                 return new Returner
                 {
-                    message= Msgs.إسم_المستخدم_موجود_بالفعل
+                    message = Msgs.إسم_المستخدم_موجود_بالفعل
                 };
             }
             db.SystemUser.Add(this);

@@ -131,9 +131,11 @@ namespace IVR
             return Check;
         }
 
-        void Collect()
+        Course Collect()
         {
-
+            Course c = new Course();
+            c.CourseID = (int)comboBoxMaterial.SelectedValue;
+            return c;
         }
 
         void PushData()
@@ -160,24 +162,18 @@ namespace IVR
         }
         private void button1_Click_1(object sender, EventArgs e)
         {
-            ValidateControls();
-            bool validation = ValidateControls();
-            if (validation == true)
+            if (ValidateControls() == true)
             {
                 label8.Visible = false;
-                Course c = new Course();
                 int studentID = (int)comboBoxStudentName.SelectedValue;
-                c.CourseID = (int)comboBoxMaterial.SelectedValue;
                 string[] startday = (comboBoxTime.Text).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                string Day = startday[0];
-                int day = (int) Enum.Parse(typeof (Dayenum),Day);
-                string time=startday[1];
-                var res = c.AddStudentCourse(studentID, time, day);
+                int day = (int)Enum.Parse(typeof(Dayenum), startday[0]);
+                var res = Collect().AddStudentCourse(studentID, startday[1], day);
                 var msg = res.message.ShowMessage();
                 var result = res.Data as Course;
                 label8.Text = msg;
                 label8.Visible = true;
-                if (msg != "عدد الطلاب مكتمل" && msg != "هذا الطالب مضاف بالفعل لهذه الماده")
+                if (msg != "عدد الطلاب مكتمل" && msg != "هذا الطالب مضاف بالفعل لهذه الماده" && msg != "الطالب ليس لديه المتطلبات اللازمه لدراسة هذه المادة")
                 {
                     FillControls();
                 }
@@ -261,8 +257,8 @@ namespace IVR
             mn.ShowDialog();
         }
 
-       
 
-       
+
+
     }
 }

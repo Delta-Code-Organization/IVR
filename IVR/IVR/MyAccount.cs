@@ -13,7 +13,6 @@ namespace IVR
 {
     public partial class MyAccount : Form
     {
-        ModifyRegistry Reg = new ModifyRegistry();
         public MyAccount()
         {
             InitializeComponent();
@@ -50,9 +49,14 @@ namespace IVR
 
         }
 
-        void Collect()
+        SystemUser Collect()
         {
-
+            SystemUser user = new SystemUser();
+            user.UserName = Session.Name;
+            int id = (user.GetSystemUser().Data as SystemUser).ID;
+            user.ID = id;
+            user.Password = textBoxPass.Text;
+            return user;
         }
 
         void PushData()
@@ -93,17 +97,10 @@ namespace IVR
             bool validation = ValidateControls();
             if (validation == true)
             {
-                SystemUser user = new SystemUser();
-                user.UserName = Reg.Read("Name");
-                int id = (user.GetSystemUser().Data as SystemUser).ID;
-                user.ID = id;
-                user.Password = textBoxPass.Text;
-                var res = user.UpdatePassword().message.ShowMessage();
+                
+                var res = Collect().UpdatePassword().message.ShowMessage();
                 label7.Text = res;
                 label7.Visible = true;
-                MainScreen ms = new MainScreen();
-                this.Hide();
-                ms.ShowDialog();
             }
         }
 
@@ -125,7 +122,7 @@ namespace IVR
 
         private void MyAccount_Load(object sender, EventArgs e)
         {
-            label2.Text = "   المستخدم الحالي   " + Reg.Read("Name");
+            label2.Text = "   المستخدم الحالي   " + Session.Name;
         }
 
         private void MyAccount_FormClosed(object sender, FormClosedEventArgs e)
