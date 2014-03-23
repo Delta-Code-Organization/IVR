@@ -66,7 +66,7 @@ namespace IVR.Models
                         {
                             tt.Registered++;
                             course.Student.Add(student);
-                            student.Credits_aquired -= course.CreditHours;
+                            student.Credits_aquired += course.CreditHours;
                             db.SaveChanges();
                             return new Returner
                             {

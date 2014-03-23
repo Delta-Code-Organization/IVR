@@ -62,16 +62,6 @@ namespace IVR
                 check = false;
             }
             int hours;
-            if (!int.TryParse(textBox2.Text, out hours))
-            {
-                errorProvider1.SetError(textBox2, "من فضلك أدخل قيمة رقمية");
-                check = false;
-            }
-            if (textBox2.TextLength < 1)
-            {
-                errorProvider1.SetError(textBox2, "من فضلك أدخل عدد الساعات");
-                check = false;
-            }
             if (textBox3.Text == "")
             {
                 errorProvider1.SetError(textBox3, "من فضلك أدخل البريد الالكتروني");
@@ -104,7 +94,7 @@ namespace IVR
             s.S_name = txtusername.Text;
             s.S_phone = textBox4.Text;
             s.S_pw = textBox1.Text;
-            s.Credits_aquired = Convert.ToInt32(textBox2.Text);
+            s.Credits_aquired = 0;
             return s;
         }
 
@@ -156,13 +146,6 @@ namespace IVR
             if (textBox1.Text != "")
                 errorProvider1.Clear();
         }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            if (textBox2.Text != "")
-                errorProvider1.Clear();
-        }
-
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             if (textBox3.Text != "")
