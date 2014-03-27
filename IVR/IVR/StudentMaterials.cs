@@ -53,7 +53,6 @@ namespace IVR
             comboBoxMaterial.DataSource = DT2;
             comboBoxMaterial.DisplayMember = "اسم المادة";
             comboBoxMaterial.ValueMember = "رقم المسلسل";
-            //comboBoxMaterial.SelectedIndex = -1;
             this.comboBoxMaterial.SelectedIndexChanged += new System.EventHandler(this.comboBoxMaterial_SelectedIndexChanged);
             Student student = new Student();
             List<Student> LOS = student.GetAllStudents();

@@ -15,7 +15,7 @@ namespace IVR.Models
             {
                 TimeSpan TS = ((DateTime)StartTime).TimeOfDay;
                 string D = Enum.GetName(typeof(Dayenum), Day);
-                return D.ToString() + " " + TS.ToString();
+                return D.ToString() + " " + TS.ToString(@"hh\:mm");
             }
         }
         #endregion
