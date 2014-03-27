@@ -83,7 +83,8 @@ namespace IVR.Models
 
         public Returner GetCourseStartTime()
         {
-            var time = db.TimeTable.OrderBy(p => p.Section_ID).ToList();
+            var course = db.Course.OrderBy(p => p.CourseID).FirstOrDefault();
+            var time = db.TimeTable.Where(p => p.Section_ID == course.CourseID).ToList();
             return new Returner
             {
                 Data = time
