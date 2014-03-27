@@ -157,6 +157,7 @@ namespace IVR
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            label7.Visible = false;
             Student s = new Student();
             s.StudentID = (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value;
             if (e.ColumnIndex == 0)

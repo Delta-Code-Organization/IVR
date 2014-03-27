@@ -218,6 +218,7 @@ namespace IVR
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            label9.Visible = false;
             TimeTable time = new TimeTable();
             time.TimeTableID = (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value;
             time.DeleteTime();

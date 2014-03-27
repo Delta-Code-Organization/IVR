@@ -124,6 +124,7 @@ namespace IVR
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            label3.Visible = false;
             SystemUser su = new SystemUser();
             su.ID = (int)dataGridView1.Rows[e.RowIndex].Cells["ID"].Value;
             su.DeleteSystemUser();

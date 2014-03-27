@@ -241,6 +241,7 @@ namespace IVR
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            label8.Visible = false;
             Course c = new Course();
             int id = (int)dataGridView1.Rows[e.RowIndex].Cells["StudentID"].Value;
             c.CourseID = (int)dataGridView1.Rows[e.RowIndex].Cells["CourseID"].Value;
